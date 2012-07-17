@@ -21,6 +21,100 @@ package _4axka.common.entity;
 public class EmailAddress {
     private EmailAddressType __type;
     private String __address;
+    private Entity<?> __entity;
+
+    /**
+     * Default constructor.
+     * <p>
+     * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
+     * <strong>MUST NOT</strong> be invoked directly.
+     * 
+     * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
+     */
+    public EmailAddress() {
+        super();
+    }
+
+    /**
+     * Instance variable constructor. Initialise <code>this</code> instance with the specified
+     * arguments. <i>For state specifications see the see also section</i>.
+     * 
+     * @param type
+     * @param address
+     */
+    public EmailAddress(final EmailAddressType type, final String address) {
+        this();
+        setType(type);
+        setAddress(address);
+    }
+
+    /**
+     * Copy constructor. <i>For state specifications see the see also section</i>.
+     * 
+     * @param template
+     *            Uses template as template to initialise {@linkplain EmailAddress
+     *            <code>this</code>}.
+     */
+    public EmailAddress(final EmailAddress template) {
+        this(template.getType(), template.getAddress());
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__type type}.
+     */
+    public final EmailAddressType getType() {
+        return __type;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @param type
+     *            Value to assign to <code>this</code> {@linkplain #__type email address type}.
+     */
+    final void setType(final EmailAddressType type) {
+        __type = type;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__address address}.
+     */
+    public final String getAddress() {
+        return __address;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @param address
+     *            Value to assign to <code>this</code> {@linkplain #__address address}.
+     */
+    final void setAddress(final String address) {
+        __address = address;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
+     */
+    final Entity<?> getEntity() {
+        return __entity;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @param reference
+     *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
+     */
+    final void setEntity(final Entity<?> reference) {
+        __entity = reference;
+    }
 
     public enum EmailAddressType {
         HOME,
