@@ -25,6 +25,16 @@ import java.util.concurrent.ConcurrentSkipListSet;
  *
  */
 public abstract class Person<ID extends Comparable<ID> & Serializable> extends Entity<ID> {
+    /**
+     * Determines if a de-serialised file is compatible with this class.
+     * <p>
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
+     * this class is not compatible with the previous version. It is not necessary to include
+     * in first version of the class, but included here as a reminder of its importance.
+     * 
+     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
+     */
+    private static final long serialVersionUID = -1623837639963962157L;
     private Set<String> __givenNames = new ConcurrentSkipListSet<>();
     private Set<String> __alsoKnownAs = new ConcurrentSkipListSet<>();
     private String __preferredGivenName;
