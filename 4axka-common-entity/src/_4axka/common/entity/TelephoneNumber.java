@@ -205,11 +205,13 @@ public class TelephoneNumber implements Serializable {
         __entity = reference;
     }
     
+    /**
+     * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
+     */
     public enum TelephoneNumberType {
         HOME,
         OFFICE,
         MOBILE,
-        FAX,
-        PAGER;
+        FAX;
     }
 }

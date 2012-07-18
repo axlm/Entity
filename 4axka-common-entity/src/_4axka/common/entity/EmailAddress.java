@@ -129,6 +129,9 @@ public class EmailAddress implements Serializable {
         __entity = reference;
     }
 
+    /**
+     * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
+     */
     public enum EmailAddressType {
         HOME,
         OFFICE;

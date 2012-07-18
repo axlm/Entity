@@ -312,20 +312,33 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
         __titles.add(title);
     }
 
+    /**
+     * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
+     */
     public enum GenderType {
         FEMALE,
         MALE;
     }
 
+    /**
+     * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
+     */
     public enum TitleType {
-        MISTER,
-        MISSERS,
-        MSS,
-        MISS,
-        PROFESSOR,
-        DOCTOR,
-        YOUR_EMINENCE,
-        YOUR_HIGNESS,
-        HONORABLE;
+        MISTER("Mr."),
+        MISTRESS("Mrs."),
+        MS("Ms."),
+        MISS("Miss"),
+        PROFESSOR("Prof."),
+        DOCTOR("Dr.");
+
+        private final String __abbreviation;
+
+        private TitleType(final String abbreviation) {
+            __abbreviation = abbreviation;
+        }
+
+        public String abbreviation() {
+            return __abbreviation;
+        }
     }
 }
