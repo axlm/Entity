@@ -19,6 +19,12 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 import javax.swing.tree.TreeNode;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -26,6 +32,11 @@ import javax.swing.tree.TreeNode;
  * 
  * @param <ID>
  */
+// XML ANNOTATIONS
+@XmlRootElement(name = "entity")
+@XmlType(name = "Entity")
+@XmlSeeAlso({Person.class})
+// ENTITY ANNOTATIONS
 public abstract class Entity<ID extends Comparable<ID> & Serializable> implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -36,10 +47,22 @@ public abstract class Entity<ID extends Comparable<ID> & Serializable> implement
      * 
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
+    @XmlTransient
     private static final long serialVersionUID = 2724081153382480314L;
+
+    @XmlElement(name = "identifier", required = true, nillable = false)
     private ID __legalIdentifier;
+
+    @XmlElementWrapper(name = "emailAddresses")
+    @XmlElement(name = "emailAddress")
     private Set<EmailAddress> __emailAddresses = new ConcurrentSkipListSet<>();
+
+    @XmlElementWrapper(name = "telephoneNumbers")
+    @XmlElement(name = "telephoneNumber")
     private Set<TelephoneNumber> __telephoneNumbers = new ConcurrentSkipListSet<>();
+
+    @XmlElementWrapper(name = "addresses")
+    @XmlElement(name = "address")
     private Set<Address> __addresses = new ConcurrentSkipListSet<>();
 
     /**

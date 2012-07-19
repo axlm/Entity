@@ -16,11 +16,23 @@ package _4axka.common.entity;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  * 
  */
+//XML ANNOTATIONS
+@XmlRootElement(name = "telephoneNumber")
+@XmlType(name = "TelephoneNumber")
+//ENTITY ANNOTATIONS
 public class TelephoneNumber implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -31,12 +43,25 @@ public class TelephoneNumber implements Serializable {
      * 
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
+    @XmlTransient
     private static final long serialVersionUID = -4884737104059972604L;
+
+    @XmlAttribute(name = "type", required = true)
     private TelephoneNumberType __type;
+
+    @XmlElement(name = "coutryCode")
     private String __countryCode;
+
+    @XmlElement(name = "areaCode")
     private String __areaCode;
+
+    @XmlElement(name = "number", required = true, nillable = false)
     private String __number;
+
+    @XmlElement(name = "extension")
     private String __extension;
+
+    @XmlTransient
     private Entity<?> __entity;
 
     /**
@@ -208,10 +233,15 @@ public class TelephoneNumber implements Serializable {
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlEnum
     public enum TelephoneNumberType {
+        @XmlEnumValue("Home")
         HOME,
+        @XmlEnumValue("Office")
         OFFICE,
+        @XmlEnumValue("Mobile")
         MOBILE,
+        @XmlEnumValue("Fax")
         FAX;
     }
 }

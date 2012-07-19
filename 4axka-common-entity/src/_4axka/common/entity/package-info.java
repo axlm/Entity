@@ -15,4 +15,13 @@
 /**
  * @author Axl Mattheus
  */
+// XML ANNOTATIONS
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSchema(namespace = "http://FourAXKA.net/common/entity")
+// ENTITY ANNOTATIONS
 package _4axka.common.entity;
+
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSchema;

@@ -18,13 +18,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 import _4axka.common.entity.Person.GenderType;
 
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  */
+// XML ANNOTATIONS
+@XmlRootElement(name = "southAfricanIdentityNumber")
+@XmlType(name = "SouthAfricanIdentityNumber")
+// ENTITY ANNOTATIONS
 public final class SouthAfricanIdentityNumber {
+    @XmlElement(name = "number", required = true, nillable = false)
     private String __number;
 
     /**

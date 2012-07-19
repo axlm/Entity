@@ -16,11 +16,23 @@ package _4axka.common.entity;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  * 
  */
+//XML ANNOTATIONS
+@XmlRootElement(name = "address")
+@XmlType(name = "Address")
+//ENTITY ANNOTATIONS
 public class Address implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -31,14 +43,31 @@ public class Address implements Serializable {
      * 
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
+    @XmlTransient
     private static final long serialVersionUID = 4184492517262397439L;
+
+    @XmlAttribute(name = "type", required = true)
     private AddressType __type;
+
+    @XmlElement(name = "location", required = true, nillable = false)
     private String __location;
+
+    @XmlElement(name = "suburb")
     private String __suburb;
+
+    @XmlElement(name = "city", required = true, nillable = false)
     private String __city;
+
+    @XmlElement(name = "region")
     private String __region;
+
+    @XmlElement(name = "country")
     private String __country;
+
+    @XmlElement(name = "code", required = true, nillable = false)
     private String __code;
+
+    @XmlTransient
     private Entity<?> __entity;
 
     /**
@@ -256,9 +285,13 @@ public class Address implements Serializable {
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlEnum
     public enum AddressType {
+        @XmlEnumValue("Home")
         HOME,
+        @XmlEnumValue("Office")
         OFFICE,
+        @XmlEnumValue("Postal")
         POSTAL;
     }
 }

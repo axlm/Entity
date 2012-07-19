@@ -19,11 +19,23 @@ import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  *
  */
+//XML ANNOTATIONS
+@XmlRootElement(name = "person")
+@XmlType(name = "Person")
+//ENTITY ANNOTATIONS
 public abstract class Person<ID extends Comparable<ID> & Serializable> extends Entity<ID> {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -34,14 +46,34 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
      * 
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
+    @XmlTransient
     private static final long serialVersionUID = -1623837639963962157L;
+
+    @XmlElementWrapper(name = "givenNames", required = true, nillable = false)
+    @XmlElement(name = "name")
     private Set<String> __givenNames = new ConcurrentSkipListSet<>();
+
+    @XmlElementWrapper(name = "aliases")
+    @XmlElement(name = "alias")
     private Set<String> __alsoKnownAs = new ConcurrentSkipListSet<>();
+
+    @XmlElement(name = "preferredGivenName")
     private String __preferredGivenName;
+
+    @XmlElement(name = "nickName")
     private String __nickName;
+
+    @XmlElement(name = "familyName", required = true, nillable = false)
     private String __familyName;
+
+    @XmlElement(name = "dateOfBirht")
     private Date __dateOfBirth;
+
+    @XmlElement(name = "gender")
     private GenderType __gender;
+
+    @XmlElementWrapper(name = "titles")
+    @XmlElement(name = "title")
     private Set<TitleType> __titles = new ConcurrentSkipListSet<>();
 
     /**
@@ -315,28 +347,51 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlEnum
     public enum GenderType {
+        @XmlEnumValue("Female")
         FEMALE,
+        @XmlEnumValue("Male")
         MALE;
     }
 
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlEnum
     public enum TitleType {
+        @XmlEnumValue("Mr")
         MISTER("Mr."),
+        @XmlEnumValue("Mrs")
         MISTRESS("Mrs."),
+        @XmlEnumValue("Ms")
         MS("Ms."),
+        @XmlEnumValue("Miss")
         MISS("Miss"),
+        @XmlEnumValue("Prof")
         PROFESSOR("Prof."),
+        @XmlEnumValue("Dr")
         DOCTOR("Dr.");
 
+        /**  */
         private final String __abbreviation;
 
+        /**
+         * Instance variable constructor. Initialise <code>this</code> instance with the
+         * specified arguments. <i>For state specifications see the see also section</i>.
+         * 
+         * @param abbreviation
+         */
         private TitleType(final String abbreviation) {
             __abbreviation = abbreviation;
         }
 
+        /**
+         * Obvious.
+         * 
+         * @return The value of <code>this</code> instance's {@linkplain #__abbreviation
+         *         abbreviation}.
+         */
         public String abbreviation() {
             return __abbreviation;
         }

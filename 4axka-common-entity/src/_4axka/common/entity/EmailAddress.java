@@ -16,11 +16,23 @@ package _4axka.common.entity;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  * 
  */
+//XML ANNOTATIONS
+@XmlRootElement(name = "emailAddress")
+@XmlType(name = "EmailAddress")
+//ENTITY ANNOTATIONS
 public class EmailAddress implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -31,9 +43,16 @@ public class EmailAddress implements Serializable {
      * 
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
+    @XmlTransient
     private static final long serialVersionUID = -5046751178904428274L;
+
+    @XmlAttribute(name = "type", required = true)
     private EmailAddressType __type;
+
+    @XmlElement(name = "address", required = true, nillable = false)
     private String __address;
+
+    @XmlTransient
     private Entity<?> __entity;
 
     /**
@@ -132,8 +151,11 @@ public class EmailAddress implements Serializable {
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlEnum
     public enum EmailAddressType {
+        @XmlEnumValue("Home")
         HOME,
+        @XmlEnumValue("Office")
         OFFICE;
     }
 }
