@@ -28,10 +28,10 @@ import _4axka.common.entity.Person.GenderType;
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  */
-// XML ANNOTATIONS
+// JAXB
 @XmlRootElement(name = "southAfricanIdentityNumber")
 @XmlType(name = "SouthAfricanIdentityNumber")
-// ENTITY ANNOTATIONS
+// JPA
 public final class SouthAfricanIdentityNumber {
     @XmlElement(name = "number", required = true, nillable = false)
     private String __number;

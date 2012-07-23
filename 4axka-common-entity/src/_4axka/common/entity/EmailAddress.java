@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlType;
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  * 
  */
-//XML ANNOTATIONS
+// JAXB
 @XmlRootElement(name = "emailAddress")
 @XmlType(name = "EmailAddress")
-//ENTITY ANNOTATIONS
+// JPA
 public class EmailAddress implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.

@@ -32,10 +32,10 @@ import javax.xml.bind.annotation.XmlType;
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  *
  */
-//XML ANNOTATIONS
+// JAXB
 @XmlRootElement(name = "person")
 @XmlType(name = "Person")
-//ENTITY ANNOTATIONS
+// JPA
 public abstract class Person<ID extends Comparable<ID> & Serializable> extends Entity<ID> {
     /**
      * Determines if a de-serialised file is compatible with this class.
