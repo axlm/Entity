@@ -16,6 +16,18 @@ package _4axka.common.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
@@ -29,10 +41,10 @@ import javax.xml.bind.annotation.XmlType;
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  * 
  */
-// JAXB
 @XmlRootElement(name = "emailAddress")
 @XmlType(name = "EmailAddress")
-// JPA
+@javax.persistence.Entity(name = "EmailAddress")
+@Table(name = "EMAIL_ADDRESSES")
 public class EmailAddress implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -44,15 +56,38 @@ public class EmailAddress implements Serializable {
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
+    @Transient
     private static final long serialVersionUID = -5046751178904428274L;
 
+    @XmlTransient
+    @Id
+    @TableGenerator(
+            name = "email_address_id_generator",
+            table = "PRIMARY_KEYS",
+            pkColumnName = "GENERATOR",
+            pkColumnValue = "email_address_id",
+            valueColumnName = "VALUE")
+    @Column(name = "ID")
+    private Long __id;
+
+    @XmlTransient
+    @Version
+    @Column(name = "VERSION_LOCK")
+    private Integer __version;
+
     @XmlAttribute(name = "type", required = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "EMAIL_ADDRESS_TYPE", length = 15, nullable = false)
     private EmailAddressType __type;
 
     @XmlElement(name = "address", required = true, nillable = false)
+    @Basic
+    @Column(name = "ADDRESS", length = 127, nullable = false)
     private String __address;
 
     @XmlTransient
+    @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
+    @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Entity<?> __entity;
 
     /**
@@ -89,6 +124,24 @@ public class EmailAddress implements Serializable {
      */
     public EmailAddress(final EmailAddress template) {
         this(template.getType(), template.getAddress());
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__id id}.
+     */
+    public final Long getId() {
+        return __id;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__version version}.
+     */
+    public final Integer getVersion() {
+        return __version;
     }
 
     /**
@@ -151,6 +204,7 @@ public class EmailAddress implements Serializable {
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlType(name = "EmailAddressType")
     @XmlEnum
     public enum EmailAddressType {
         @XmlEnumValue("Home")

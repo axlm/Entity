@@ -18,6 +18,10 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.UUID;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -27,10 +31,9 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  */
-// JAXB
 @XmlRootElement(name = "randomUniqueIdentity")
 @XmlType(name = "RandomUniqueIdentity")
-// JPA
+@Embeddable
 public final class RandomUniqueIdentitfier implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -42,9 +45,12 @@ public final class RandomUniqueIdentitfier implements Serializable {
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
+    @Transient
     private static final long serialVersionUID = -2315326616405271556L;
 
     @XmlElement(name = "radix32UUID", required = true, nillable = false)
+    @Basic
+    @Column(name = "RADIX_32_UUID", length = 63, nullable = false, unique = true)
     private String __id;
 
     /**
@@ -106,7 +112,7 @@ public final class RandomUniqueIdentitfier implements Serializable {
      *            Value to assign to <code>this</code> {@linkplain #__id identifier}.
      */
     void setId(final String id) {
-        final BigInteger octalFormatter_ = new BigInteger(id.getBytes());
-        __id = octalFormatter_.toString(32);
+        final BigInteger radix32Identifier_ = new BigInteger(id.getBytes());
+        __id = radix32Identifier_.toString(32);
     }
 }

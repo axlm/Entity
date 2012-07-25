@@ -15,10 +15,8 @@
 /**
  * @author Axl Mattheus
  */
-// JAXB
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSchema(namespace = "http://FourAXKA.net/common/entity/20120719")
-// JPA
 package _4axka.common.entity;
 
 

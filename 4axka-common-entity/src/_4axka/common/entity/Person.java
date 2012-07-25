@@ -19,6 +19,17 @@ import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
+import javax.persistence.Basic;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlEnum;
@@ -32,10 +43,10 @@ import javax.xml.bind.annotation.XmlType;
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  *
  */
-// JAXB
 @XmlRootElement(name = "person")
 @XmlType(name = "Person")
-// JPA
+@javax.persistence.Entity(name = "Person")
+@Table(name = "PERSONS")
 public abstract class Person<ID extends Comparable<ID> & Serializable> extends Entity<ID> {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -47,33 +58,56 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
+    @Transient
     private static final long serialVersionUID = -1623837639963962157L;
 
     @XmlElementWrapper(name = "givenNames", required = true, nillable = false)
     @XmlElement(name = "name")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "GIVEN_NAMES")
+    @Column(name = "GIVEN_NAME", length = 63, nullable = false)
     private Set<String> __givenNames = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "aliases")
     @XmlElement(name = "alias")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "ALIASES")
+    @Column(name = "ALIAS", length = 63, nullable = false)
     private Set<String> __alsoKnownAs = new ConcurrentSkipListSet<>();
 
     @XmlElement(name = "preferredGivenName")
+    @Basic
+    @Column(name = "PREFERRED_GIVEN_NAME", length = 63)
     private String __preferredGivenName;
 
     @XmlElement(name = "nickName")
+    @Basic
+    @Column(name = "NICK_NAME", length = 31)
     private String __nickName;
 
     @XmlElement(name = "familyName", required = true, nillable = false)
+    @Basic
+    @Column(name = "FAMILY_NAME", length = 63, nullable = false)
     private String __familyName;
 
     @XmlElement(name = "dateOfBirht")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATE_OF_BIRTH")
     private Date __dateOfBirth;
 
     @XmlElement(name = "gender")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "GENDER", length = 7)
     private GenderType __gender;
 
     @XmlElementWrapper(name = "titles")
     @XmlElement(name = "title")
+    // TODO: this should be a unidirectional many to one form the TitleType side to act like a
+    // lookup.
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "TITLES")
+    @Column(name = "TITLE", length = 15)
     private Set<TitleType> __titles = new ConcurrentSkipListSet<>();
 
     /**
@@ -347,6 +381,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlType(name = "GenderType")
     @XmlEnum
     public enum GenderType {
         @XmlEnumValue("Female")
@@ -358,6 +393,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlType(name = "TitleType")
     @XmlEnum
     public enum TitleType {
         @XmlEnumValue("Mr")

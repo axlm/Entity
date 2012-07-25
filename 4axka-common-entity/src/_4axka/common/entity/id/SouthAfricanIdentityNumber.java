@@ -14,12 +14,18 @@
 package _4axka.common.entity.id;
 
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import _4axka.common.entity.Person.GenderType;
@@ -28,12 +34,26 @@ import _4axka.common.entity.Person.GenderType;
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  */
-// JAXB
 @XmlRootElement(name = "southAfricanIdentityNumber")
 @XmlType(name = "SouthAfricanIdentityNumber")
-// JPA
-public final class SouthAfricanIdentityNumber {
+@Embeddable
+public final class SouthAfricanIdentityNumber implements Serializable {
+    /**
+     * Determines if a de-serialised file is compatible with this class.
+     * <p>
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
+     * this class is not compatible with the previous version. It is not necessary to include
+     * in first version of the class, but included here as a reminder of its importance.
+     * 
+     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
+     */
+    @XmlTransient
+    @Transient
+    private static final long serialVersionUID = -2445401405948658566L;
+
     @XmlElement(name = "number", required = true, nillable = false)
+    @Basic
+    @Column(name = "SOUTH_AFRICAN_ID_NUMBER", length = 31, nullable = false, unique = true)
     private String __number;
 
     /**

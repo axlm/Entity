@@ -16,6 +16,18 @@ package _4axka.common.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
@@ -29,10 +41,10 @@ import javax.xml.bind.annotation.XmlType;
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  * 
  */
-// JAXB
 @XmlRootElement(name = "telephoneNumber")
 @XmlType(name = "TelephoneNumber")
-// JPA
+@javax.persistence.Entity(name = "TelephoneNumber")
+@Table(name = "TELEPHONE_NUMBERS")
 public class TelephoneNumber implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -44,24 +56,53 @@ public class TelephoneNumber implements Serializable {
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
+    @Transient
     private static final long serialVersionUID = -4884737104059972604L;
 
+    @XmlTransient
+    @Id
+    @TableGenerator(
+            name = "telephone_number_id_generator",
+            table = "PRIMARY_KEYS",
+            pkColumnName = "GENERATOR",
+            pkColumnValue = "telephone_number_id",
+            valueColumnName = "VALUE")
+    @Column(name = "ID")
+    private Long __id;
+
+    @XmlTransient
+    @Version
+    @Column(name = "VERSION_LOCK")
+    private Integer __version;
+
     @XmlAttribute(name = "type", required = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TELEPHONE_NUMBER_TYPE", length = 15, nullable = false)
     private TelephoneNumberType __type;
 
     @XmlElement(name = "coutryCode")
+    @Basic
+    @Column(name = "COUNTRY_CODE", length = 7)
     private String __countryCode;
 
     @XmlElement(name = "areaCode")
+    @Basic
+    @Column(name = "AREA_CODE", length = 7)
     private String __areaCode;
 
     @XmlElement(name = "number", required = true, nillable = false)
+    @Basic
+    @Column(name = "NUMBER", length = 9, nullable = false)
     private String __number;
 
     @XmlElement(name = "extension")
+    @Basic
+    @Column(name = "EXTENSION", length = 9)
     private String __extension;
 
     @XmlTransient
+    @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
+    @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Entity<?> __entity;
 
     /**
@@ -114,6 +155,24 @@ public class TelephoneNumber implements Serializable {
                 template.getAreaCode(),
                 template.getNumber(),
                 template.getExtension());
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__id id}.
+     */
+    public final Long getId() {
+        return __id;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__version version}.
+     */
+    public final Integer getVersion() {
+        return __version;
     }
 
     /**
@@ -233,6 +292,7 @@ public class TelephoneNumber implements Serializable {
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
+    @XmlType(name = "TelephoneNumberType")
     @XmlEnum
     public enum TelephoneNumberType {
         @XmlEnumValue("Home")

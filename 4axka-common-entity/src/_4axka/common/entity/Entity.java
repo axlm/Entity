@@ -18,6 +18,18 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 import javax.swing.tree.TreeNode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -26,17 +38,17 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  * 
  * @param <ID>
  */
-// JAXB
 @XmlRootElement(name = "entity")
 @XmlType(name = "Entity")
 @XmlSeeAlso({Person.class})
-// JPA
+@javax.persistence.Entity(name = "Entity") // there are complaints if the fqn is not used
+@Table(name = "ENTITIES")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Entity<ID extends Comparable<ID> & Serializable> implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -48,21 +60,42 @@ public abstract class Entity<ID extends Comparable<ID> & Serializable> implement
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
+    @Transient
     private static final long serialVersionUID = 2724081153382480314L;
 
+    @XmlTransient
+    @Id
+    @TableGenerator(
+            name = "entity_id_generator",
+            table = "PRIMARY_KEYS",
+            pkColumnName = "GENERATOR",
+            pkColumnValue = "entity_id",
+            valueColumnName = "VALUE")
+    @Column(name = "ID")
+    private Long __id;
+
+    @XmlTransient
+    @Version
+    @Column(name = "VERSION_LOCK")
+    private Integer __version;
+
     @XmlElement(name = "identifier", required = true, nillable = false)
+    @Embedded
     private ID __legalIdentifier;
 
     @XmlElementWrapper(name = "emailAddresses")
     @XmlElement(name = "emailAddress")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "__entity")
     private Set<EmailAddress> __emailAddresses = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "telephoneNumbers")
     @XmlElement(name = "telephoneNumber")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "__entity")
     private Set<TelephoneNumber> __telephoneNumbers = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "addresses")
     @XmlElement(name = "address")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "__entity")
     private Set<Address> __addresses = new ConcurrentSkipListSet<>();
 
     /**
@@ -111,6 +144,24 @@ public abstract class Entity<ID extends Comparable<ID> & Serializable> implement
                 template.getEmailAddresses(),
                 template.getTelephoneNumbers(),
                 template.getAddresses());
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__id id}.
+     */
+    public final Long getId() {
+        return __id;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__version version}.
+     */
+    public final Integer getVersion() {
+        return __version;
     }
 
     /**

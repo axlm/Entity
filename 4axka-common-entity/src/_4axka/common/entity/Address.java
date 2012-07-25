@@ -16,6 +16,18 @@ package _4axka.common.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
@@ -33,6 +45,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "address")
 @XmlType(name = "Address")
 // JPA
+@javax.persistence.Entity(name = "Address")
+@Table(name = "ADDRESSES")
 public class Address implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -44,30 +58,63 @@ public class Address implements Serializable {
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
+    @Transient
     private static final long serialVersionUID = 4184492517262397439L;
 
+    @XmlTransient
+    @Id
+    @TableGenerator(
+            name = "address_id_generator",
+            table = "PRIMARY_KEYS",
+            pkColumnName = "GENERATOR",
+            pkColumnValue = "address_id",
+            valueColumnName = "VALUE")
+    @Column(name = "ID")
+    private Long __id;
+
+    @XmlTransient
+    @Version
+    @Column(name = "VERSION_LOCK")
+    private Integer __version;
+
     @XmlAttribute(name = "type", required = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ADDRESS_TYPE", length = 15, nullable = false)
     private AddressType __type;
 
     @XmlElement(name = "location", required = true, nillable = false)
+    @Basic
+    @Column(name = "LOCATION", length = 255, nullable = false)
     private String __location;
 
     @XmlElement(name = "suburb")
+    @Basic
+    @Column(name = "SUBURB", length = 63)
     private String __suburb;
 
     @XmlElement(name = "city", required = true, nillable = false)
+    @Basic
+    @Column(name = "CITY", length = 63, nullable = false)
     private String __city;
 
     @XmlElement(name = "region")
+    @Basic
+    @Column(name = "REGION", length = 63)
     private String __region;
 
     @XmlElement(name = "country")
+    @Basic
+    @Column(name = "COUNTRY", length = 63)
     private String __country;
 
     @XmlElement(name = "code", required = true, nillable = false)
+    @Basic
+    @Column(name = "CODE", length = 15, nullable = false)
     private String __code;
 
     @XmlTransient
+    @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
+    @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Entity<?> __entity;
 
     /**
@@ -128,6 +175,24 @@ public class Address implements Serializable {
                 template.getRegion(),
                 template.getCountry(),
                 template.getCode());
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__id id}.
+     */
+    public final Long getId() {
+        return __id;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__version version}.
+     */
+    public final Integer getVersion() {
+        return __version;
     }
 
     /**
