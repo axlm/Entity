@@ -223,6 +223,21 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
     /**
      * Obvious.
      * 
+     * @return The value of <code>this</code> instance's initials.
+     */
+    public final String getInitials() {
+        final StringBuilder builder_ = new StringBuilder();
+
+        for (final String name_ : getGivenNames()) {
+            builder_.append(name_.charAt(0)).append(". ");
+        }
+
+        return builder_.toString();
+    }
+
+    /**
+     * Obvious.
+     * 
      * @return The value of <code>this</code> instance's {@linkplain #__alsoKnownAs aliases}.
      */
     public final Iterable<String> getAlsoKnownAs() {
@@ -397,6 +412,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
                 .append("Id=").append(wrap(getId())).append(", ")
                 .append("Version=").append(wrap(getVersion())).append(", ")
                 .append("Given Names=").append(unroll(__givenNames)).append(", ")
+                .append("Initials=").append(wrap(getInitials())).append(", ")
                 .append("Family Name=").append(wrap(getFamilyName())).append(", ")
                 .append("Also Known As=").append(unroll(__alsoKnownAs)).append(", ")
                 .append("Preferred Given Name=").append(wrap(getPreferredGivenName())).append(", ")

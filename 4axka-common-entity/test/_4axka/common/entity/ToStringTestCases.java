@@ -69,7 +69,7 @@ public class ToStringTestCases {
         };
 
         person_.addGivenName("Adolf");
-        person_.addGivenName("Johannes");
+        person_.addGivenName("Jan");
         person_.addAlias("Axl");
         person_.setPreferredGivenName("Axl");
         person_.setFamilyName("Mattheus");
