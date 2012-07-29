@@ -14,6 +14,8 @@
 package _4axka.common.entity.id;
 
 
+import static _4axka.util.lang.ToString.wrap;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,7 +39,7 @@ import _4axka.common.entity.Person.GenderType;
 @XmlRootElement(name = "southAfricanIdentityNumber")
 @XmlType(name = "SouthAfricanIdentityNumber")
 @Embeddable
-public final class SouthAfricanIdentityNumber implements Serializable {
+public final class SouthAfricanIdentityNumber implements Serializable, Comparable<SouthAfricanIdentityNumber> {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -285,6 +287,85 @@ public final class SouthAfricanIdentityNumber implements Serializable {
         return checkSum_ == Integer.parseInt(numberWithCheckDigit_.substring(
                 offset_ - 1,
                 offset_));
+    }
+
+    @Override
+    public boolean equals(final Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (!(that.getClass().isAssignableFrom(SouthAfricanIdentityNumber.class))) {
+            return false;
+        }
+        final SouthAfricanIdentityNumber that_ = SouthAfricanIdentityNumber.class.cast(that);
+
+        if (getNumber() == null) {
+            if (that_.getNumber() != null) {
+                return false;
+            }
+        } else if (!getNumber().equals(that_.getNumber())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int compareTo(final SouthAfricanIdentityNumber that) {
+        int result_ = 0;
+
+        if (this == that) {
+            return result_;
+        }
+        if (that == null) {
+            return 1;
+        }
+
+        if (null == getNumber()) {
+            if (null != that.getNumber()) {
+                result_ = -1;
+            }
+        } else if (null != that.getNumber()) {
+            result_ = getNumber().compareTo(that.getNumber());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        return result_;
+    }
+
+    @Override
+    public int hashCode() {
+        int result_ = 1;
+        final int PRIME = 31;
+
+        result_ = PRIME * result_ + ((getNumber() == null) ? 0 : getNumber().hashCode());
+
+        return result_;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder_ = new StringBuilder();
+        
+        final String loadedFrom_ = getClass()
+                .getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .toString();
+        
+        builder_.append("SouthAfricanIdentityNumber@").append(System.identityHashCode(this))
+        .append("=[")
+        .append("South African Identity Number=").append(wrap(getNumber())).append(", ")
+        .append("super=[").append(super.toString()).append("]").append(", ")
+        .append("Bytecode Location=").append(loadedFrom_)
+        .append("]");
+        
+        return builder_.toString();
     }
 
     /* For internal use only. */

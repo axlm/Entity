@@ -14,6 +14,9 @@
 package _4axka.common.entity;
 
 
+import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.unroll;
+
 import java.io.Serializable;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -21,6 +24,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -46,10 +50,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "entity")
 @XmlType(name = "Entity")
 @XmlSeeAlso({Person.class})
-@javax.persistence.Entity(name = "Entity") // there are complaints if the fqn is not used
+@Entity(name = "Entity") // there are complaints if the fqn is not used
 @Table(name = "ENTITIES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Entity<ID extends Comparable<ID> & Serializable> implements Serializable {
+public abstract class Contact<ID extends Serializable & Comparable<ID>> implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -106,7 +110,7 @@ public abstract class Entity<ID extends Comparable<ID> & Serializable> implement
      * 
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
-    public Entity() {
+    public Contact() {
         super();
     }
 
@@ -119,7 +123,7 @@ public abstract class Entity<ID extends Comparable<ID> & Serializable> implement
      * @param numbers
      * @param addresses
      */
-    public Entity(
+    public Contact(
             final ID legalIdentifier,
             final Iterable<EmailAddress> emailAddresses,
             final Iterable<TelephoneNumber> numbers,
@@ -135,10 +139,10 @@ public abstract class Entity<ID extends Comparable<ID> & Serializable> implement
      * Copy constructor. <i>For state specifications see the see also section</i>.
      * 
      * @param template
-     *            Uses template as template to initialise {@linkplain Entity <code>this</code>}.
+     *            Uses template as template to initialise {@linkplain Contact <code>this</code>}.
      * @see super
      */
-    public Entity(final Entity<ID> template) {
+    public Contact(final Contact<ID> template) {
         this(
                 template.getLegalIdentifier(),
                 template.getEmailAddresses(),
@@ -288,8 +292,33 @@ public abstract class Entity<ID extends Comparable<ID> & Serializable> implement
      *            Instance to add to <code>this</code> {@linkplain #__addresses  addresses}.
      */
     public final void addAddress(final Address address) {
-        final Address address_ = new Address(address);
-        address_.setEntity(this);
-        __addresses.add(address_);
+        final Address adress__ = new Address(address);
+        adress__.setEntity(this);
+        __addresses.add(adress__);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder_ = new StringBuilder();
+
+        final String loadedFrom_ = getClass()
+                .getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .toString();
+
+        builder_.append("Contact@").append(System.identityHashCode(this))
+                .append("{")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Legal Identifier=").append(wrap(getLegalIdentifier())).append(", ")
+                .append("Email Addresses=").append(unroll(__emailAddresses)).append(", ")
+                .append("Telephone Numbers=").append(unroll(__telephoneNumbers)).append(", ")
+                .append("Addresses=").append(unroll(__addresses)).append(", ")
+                .append("Bytecode Location=").append(loadedFrom_).append(", ")
+                .append("super=").append(super.toString())
+                .append("}");
+
+        return builder_.toString();
     }
 }

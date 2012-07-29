@@ -14,11 +14,14 @@
 package _4axka.common.entity;
 
 
+import static _4axka.util.lang.ToString.wrap;
+
 import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
@@ -45,9 +48,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "address")
 @XmlType(name = "Address")
 // JPA
-@javax.persistence.Entity(name = "Address")
+@Entity(name = "Address")
 @Table(name = "ADDRESSES")
-public class Address implements Serializable {
+public class Address implements Serializable, Comparable<Address> {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -115,7 +118,7 @@ public class Address implements Serializable {
     @XmlTransient
     @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Entity<?> __entity;
+    private Contact<?> __entity;
 
     /**
      * Default constructor.
@@ -333,7 +336,7 @@ public class Address implements Serializable {
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    final Entity<?> getEntity() {
+    final Contact<?> getEntity() {
         return __entity;
     }
 
@@ -343,8 +346,167 @@ public class Address implements Serializable {
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    final void setEntity(final Entity<?> reference) {
+    final void setEntity(final Contact<?> reference) {
         __entity = reference;
+    }
+
+    @Override
+    public boolean equals(final Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (!(that.getClass().isAssignableFrom(Address.class))) {
+            return false;
+        }
+
+        final Address that_ = Address.class.cast(that);
+        if (__type != that_.__type) {
+            return false;
+        }
+        if (__code == null) {
+            if (that_.__code != null) {
+                return false;
+            }
+        } else if (!__code.equals(that_.__code)) {
+            return false;
+        }
+        if (__location == null) {
+            if (that_.__location != null) {
+                return false;
+            }
+        } else if (!__location.equals(that_.__location)) {
+            return false;
+        }
+        if (__city == null) {
+            if (that_.__city != null) {
+                return false;
+            }
+        } else if (!__city.equals(that_.__city)) {
+            return false;
+        }
+        if (__suburb == null) {
+            if (that_.__suburb != null) {
+                return false;
+            }
+        } else if (!__suburb.equals(that_.__suburb)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int compareTo(final Address that) {
+        int result_ = 0;
+
+        if (this == that) {
+            return result_;
+        }
+        if (that == null) {
+            return 1;
+        }
+
+        if (null == getType()) {
+            if (null != that.getType()) {
+                result_ = -1;
+            }
+        } else if (null != that.getType()) {
+            result_ = getType().compareTo(that.getType());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        if (null == getCode()) {
+            if (null != that.getCode()) {
+                result_ = -1;
+            }
+        } else if (null != that.getCode()) {
+            result_ = getCode().compareTo(that.getCode());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        if (null == getLocation()) {
+            if (null != that.getLocation()) {
+                result_ = -1;
+            }
+        } else if (null != that.getLocation()) {
+            result_ = getLocation().compareTo(that.getLocation());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        if (null == getCity()) {
+            if (null != that.getCity()) {
+                result_ = -1;
+            }
+        } else if (null != that.getCity()) {
+            result_ = getCity().compareTo(that.getCity());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        if (null == getSuburb()) {
+            if (null != that.getSuburb()) {
+                result_ = -1;
+            }
+        } else if (null != that.getSuburb()) {
+            result_ = getSuburb().compareTo(that.getSuburb());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        return result_;
+    }
+
+    @Override
+    public int hashCode() {
+        int result_ = 1;
+
+        final int prime = 31;
+        result_ = prime * result_ + ((__type == null) ? 0 : __type.hashCode());
+        result_ = prime * result_ + ((__code == null) ? 0 : __code.hashCode());
+        result_ = prime * result_ + ((__location == null) ? 0 : __location.hashCode());
+        result_ = prime * result_ + ((__city == null) ? 0 : __city.hashCode());
+        result_ = prime * result_ + ((__suburb == null) ? 0 : __suburb.hashCode());
+
+        return result_;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder_ = new StringBuilder();
+
+        final String loadedFrom_ = getClass()
+                .getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .toString();
+
+        builder_.append("Address@").append(System.identityHashCode(this))
+                .append("{")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Type=").append(wrap(getType())).append(", ")
+                .append("Location=").append(wrap(getLocation())).append(", ")
+                .append("Suburb=").append(wrap(getSuburb())).append(", ")
+                .append("City=").append(wrap(getCity())).append(", ")
+                .append("Region=").append(wrap(getRegion())).append(", ")
+                .append("Country=").append(wrap(getCountry())).append(", ")
+                .append("Code=").append(wrap(getCode())).append(", ")
+                .append("Bytecode Location=").append(loadedFrom_).append(", ")
+                .append("super=").append(super.toString())
+                .append("}");
+
+        return builder_.toString();
     }
 
     /**

@@ -14,6 +14,9 @@
 package _4axka.common.entity;
 
 
+import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.unroll;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -23,6 +26,7 @@ import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -45,9 +49,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement(name = "person")
 @XmlType(name = "Person")
-@javax.persistence.Entity(name = "Person")
+@Entity(name = "Person")
 @Table(name = "PERSONS")
-public abstract class Person<ID extends Comparable<ID> & Serializable> extends Entity<ID> {
+public abstract class Person<ID extends Comparable<ID> & Serializable> extends Contact<ID> {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -213,7 +217,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
      *            given names} instance.
      */
     public final void addGivenName(final String name) {
-        __alsoKnownAs.add(name);
+        __givenNames.add(name);
     }
 
     /**
@@ -267,7 +271,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
      *            preferred given name}.
      */
     final void setPreferredGivenName(final String name) {
-        __alsoKnownAs.add(name);
+        __preferredGivenName = name;
     }
 
     /**
@@ -376,6 +380,34 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends E
      */
     public final void addTitle(final TitleType title) {
         __titles.add(title);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder_ = new StringBuilder();
+
+        final String loadedFrom_ = getClass()
+                .getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .toString();
+
+        builder_.append("Person@").append(System.identityHashCode(this))
+                .append("{")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Given Names=").append(unroll(__givenNames)).append(", ")
+                .append("Family Name=").append(wrap(getFamilyName())).append(", ")
+                .append("Also Known As=").append(unroll(__alsoKnownAs)).append(", ")
+                .append("Preferred Given Name=").append(wrap(getPreferredGivenName())).append(", ")
+                .append("Date of Birth=").append(wrap(getDateOfBirth())).append(", ")
+                .append("Gender=").append(wrap(getGender())).append(", ")
+                .append("Titles=").append(unroll(__titles)).append(", ")
+                .append("Bytecode Location=").append(loadedFrom_).append(", ")
+                .append("super=").append(super.toString())
+                .append("}");
+
+        return builder_.toString();
     }
 
     /**

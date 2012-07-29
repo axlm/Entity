@@ -13,6 +13,7 @@
  */
 package _4axka.common.entity.id;
 
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -34,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "randomUniqueIdentity")
 @XmlType(name = "RandomUniqueIdentity")
 @Embeddable
-public final class RandomUniqueIdentitfier implements Serializable {
+public final class RandomUniqueIdentitfier implements Serializable, Comparable<RandomUniqueIdentitfier> {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -114,5 +115,84 @@ public final class RandomUniqueIdentitfier implements Serializable {
     void setId(final String id) {
         final BigInteger radix32Identifier_ = new BigInteger(id.getBytes());
         __id = radix32Identifier_.toString(32);
+    }
+
+    @Override
+    public boolean equals(final Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (!(that.getClass().isAssignableFrom(RandomUniqueIdentitfier.class))) {
+            return false;
+        }
+        final RandomUniqueIdentitfier that_ = RandomUniqueIdentitfier.class.cast(that);
+
+        if (__id == null) {
+            if (that_.__id != null) {
+                return false;
+            }
+        } else if (!__id.equals(that_.__id)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int compareTo(final RandomUniqueIdentitfier that) {
+        int result_ = 0;
+
+        if (this == that) {
+            return result_;
+        }
+        if (that == null) {
+            return 1;
+        }
+
+        if (null == getId()) {
+            if (null != that.getId()) {
+                result_ = -1;
+            }
+        } else if (null != that.getId()) {
+            result_ = getId().compareTo(that.getId());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        return result_;
+    }
+
+    @Override
+    public int hashCode() {
+        int result_ = 1;
+        final int PRIME = 31;
+
+        result_ = PRIME * result_ + ((__id == null) ? 0 : __id.hashCode());
+
+        return result_;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder_ = new StringBuilder();
+        
+        final String loadedFrom_ = getClass()
+                .getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .toString();
+        
+        builder_.append("RandomUniqueIdentitfier@").append(System.identityHashCode(this))
+        .append("=[")
+        .append("Radix 32 Universally Unique Identity=").append(wrap(getId())).append(", ")
+        .append("Bytecode Location=").append(loadedFrom_).append(", ")
+        .append("super=[").append(super.toString()).append("]")
+        .append("]");
+        
+        return builder_.toString();
     }
 }

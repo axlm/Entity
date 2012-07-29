@@ -14,11 +14,14 @@
 package _4axka.common.entity;
 
 
+import static _4axka.util.lang.ToString.wrap;
+
 import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
@@ -43,9 +46,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement(name = "emailAddress")
 @XmlType(name = "EmailAddress")
-@javax.persistence.Entity(name = "EmailAddress")
+@Entity(name = "EmailAddress")
 @Table(name = "EMAIL_ADDRESSES")
-public class EmailAddress implements Serializable {
+public class EmailAddress implements Serializable, Comparable<EmailAddress> {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -88,7 +91,7 @@ public class EmailAddress implements Serializable {
     @XmlTransient
     @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Entity<?> __entity;
+    private Contact<?> __entity;
 
     /**
      * Default constructor.
@@ -187,7 +190,7 @@ public class EmailAddress implements Serializable {
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    final Entity<?> getEntity() {
+    final Contact<?> getEntity() {
         return __entity;
     }
 
@@ -197,8 +200,105 @@ public class EmailAddress implements Serializable {
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    final void setEntity(final Entity<?> reference) {
+    final void setEntity(final Contact<?> reference) {
         __entity = reference;
+    }
+
+    @Override
+    public boolean equals(final Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (!(that.getClass().isAssignableFrom(EmailAddress.class))) {
+            return false;
+        }
+
+        final EmailAddress that_ = EmailAddress.class.cast(that);
+        if (__address == null) {
+            if (that_.__address != null) {
+                return false;
+            }
+        } else if (!__address.equals(that_.__address)) {
+            return false;
+        }
+        if (__type != that_.__type) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int compareTo(final EmailAddress that) {
+        int result_ = 0;
+
+        if (this == that) {
+            return result_;
+        }
+        if (that == null) {
+            return 1;
+        }
+
+        if (null == getType()) {
+            if (null != that.getType()) {
+                result_ = -1;
+            }
+        } else if (null != that.getType()) {
+            result_ = getType().compareTo(that.getType());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        if (null == getAddress()) {
+            if (null != that.getAddress()) {
+                result_ = -1;
+            }
+        } else if (null != that.getAddress()) {
+            result_ = getAddress().compareTo(that.getAddress());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        return result_;
+    }
+
+    @Override
+    public int hashCode() {
+        int result_ = 1;
+
+        final int prime = 31;
+        result_ = prime * result_ + ((__type == null) ? 0 : __type.hashCode());
+        result_ = prime * result_ + ((__address == null) ? 0 : __address.hashCode());
+
+        return result_;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder_ = new StringBuilder();
+
+        final String loadedFrom_ = getClass()
+                .getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .toString();
+
+        builder_.append("EmailAddress@").append(System.identityHashCode(this))
+                .append("{")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Type=").append(wrap(getType())).append(", ")
+                .append("Address=").append(wrap(getAddress())).append(", ")
+                .append("Bytecode Location=").append(loadedFrom_).append(", ")
+                .append("super=").append(super.toString())
+                .append("}");
+
+        return builder_.toString();
     }
 
     /**

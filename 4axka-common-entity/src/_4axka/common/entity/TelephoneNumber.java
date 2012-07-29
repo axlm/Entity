@@ -14,11 +14,14 @@
 package _4axka.common.entity;
 
 
+import static _4axka.util.lang.ToString.wrap;
+
 import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
@@ -43,9 +46,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement(name = "telephoneNumber")
 @XmlType(name = "TelephoneNumber")
-@javax.persistence.Entity(name = "TelephoneNumber")
+@Entity(name = "TelephoneNumber")
 @Table(name = "TELEPHONE_NUMBERS")
-public class TelephoneNumber implements Serializable {
+public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber> {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -103,7 +106,7 @@ public class TelephoneNumber implements Serializable {
     @XmlTransient
     @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Entity<?> __entity;
+    private Contact<?> __entity;
 
     /**
      * Default constructor.
@@ -275,7 +278,7 @@ public class TelephoneNumber implements Serializable {
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    final Entity<?> getEntity() {
+    final Contact<?> getEntity() {
         return __entity;
     }
 
@@ -285,10 +288,151 @@ public class TelephoneNumber implements Serializable {
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    final void setEntity(final Entity<?> reference) {
+    final void setEntity(final Contact<?> reference) {
         __entity = reference;
     }
+
+    @Override
+    public boolean equals(final Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (!(that.getClass().isAssignableFrom(TelephoneNumber.class))) {
+            return false;
+        }
+        final TelephoneNumber that_ = TelephoneNumber.class.cast(that);
+
+        if (__type != that_.__type) {
+            return false;
+        }
+        if (__countryCode == null) {
+            if (that_.__countryCode != null) {
+                return false;
+            }
+        } else if (!__countryCode.equals(that_.__countryCode)) {
+            return false;
+        }
+        if (__areaCode == null) {
+            if (that_.__areaCode != null) {
+                return false;
+            }
+        } else if (!__areaCode.equals(that_.__areaCode)) {
+            return false;
+        }
+        if (__number == null) {
+            if (that_.__number != null) {
+                return false;
+            }
+        } else if (!__number.equals(that_.__number)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int compareTo(final TelephoneNumber that) {
+        int result_ = 0;
+
+        if (this == that) {
+            return result_;
+        }
+        if (that == null) {
+            return 1;
+        }
+
+        if (null == getType()) {
+            if (null != that.getType()) {
+                result_ = -1;
+            }
+        } else if (null != that.getType()) {
+            result_ = getType().compareTo(that.getType());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        if (null == getCountryCode()) {
+            if (null != that.getCountryCode()) {
+                result_ = -1;
+            }
+        } else if (null != that.getCountryCode()) {
+            result_ = getCountryCode().compareTo(that.getCountryCode());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        if (null == getAreaCode()) {
+            if (null != that.getAreaCode()) {
+                result_ = -1;
+            }
+        } else if (null != that.getAreaCode()) {
+            result_ = getAreaCode().compareTo(that.getAreaCode());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        if (null == getNumber()) {
+            if (null != that.getNumber()) {
+                result_ = -1;
+            }
+        } else if (null != that.getNumber()) {
+            result_ = getNumber().compareTo(that.getNumber());
+        }
+        if (result_ != 0) {
+            return result_;
+        }
+
+        return result_;
+    }
+
+    @Override
+    public int hashCode() {
+        int result_ = 1;
+
+        final int PRIME = 31;
+
+        result_ = PRIME * result_ + ((__type == null) ? 0 : __type.hashCode());
+        result_ = PRIME * result_ + ((__areaCode == null) ? 0 : __areaCode.hashCode());
+        result_ = PRIME * result_ + ((__countryCode == null) ? 0 : __countryCode.hashCode());
+        result_ = PRIME * result_ + ((__number == null) ? 0 : __number.hashCode());
+
+        return result_;
+    }
+
     
+    @Override
+    public String toString() {
+        final StringBuilder builder_ = new StringBuilder();
+
+        final String loadedFrom_ = getClass()
+                .getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .toString();
+
+        builder_.append("TelephoneNumber@").append(System.identityHashCode(this))
+                .append("{")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Type=").append(wrap(getType())).append(", ")
+                .append("Contry Code=").append(wrap(getCountryCode())).append(", ")
+                .append("Area Code=").append(wrap(getAreaCode())).append(", ")
+                .append("Number=").append(wrap(getNumber())).append(", ")
+                .append("Extension=").append(wrap(getExtension())).append(", ")
+                .append("Bytecode Location=").append(loadedFrom_).append(", ")
+                .append("super=").append(super.toString())
+                .append("}");
+
+        return builder_.toString();
+    }
+
+
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
