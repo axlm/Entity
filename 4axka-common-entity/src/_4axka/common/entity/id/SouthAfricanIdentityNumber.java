@@ -171,18 +171,19 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
      * Obvious.
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__number date of birth}.
+     * @throws ParseException
+     *             when the date part of the identity number is not valid.
      */
     public Date getDateOfBirth() {
         Date result_ = null;
 
+        final SimpleDateFormat format_ = new SimpleDateFormat("yyMMdd");
         try {
-            final SimpleDateFormat format_ = new SimpleDateFormat("yyMMdd");
             result_ = format_.parse(__number.substring(
                     Offsets.DATE_START.offset(),
                     Offsets.DATE_STOP.offset()));
         } catch (final ParseException e_) {
-            // FIXME! Log, or throw?
-            e_.printStackTrace();
+            // TODO: Fix!
         }
 
         return result_;
@@ -242,6 +243,14 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
      * @return
      */
     private Boolean isValid(final String number) {
+        Boolean result_ = false;
+
+        // Check the validity of the date first.
+        result_ = getDateOfBirth() != null;
+        if (!result_) {
+            return result_;
+        }
+
         // 1. Remove redundant white space AND remove check digit - we will calculate it here!
         final String numberWithCheckDigit_ = number.replaceAll(" ", "");
         final String numberWithoutCheckDigit_ = numberWithCheckDigit_.substring(0, 12);
@@ -284,9 +293,10 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
         // 9. The number obtained in 8.) must equal the id number check digit.
         final int offset_ = numberWithCheckDigit_.length();
-        return checkSum_ == Integer.parseInt(numberWithCheckDigit_.substring(
-                offset_ - 1,
-                offset_));
+        result_ = (checkSum_ == Integer.parseInt(
+                    numberWithCheckDigit_.substring(offset_ - 1, offset_)));
+
+        return result_;
     }
 
     @Override
@@ -359,11 +369,11 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
                 .toString();
         
         builder_.append("SouthAfricanIdentityNumber@").append(System.identityHashCode(this))
-        .append("=[")
+        .append("{")
         .append("South African Identity Number=").append(wrap(getNumber())).append(", ")
-        .append("super=[").append(super.toString()).append("]").append(", ")
-        .append("Bytecode Location=").append(loadedFrom_)
-        .append("]");
+        .append("Bytecode Location=").append(loadedFrom_).append(", ")
+        .append("super{").append(super.toString()).append("}")
+        .append("}");
         
         return builder_.toString();
     }
@@ -382,6 +392,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         BUFFER_STOP(15),
         CHECKDIGIT_START(16),
         CHECKDIGIT_STOP(17);
+
         private int __offset;
 
         private Offsets(final int offset) {

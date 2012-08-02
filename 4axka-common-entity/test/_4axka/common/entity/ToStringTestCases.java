@@ -1,7 +1,9 @@
 package _4axka.common.entity;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Date;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,8 +13,10 @@ import org.junit.Test;
 
 import _4axka.common.entity.Address.AddressType;
 import _4axka.common.entity.EmailAddress.EmailAddressType;
+import _4axka.common.entity.Person.TitleType;
 import _4axka.common.entity.TelephoneNumber.TelephoneNumberType;
 import _4axka.common.entity.id.SouthAfricanIdentityNumber;
+import _4axka.util.lang.ToString;
 
 
 public class ToStringTestCases {
@@ -68,9 +72,9 @@ public class ToStringTestCases {
             private static final long serialVersionUID = 7226518013709502430L;
         };
 
+        person_.addGivenName("Axl");
         person_.addGivenName("Adolf");
-        person_.addGivenName("Jan");
-        person_.addAlias("Axl");
+        person_.addAlias("Mao");
         person_.setPreferredGivenName("Axl");
         person_.setFamilyName("Mattheus");
         person_.setLegalIdentifier(new SouthAfricanIdentityNumber("6803025017089"));
@@ -86,7 +90,40 @@ public class ToStringTestCases {
                 "Homms",
                 "RSA",
                 "7852"));
-        String personToString_ = person_.toString();
+        person_.addTitle(TitleType.MISTER);
+        person_.setDateOfBirth(new Date());
+        final String personToString_ = person_.toString();
+        System.out.println(personToString_);
+        assertNotNull(personToString_);
+    }
+
+    @Test
+    public final void testPrettyToString() {
+        final Person<SouthAfricanIdentityNumber> person_ = new Person<SouthAfricanIdentityNumber>() {
+            private static final long serialVersionUID = 7226518013709502430L;
+        };
+
+        person_.addGivenName("Axl");
+        person_.addGivenName("Adolf");
+        person_.addAlias("Mao");
+        person_.setPreferredGivenName("Axl");
+        person_.setFamilyName("Mattheus");
+        person_.setLegalIdentifier(new SouthAfricanIdentityNumber("6803025017089"));
+        person_.addTelephoneNumber(new TelephoneNumber(
+                TelephoneNumberType.HOME, "+27", "12", "654 3210", ""));
+        person_.addEmailAddress(new EmailAddress(EmailAddressType.HOME, "axl.mattheus@home.com"));
+        person_.addEmailAddress(new EmailAddress(EmailAddressType.OFFICE, "axl.mattheus@work.net"));
+        person_.addAddress(new Address(
+                AddressType.HOME,
+                "123 Homestead Street",
+                "Home View",
+                "Homely",
+                "Homms",
+                "RSA",
+                "7852"));
+        person_.addTitle(TitleType.MISTER);
+        person_.setDateOfBirth(new Date());
+        final String personToString_ = ToString.prettyPrint(person_.toString());
         System.out.println(personToString_);
         assertNotNull(personToString_);
     }

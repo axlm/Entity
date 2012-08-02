@@ -14,8 +14,8 @@
 package _4axka.common.entity;
 
 
-import static _4axka.util.lang.ToString.wrap;
 import static _4axka.util.lang.ToString.unroll;
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -204,8 +204,10 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
      *            add to <code>this</code> instance.
      */     
     public final void addGivenNames(final Iterable<String> names) {
-        for (final String name_ : names) {
-            addGivenName(name_);
+        if (null != names) {
+            for (final String name_ : names) {
+                addGivenName(name_);
+            }
         }
     }
 
@@ -252,8 +254,10 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
      *            <code>this</code> instance.
      */
     public final void addAliases(final Iterable<String> aka) {
-        for (final String alias_ : aka) {
-            addAlias(alias_);
+        if (null != aka) {
+            for (final String alias_ : aka) {
+                addAlias(alias_);
+            }
         }
     }
 
@@ -381,8 +385,10 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
      *            Value to assign to <code>this</code> {@linkplain #__titles titles}.
      */
     public final void addTitles(final Iterable<TitleType> titles) {
-        for (final TitleType title_ : titles) {
-            addTitle(title_);
+        if (null != titles) {
+            for (final TitleType title_ : titles) {
+                addTitle(title_);
+            }
         }
     }
 

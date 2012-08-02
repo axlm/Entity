@@ -14,8 +14,8 @@
 package _4axka.common.entity;
 
 
-import static _4axka.util.lang.ToString.wrap;
 import static _4axka.util.lang.ToString.unroll;
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 import java.util.Set;
