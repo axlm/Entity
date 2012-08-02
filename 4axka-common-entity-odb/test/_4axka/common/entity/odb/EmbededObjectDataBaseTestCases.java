@@ -42,7 +42,7 @@ public class EmbededObjectDataBaseTestCases {
 
     //@Test
     public final void addEntity() {
-        final EmbededObjectDataBase eodb_ = new EmbededObjectDataBase();
+        final EmbededObjectDatabase eodb_ = new EmbededObjectDatabase();
 
         try {
             eodb_.connect("eodb.db4o");
@@ -136,7 +136,7 @@ public class EmbededObjectDataBaseTestCases {
 
     @Test
     public final void testFindEntityClass() {
-        final EmbededObjectDataBase eodb_ = new EmbededObjectDataBase();
+        final EmbededObjectDatabase eodb_ = new EmbededObjectDatabase();
 
         try {
             eodb_.connect("eodb.db4o");
@@ -168,7 +168,7 @@ public class EmbededObjectDataBaseTestCases {
 
     //@Test
     public final void testFindEntityUsingPredicate() {
-        final EmbededObjectDataBase eodb_ = new EmbededObjectDataBase();
+        final EmbededObjectDatabase eodb_ = new EmbededObjectDatabase();
 
         try {
             eodb_.connect("eodb.db4o");

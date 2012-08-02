@@ -1,3 +1,16 @@
+// $Id$
+
+/*
+ * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
+ *
+ * The content of AdditionException.java is strictly CONFIDENTIAL.
+ *
+ * It may not be viewed as a whole, or in part by any unauthorised party unless
+ * explicit permission has been granted by an authorised 4axka representative.
+ *
+ * It may not be reproduced as a whole, or in part by any means unless explicit
+ * permission has been granted by an authorised 4axka representative.
+ */
 package _4axka.common.entity.odb;
 
 
@@ -13,4 +26,27 @@ public class AdditionException extends Exception {
      */
     private static final long serialVersionUID = -2210548374389008210L;
 
+    public AdditionException() {
+        super();
+    }
+
+    public AdditionException(
+            final String message,
+            final Throwable cause,
+            final boolean enableSuppression,
+            final boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public AdditionException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public AdditionException(final String message) {
+        super(message);
+    }
+
+    public AdditionException(final Throwable cause) {
+        super(cause);
+    }
 }

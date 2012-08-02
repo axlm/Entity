@@ -21,4 +21,28 @@ public class ModificationException extends Exception {
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     private static final long serialVersionUID = -2290808652313826699L;
+
+    public ModificationException() {
+        super();
+    }
+
+    public ModificationException(
+            final String message,
+            final Throwable cause,
+            final boolean enableSuppression,
+            final boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public ModificationException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public ModificationException(final String message) {
+        super(message);
+    }
+
+    public ModificationException(final Throwable cause) {
+        super(cause);
+    }
 }

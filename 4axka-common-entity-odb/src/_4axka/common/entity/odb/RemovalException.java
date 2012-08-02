@@ -26,4 +26,28 @@ public class RemovalException extends Exception {
      */
     private static final long serialVersionUID = 3652322461545081352L;
 
+
+    public RemovalException() {
+        super();
+    }
+
+    public RemovalException(
+            final String message,
+            final Throwable cause,
+            final boolean enableSuppression,
+            final boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public RemovalException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public RemovalException(final String message) {
+        super(message);
+    }
+
+    public RemovalException(final Throwable cause) {
+        super(cause);
+    }
 }

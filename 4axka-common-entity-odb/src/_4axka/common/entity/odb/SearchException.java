@@ -21,4 +21,28 @@ public class SearchException extends Exception {
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     private static final long serialVersionUID = -1571721802421456890L;
+
+    public SearchException() {
+        super();
+    }
+
+    public SearchException(
+            final String message,
+            final Throwable cause,
+            final boolean enableSuppression,
+            final boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public SearchException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public SearchException(final String message) {
+        super(message);
+    }
+
+    public SearchException(final Throwable cause) {
+        super(cause);
+    }
 }
