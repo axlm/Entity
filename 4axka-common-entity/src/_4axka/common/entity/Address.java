@@ -350,6 +350,7 @@ public class Address implements Serializable, Comparable<Address> {
         __entity = reference;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object that) {
         if (this == that) {
@@ -363,41 +364,42 @@ public class Address implements Serializable, Comparable<Address> {
         }
 
         final Address that_ = Address.class.cast(that);
-        if (__type != that_.__type) {
+        if (getType() != that_.getType()) {
             return false;
         }
-        if (__code == null) {
-            if (that_.__code != null) {
+        if (getCode() == null) {
+            if (that_.getCode() != null) {
                 return false;
             }
-        } else if (!__code.equals(that_.__code)) {
+        } else if (!getCode().equals(that_.getCode())) {
             return false;
         }
-        if (__location == null) {
-            if (that_.__location != null) {
+        if (getLocation() == null) {
+            if (that_.getLocation() != null) {
                 return false;
             }
-        } else if (!__location.equals(that_.__location)) {
+        } else if (!getLocation().equals(that_.getLocation())) {
             return false;
         }
-        if (__city == null) {
-            if (that_.__city != null) {
+        if (getCity() == null) {
+            if (that_.getCity() != null) {
                 return false;
             }
-        } else if (!__city.equals(that_.__city)) {
+        } else if (!getCity().equals(that_.getCity())) {
             return false;
         }
-        if (__suburb == null) {
-            if (that_.__suburb != null) {
+        if (getCity() == null) {
+            if (that_.getCity() != null) {
                 return false;
             }
-        } else if (!__suburb.equals(that_.__suburb)) {
+        } else if (!getCity().equals(that_.getCity())) {
             return false;
         }
 
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int compareTo(final Address that) {
         int result_ = 0;
@@ -467,20 +469,22 @@ public class Address implements Serializable, Comparable<Address> {
         return result_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result_ = 1;
 
-        final int prime = 31;
-        result_ = prime * result_ + ((__type == null) ? 0 : __type.hashCode());
-        result_ = prime * result_ + ((__code == null) ? 0 : __code.hashCode());
-        result_ = prime * result_ + ((__location == null) ? 0 : __location.hashCode());
-        result_ = prime * result_ + ((__city == null) ? 0 : __city.hashCode());
-        result_ = prime * result_ + ((__suburb == null) ? 0 : __suburb.hashCode());
+        final int PRIME = 31;
+        result_ = PRIME * result_ + ((getType() == null) ? 0 : getType().hashCode());
+        result_ = PRIME * result_ + ((getCode() == null) ? 0 : getCode().hashCode());
+        result_ = PRIME * result_ + ((getLocation() == null) ? 0 : getLocation().hashCode());
+        result_ = PRIME * result_ + ((getCity() == null) ? 0 : getCity().hashCode());
+        result_ = PRIME * result_ + ((getSuburb() == null) ? 0 : getSuburb().hashCode());
 
         return result_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();

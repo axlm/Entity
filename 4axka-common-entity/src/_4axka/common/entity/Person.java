@@ -403,6 +403,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
         __titles.add(title);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();

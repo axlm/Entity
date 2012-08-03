@@ -128,23 +128,6 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         // C country of birth; 0 is South Africa, 1 is another country
         // R old race classification number, usually 8 or 9
         // Z check digit
-        // OFFSETS:
-        //                  17
-        //                Z16|
-        //                  ||
-        //                15||
-        //              R14|||
-        //                ||||
-        //              13||||
-        //            C12|||||
-        //              ||||||
-        //            11||||||
-        //       GS7   |||||||
-        //         |   |||||||
-        //        6|   |||||||
-        // D0     ||   |||||||
-        //  v     vv   vvvvvvv
-        //  YYMMDD GSSS C R Z
         if (number == null) {
             throw new IllegalArgumentException("Argument may not be null!");
         }
@@ -156,11 +139,11 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
         final StringBuilder builder_ = new StringBuilder();
 
-        builder_.append(number_.substring(0, 6)).append(" ");
-        builder_.append(number_.substring(6, 10)).append(" ");
-        builder_.append(number_.substring(10, 11)).append(" ");
-        builder_.append(number_.substring(11, 12)).append(" ");
-        builder_.append(number_.substring(12,  13)).append(" ");
+        builder_.append(number_.substring(0, 6)).append(" ")
+                .append(number_.substring(6, 10)).append(" ")
+                .append(number_.substring(10, 11)).append(" ")
+                .append(number_.substring(11, 12)).append(" ")
+                .append(number_.substring(12,  13)).append(" ");
 
         final String result_ = builder_.toString();
 
@@ -180,10 +163,10 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         final SimpleDateFormat format_ = new SimpleDateFormat("yyMMdd");
         try {
             result_ = format_.parse(__number.substring(
-                    Offsets.DATE_START.offset(),
-                    Offsets.DATE_STOP.offset()));
+                    Offsets.BIRHT_DATE_START.offset(),
+                    Offsets.BIRHT_DATE_STOP.offset()));
         } catch (final ParseException e_) {
-            // TODO: Fix!
+            // FIXME:
         }
 
         return result_;
@@ -299,6 +282,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         return result_;
     }
 
+    /** @{inheritDoc} */
     @Override
     public boolean equals(final Object that) {
         if (this == that) {
@@ -323,6 +307,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         return true;
     }
 
+    /** @{inheritDoc} */
     @Override
     public int compareTo(final SouthAfricanIdentityNumber that) {
         int result_ = 0;
@@ -348,6 +333,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         return result_;
     }
 
+    /** @{inheritDoc} */
     @Override
     public int hashCode() {
         int result_ = 1;
@@ -358,6 +344,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         return result_;
     }
 
+    /** @{inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
@@ -369,27 +356,27 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
                 .toString();
         
         builder_.append("SouthAfricanIdentityNumber@").append(System.identityHashCode(this))
-        .append("{")
-        .append("South African Identity Number=").append(wrap(getNumber())).append(", ")
-        .append("Bytecode Location=").append(loadedFrom_).append(", ")
-        .append("super{").append(super.toString()).append("}")
-        .append("}");
+                .append("{")
+                .append("South African Identity Number=").append(wrap(getNumber())).append(", ")
+                .append("Bytecode Location=").append(loadedFrom_).append(", ")
+                .append("super{").append(super.toString()).append("}")
+                .append("}");
         
         return builder_.toString();
     }
 
     /* For internal use only. */
     private static enum Offsets {
-        DATE_START(0),
-        DATE_STOP(6),
+        BIRHT_DATE_START(0),
+        BIRHT_DATE_STOP(6),
         GENDER_START(7),
         GENDER_STOP(8),
         SEQUENCE_START(8),
         SEQUENCE_STOP(11),
         CITIZENSHIP_START(12),
         CITIZENSHIP_STOP(13),
-        BUFFER_START(14),
-        BUFFER_STOP(15),
+        ETHNICITY_START(14),
+        ETHNICITY_STOP(15),
         CHECKDIGIT_START(16),
         CHECKDIGIT_STOP(17);
 

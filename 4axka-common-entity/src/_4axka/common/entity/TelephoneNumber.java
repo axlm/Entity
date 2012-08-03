@@ -292,7 +292,8 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         __entity = reference;
     }
 
-    @Override
+    /** {@inheritDoc} */
+   @Override
     public boolean equals(final Object that) {
         if (this == that) {
             return true;
@@ -305,34 +306,35 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         }
         final TelephoneNumber that_ = TelephoneNumber.class.cast(that);
 
-        if (__type != that_.__type) {
+        if (getType() != that_.getType()) {
             return false;
         }
-        if (__countryCode == null) {
-            if (that_.__countryCode != null) {
+        if (getCountryCode() == null) {
+            if (that_.getCountryCode() != null) {
                 return false;
             }
-        } else if (!__countryCode.equals(that_.__countryCode)) {
+        } else if (!getCountryCode().equals(that_.getCountryCode())) {
             return false;
         }
-        if (__areaCode == null) {
-            if (that_.__areaCode != null) {
+        if (getAreaCode() == null) {
+            if (that_.getAreaCode() != null) {
                 return false;
             }
-        } else if (!__areaCode.equals(that_.__areaCode)) {
+        } else if (!getAreaCode().equals(that_.getAreaCode())) {
             return false;
         }
-        if (__number == null) {
-            if (that_.__number != null) {
+        if (getAreaCode() == null) {
+            if (that_.getAreaCode() != null) {
                 return false;
             }
-        } else if (!__number.equals(that_.__number)) {
+        } else if (!getAreaCode().equals(that_.getAreaCode())) {
             return false;
         }
 
         return true;
     }
 
+   /** {@inheritDoc} */
     @Override
     public int compareTo(final TelephoneNumber that) {
         int result_ = 0;
@@ -391,21 +393,23 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         return result_;
     }
 
-    @Override
+    /** {@inheritDoc} */
+   @Override
     public int hashCode() {
         int result_ = 1;
 
         final int PRIME = 31;
 
-        result_ = PRIME * result_ + ((__type == null) ? 0 : __type.hashCode());
-        result_ = PRIME * result_ + ((__areaCode == null) ? 0 : __areaCode.hashCode());
-        result_ = PRIME * result_ + ((__countryCode == null) ? 0 : __countryCode.hashCode());
-        result_ = PRIME * result_ + ((__number == null) ? 0 : __number.hashCode());
+        result_ = PRIME * result_ + ((getType() == null) ? 0 : getType().hashCode());
+        result_ = PRIME * result_ + ((getAreaCode() == null) ? 0 : getAreaCode().hashCode());
+        result_ = PRIME * result_ + ((getCountryCode() == null) ? 0 : getCountryCode().hashCode());
+        result_ = PRIME * result_ + ((getNumber() == null) ? 0 : getNumber().hashCode());
 
         return result_;
     }
 
     
+   /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();

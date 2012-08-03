@@ -204,6 +204,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         __entity = reference;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object that) {
         if (this == that) {
@@ -217,20 +218,21 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         }
 
         final EmailAddress that_ = EmailAddress.class.cast(that);
-        if (__address == null) {
-            if (that_.__address != null) {
-                return false;
-            }
-        } else if (!__address.equals(that_.__address)) {
+        if (getType() != that_.getType()) {
             return false;
         }
-        if (__type != that_.__type) {
+        if (getAddress() == null) {
+            if (that_.getAddress() != null) {
+                return false;
+            }
+        } else if (!getAddress().equals(that_.getAddress())) {
             return false;
         }
 
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int compareTo(final EmailAddress that) {
         int result_ = 0;
@@ -267,17 +269,19 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         return result_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result_ = 1;
 
-        final int prime = 31;
-        result_ = prime * result_ + ((__type == null) ? 0 : __type.hashCode());
-        result_ = prime * result_ + ((__address == null) ? 0 : __address.hashCode());
+        final int PRIME = 31;
+        result_ = PRIME * result_ + ((getType() == null) ? 0 : getType().hashCode());
+        result_ = PRIME * result_ + ((getAddress() == null) ? 0 : getAddress().hashCode());
 
         return result_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();

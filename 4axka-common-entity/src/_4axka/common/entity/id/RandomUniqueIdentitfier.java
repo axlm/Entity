@@ -117,6 +117,7 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
         __id = radix32Identifier_.toString(32);
     }
 
+    /** @{inheritDoc} */
     @Override
     public boolean equals(final Object that) {
         if (this == that) {
@@ -130,17 +131,18 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
         }
         final RandomUniqueIdentitfier that_ = RandomUniqueIdentitfier.class.cast(that);
 
-        if (__id == null) {
-            if (that_.__id != null) {
+        if (getId() == null) {
+            if (that_.getId() != null) {
                 return false;
             }
-        } else if (!__id.equals(that_.__id)) {
+        } else if (!getId().equals(that_.getId())) {
             return false;
         }
 
         return true;
     }
 
+    /** @{inheritDoc} */
     @Override
     public int compareTo(final RandomUniqueIdentitfier that) {
         int result_ = 0;
@@ -166,16 +168,18 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
         return result_;
     }
 
+    /** @{inheritDoc} */
     @Override
     public int hashCode() {
         int result_ = 1;
         final int PRIME = 31;
 
-        result_ = PRIME * result_ + ((__id == null) ? 0 : __id.hashCode());
+        result_ = PRIME * result_ + ((getId() == null) ? 0 : getId().hashCode());
 
         return result_;
     }
 
+    /** @{inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();

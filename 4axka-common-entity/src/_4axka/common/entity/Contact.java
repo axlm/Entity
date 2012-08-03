@@ -297,6 +297,7 @@ public abstract class Contact<ID extends Serializable & Comparable<ID>> implemen
         __addresses.add(adress__);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
