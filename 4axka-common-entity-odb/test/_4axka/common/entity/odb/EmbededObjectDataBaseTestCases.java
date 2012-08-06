@@ -1,3 +1,16 @@
+// $Id$
+
+/*
+ * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
+ *
+ * The content of EmbededObjectDataBaseTestCases.java is strictly CONFIDENTIAL.
+ *
+ * It may not be viewed as a whole, or in part by any unauthorised party unless
+ * explicit permission has been granted by an authorised 4axka representative.
+ *
+ * It may not be reproduced as a whole, or in part by any means unless explicit
+ * permission has been granted by an authorised 4axka representative.
+ */
 package _4axka.common.entity.odb;
 
 
@@ -22,6 +35,9 @@ import _4axka.common.entity.Person.GenderType;
 import _4axka.common.entity.TelephoneNumber;
 import _4axka.common.entity.TelephoneNumber.TelephoneNumberType;
 import _4axka.common.entity.id.SouthAfricanIdentityNumber;
+import _4axka.util.data.exception.DataAdditionException;
+import _4axka.util.data.exception.DataSearchException;
+import _4axka.util.data.exception.DatabaseException;
 
 import com.db4o.query.Predicate;
 
@@ -121,7 +137,7 @@ public class EmbededObjectDataBaseTestCases {
         try {
             eodb_.add(axl_);
             eodb_.add(anel_);
-        } catch (final AdditionException e_) {
+        } catch (final DataAdditionException e_) {
             e_.printStackTrace();
         }
 
@@ -147,7 +163,7 @@ public class EmbededObjectDataBaseTestCases {
         Iterable<SouthAfricanCitizen> saffers_ = null;
         try {
             saffers_ = eodb_.find(SouthAfricanCitizen.class);
-        } catch (final SearchException e_) {
+        } catch (final DataSearchException e_) {
             e_.printStackTrace();
         }
 
@@ -195,7 +211,7 @@ public class EmbededObjectDataBaseTestCases {
                     return candidate.getLegalIdentifier().getGender() == GenderType.FEMALE;
                 }
             });
-        } catch (final SearchException e_) {
+        } catch (final DataSearchException e_) {
             e_.printStackTrace();
         }
 
