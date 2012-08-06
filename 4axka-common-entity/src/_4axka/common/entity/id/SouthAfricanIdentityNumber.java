@@ -113,8 +113,6 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
     }
 
     /**
-     * TODO: Document!
-     *
      * @param number
      * @return
      * @throws IllegalArgumentException
