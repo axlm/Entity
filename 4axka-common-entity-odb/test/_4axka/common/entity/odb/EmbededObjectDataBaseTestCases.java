@@ -97,6 +97,7 @@ public class EmbededObjectDataBaseTestCases {
                 "Bok",
                 "Mattheus",
                 new Date(),
+                new Date(),
                 GenderType.MALE,
                 Arrays.asList(Person.TitleType.MISTER));
 
@@ -130,6 +131,7 @@ public class EmbededObjectDataBaseTestCases {
                 "Anel",
                 "Bokkie",
                 "Mattheus",
+                new Date(),
                 new Date(),
                 GenderType.FEMALE,
                 Arrays.asList(Person.TitleType.PROFESSOR, Person.TitleType.MISTRESS));

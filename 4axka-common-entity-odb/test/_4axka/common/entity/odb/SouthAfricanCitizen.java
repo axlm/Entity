@@ -54,6 +54,7 @@ public class SouthAfricanCitizen extends Person<SouthAfricanIdentityNumber> {
             String nickName,
             String familyName,
             Date dateOfBirth,
+            Date deceasedDate,
             _4axka.common.entity.Person.GenderType gender,
             Iterable<_4axka.common.entity.Person.TitleType> titles) {
         super(
@@ -67,6 +68,7 @@ public class SouthAfricanCitizen extends Person<SouthAfricanIdentityNumber> {
                 nickName,
                 familyName,
                 dateOfBirth,
+                deceasedDate,
                 gender,
                 titles);
     }
