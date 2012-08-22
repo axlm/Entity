@@ -162,7 +162,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * @param type
      *            Value to assign to <code>this</code> {@linkplain #__type email address type}.
      */
-    final void setType(final EmailAddressType type) {
+    protected final void setType(final EmailAddressType type) {
         __type = type;
     }
 
@@ -181,7 +181,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * @param address
      *            Value to assign to <code>this</code> {@linkplain #__address address}.
      */
-    final void setAddress(final String address) {
+    protected final void setAddress(final String address) {
         __address = address;
     }
 
@@ -190,7 +190,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    final Contact<?> getEntity() {
+    protected final Contact<?> getEntity() {
         return __entity;
     }
 
@@ -200,7 +200,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    final void setEntity(final Contact<?> reference) {
+    protected final void setEntity(final Contact<?> reference) {
         __entity = reference;
     }
 

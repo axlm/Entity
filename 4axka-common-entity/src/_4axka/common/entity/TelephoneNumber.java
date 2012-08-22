@@ -193,7 +193,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * @param type
      *            Value to assign to <code>this</code> {@linkplain #__type telephone number type}.
      */
-    final void setType(final TelephoneNumberType type) {
+    protected final void setType(final TelephoneNumberType type) {
         __type = type;
     }
 
@@ -212,7 +212,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * @param code
      *            Value to assign to <code>this</code> {@linkplain #__countryCode country code}.
      */
-    final void setCountryCode(final String code) {
+    protected final void setCountryCode(final String code) {
         __countryCode = code;
     }
 
@@ -231,7 +231,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * @param code
      *            Value to assign to <code>this</code> {@linkplain #__areaCode area code}.
      */
-    final void setAreaCode(final String code) {
+    protected final void setAreaCode(final String code) {
         __areaCode = code;
     }
 
@@ -250,7 +250,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * @param number
      *            Value to assign to <code>this</code> {@linkplain #__number number}.
      */
-    final void setNumber(final String number) {
+    protected final void setNumber(final String number) {
         __number = number;
     }
 
@@ -269,7 +269,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * @param extension
      *            Value to assign to <code>this</code> {@linkplain #__extension extension}.
      */
-    final void setExtension(final String extension) {
+    protected final void setExtension(final String extension) {
         __extension = extension;
     }
 
@@ -278,7 +278,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    final Contact<?> getEntity() {
+    protected final Contact<?> getEntity() {
         return __entity;
     }
 
@@ -288,7 +288,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    final void setEntity(final Contact<?> reference) {
+    protected final void setEntity(final Contact<?> reference) {
         __entity = reference;
     }
 

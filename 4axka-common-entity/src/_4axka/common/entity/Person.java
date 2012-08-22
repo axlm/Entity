@@ -99,6 +99,11 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
     @Column(name = "DATE_OF_BIRTH")
     private Date __dateOfBirth;
 
+    @XmlElement(name = "deceasedOn")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DECEASED_ON")
+    private Date __deceasedOn;
+
     @XmlElement(name = "gender")
     @Enumerated(EnumType.STRING)
     @Column(name = "GENDER", length = 7)
@@ -156,6 +161,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
             final String nickName,
             final String familyName,
             final Date dateOfBirth,
+            final Date deceasedOn,
             final GenderType gender,
             final Iterable<TitleType> titles) {
         super(legalIdentifier, emailAddresses, numbers, addresses);
@@ -165,6 +171,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
         setNickName(nickName);
         setFamilyName(familyName);
         setDateOfBirth(dateOfBirth);
+        setDeceasedOn(deceasedOn);
         setGender(gender);
         addTitles(titles);
     }
@@ -183,6 +190,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
         setNickName(template.getNickName());
         setFamilyName(template.getFamilyName());
         setDateOfBirth(template.getDateOfBirth());
+        setDeceasedOn(template.getDeceasedOn());
         setGender(template.getGender());
         addTitles(template.getTitles());
     }
@@ -289,7 +297,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
      *            Value to assign to <code>this</code> {@linkplain #__preferredGivenName
      *            preferred given name}.
      */
-    final void setPreferredGivenName(final String name) {
+    protected final void setPreferredGivenName(final String name) {
         __preferredGivenName = name;
     }
 
@@ -308,7 +316,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
      * @param name
      *            Value to assign to <code>this</code> {@linkplain #__nickName nick name}.
      */
-    final void setNickName(final String name) {
+    protected final void setNickName(final String name) {
         __nickName = name;
     }
 
@@ -327,8 +335,27 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
      * @param name
      *            Value to assign to <code>this</code> {@linkplain #__familyName family name}.
      */
-    final void setFamilyName(final String name) {
+    protected final void setFamilyName(final String name) {
         __familyName = name;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @return The value of <code>this</code> instance's {@linkplain #__deceasedOn date of death}.
+     */
+    public final Date getDeceasedOn() {
+        return __deceasedOn;
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @param date
+     *            Value to assign to <code>this</code> {@linkplain #__deceasedOn date of death}.
+     */
+    protected final void setDeceasedOn(final Date date) {
+        __deceasedOn = date;
     }
 
     /**
@@ -346,7 +373,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
      * @param date
      *            Value to assign to <code>this</code> {@linkplain #__dateOfBirth date of birth}.
      */
-    final void setDateOfBirth(final Date date) {
+    protected final void setDateOfBirth(final Date date) {
         __dateOfBirth = date;
     }
 
@@ -365,7 +392,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
      * @param gender
      *            Value to assign to <code>this</code> {@linkplain #__gender gender}.
      */
-    final void setGender(final GenderType gender) {
+    protected final void setGender(final GenderType gender) {
         __gender = gender;
     }
 
@@ -424,6 +451,7 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
                 .append("Also Known As=").append(unroll(__alsoKnownAs)).append(", ")
                 .append("Preferred Given Name=").append(wrap(getPreferredGivenName())).append(", ")
                 .append("Date of Birth=").append(wrap(getDateOfBirth())).append(", ")
+                .append("Deceased On=").append(wrap(getDeceasedOn())).append(", ")
                 .append("Gender=").append(wrap(getGender())).append(", ")
                 .append("Titles=").append(unroll(__titles)).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")

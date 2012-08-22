@@ -185,7 +185,7 @@ public abstract class Contact<ID extends Serializable & Comparable<ID>> implemen
      *            Value to assign to <code>this</code> {@linkplain #__legalIdentifier legal
      *            identifier}.
      */
-    final void setLegalIdentifier(final ID id) {
+    protected final void setLegalIdentifier(final ID id) {
         __legalIdentifier = id;
     }
 

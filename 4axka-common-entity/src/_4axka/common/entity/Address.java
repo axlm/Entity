@@ -213,7 +213,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param type
      *            Value to assign to <code>this</code> {@linkplain #__type address type}.
      */
-    final void setType(final AddressType type) {
+    protected final void setType(final AddressType type) {
         __type = type;
     }
 
@@ -232,7 +232,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param location
      *            Value to assign to <code>this</code> {@linkplain #__location location}.
      */
-    final void setLocation(final String location) {
+    protected final void setLocation(final String location) {
         __location = location;
     }
 
@@ -251,7 +251,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param suburb
      *            Value to assign to <code>this</code> {@linkplain #__suburb suburb}.
      */
-    final void setSuburb(final String suburb) {
+    protected final void setSuburb(final String suburb) {
         __suburb = suburb;
     }
 
@@ -270,7 +270,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param city
      *            Value to assign to <code>this</code> {@linkplain #__city city}.
      */
-    final void setCity(final String city) {
+    protected final void setCity(final String city) {
         __city = city;
     }
 
@@ -289,7 +289,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param region
      *            Value to assign to <code>this</code> {@linkplain #__region region}.
      */
-    final void setRegion(final String region) {
+    protected final void setRegion(final String region) {
         __region = region;
     }
 
@@ -308,7 +308,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param country
      *            Value to assign to <code>this</code> {@linkplain #__country country}.
      */
-    final void setCountry(final String country) {
+    protected final void setCountry(final String country) {
         __country = country;
     }
 
@@ -327,7 +327,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param code
      *            Value to assign to <code>this</code> {@linkplain #__code code}.
      */
-    final void setCode(final String code) {
+    protected final void setCode(final String code) {
         __code = code;
     }
 
@@ -336,7 +336,7 @@ public class Address implements Serializable, Comparable<Address> {
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    final Contact<?> getEntity() {
+    protected final Contact<?> getEntity() {
         return __entity;
     }
 
@@ -346,7 +346,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    final void setEntity(final Contact<?> reference) {
+    protected final void setEntity(final Contact<?> reference) {
         __entity = reference;
     }
 
