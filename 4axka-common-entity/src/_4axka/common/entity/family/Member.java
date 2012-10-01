@@ -43,22 +43,27 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
     private final ConcurrentSkipListSet<Member<ID>> __spouses = new ConcurrentSkipListSet<>();
+
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
     private final ConcurrentSkipListSet<Member<ID>> __parents = new ConcurrentSkipListSet<>();
+
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
     private final ConcurrentSkipListSet<Member<ID>> __siblings = new ConcurrentSkipListSet<>();
+
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
     private final ConcurrentSkipListSet<Member<ID>> __children = new ConcurrentSkipListSet<>();
+
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
     private final ConcurrentSkipListSet<Member<ID>> __gaurdians = new ConcurrentSkipListSet<>();
+
     @JoinColumn(name = "MEMBER_FK", referencedColumnName = "ID")
     private Member<ID> __member;
 

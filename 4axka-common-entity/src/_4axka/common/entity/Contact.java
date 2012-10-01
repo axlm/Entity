@@ -235,7 +235,6 @@ public abstract class Contact<ID extends Serializable & Comparable<ID>> implemen
         return __telephoneNumbers;
     }
 
-
     /**
      * Obvious.
      * 
