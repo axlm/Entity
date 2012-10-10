@@ -14,7 +14,7 @@
 package _4axka.common.entity;
 
 
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.nullable;
 
 import java.io.Serializable;
 
@@ -121,7 +121,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
     }
 
     /**
-     * Instance variable constructor. Initialise <code>this</code> instance with the specified
+     * Instance variable constructor. Initialize <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
      * 
      * @param type
@@ -422,13 +422,13 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
         builder_.append("TelephoneNumber@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
-                .append("Type=").append(wrap(getType())).append(", ")
-                .append("Contry Code=").append(wrap(getCountryCode())).append(", ")
-                .append("Area Code=").append(wrap(getAreaCode())).append(", ")
-                .append("Number=").append(wrap(getNumber())).append(", ")
-                .append("Extension=").append(wrap(getExtension())).append(", ")
+                .append("Id=").append(nullable(getId())).append(", ")
+                .append("Version=").append(nullable(getVersion())).append(", ")
+                .append("Type=").append(nullable(getType())).append(", ")
+                .append("Contry Code=").append(nullable(getCountryCode())).append(", ")
+                .append("Area Code=").append(nullable(getAreaCode())).append(", ")
+                .append("Number=").append(nullable(getNumber())).append(", ")
+                .append("Extension=").append(nullable(getExtension())).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())
                 .append("}");

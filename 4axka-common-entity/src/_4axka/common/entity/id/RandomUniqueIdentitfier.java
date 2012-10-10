@@ -13,7 +13,7 @@
  */
 package _4axka.common.entity.id;
 
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.nullable;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -192,7 +192,7 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
         
         builder_.append("RandomUniqueIdentitfier@").append(System.identityHashCode(this))
         .append("=[")
-        .append("Radix 32 Universally Unique Identity=").append(wrap(getId())).append(", ")
+        .append("Radix 32 Universally Unique Identity=").append(nullable(getId())).append(", ")
         .append("Bytecode Location=").append(loadedFrom_).append(", ")
         .append("super=[").append(super.toString()).append("]")
         .append("]");

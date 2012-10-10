@@ -14,7 +14,7 @@
 package _4axka.common.entity;
 
 
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.nullable;
 
 import java.io.Serializable;
 
@@ -294,10 +294,10 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
         builder_.append("EmailAddress@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
-                .append("Type=").append(wrap(getType())).append(", ")
-                .append("Address=").append(wrap(getAddress())).append(", ")
+                .append("Id=").append(nullable(getId())).append(", ")
+                .append("Version=").append(nullable(getVersion())).append(", ")
+                .append("Type=").append(nullable(getType())).append(", ")
+                .append("Address=").append(nullable(getAddress())).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())
                 .append("}");

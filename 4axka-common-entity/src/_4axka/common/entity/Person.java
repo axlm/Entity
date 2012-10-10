@@ -15,7 +15,7 @@ package _4axka.common.entity;
 
 
 import static _4axka.util.lang.ToString.unroll;
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.nullable;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -443,16 +443,16 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
 
         builder_.append("Person@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Id=").append(nullable(getId())).append(", ")
+                .append("Version=").append(nullable(getVersion())).append(", ")
                 .append("Given Names=").append(unroll(__givenNames)).append(", ")
-                .append("Initials=").append(wrap(getInitials())).append(", ")
-                .append("Family Name=").append(wrap(getFamilyName())).append(", ")
+                .append("Initials=").append(nullable(getInitials())).append(", ")
+                .append("Family Name=").append(nullable(getFamilyName())).append(", ")
                 .append("Also Known As=").append(unroll(__alsoKnownAs)).append(", ")
-                .append("Preferred Given Name=").append(wrap(getPreferredGivenName())).append(", ")
-                .append("Date of Birth=").append(wrap(getDateOfBirth())).append(", ")
-                .append("Deceased On=").append(wrap(getDeceasedOn())).append(", ")
-                .append("Gender=").append(wrap(getGender())).append(", ")
+                .append("Preferred Given Name=").append(nullable(getPreferredGivenName())).append(", ")
+                .append("Date of Birth=").append(nullable(getDateOfBirth())).append(", ")
+                .append("Deceased On=").append(nullable(getDeceasedOn())).append(", ")
+                .append("Gender=").append(nullable(getGender())).append(", ")
                 .append("Titles=").append(unroll(__titles)).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())

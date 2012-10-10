@@ -14,7 +14,7 @@
 package _4axka.common.entity.id;
 
 
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.nullable;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -355,7 +355,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         
         builder_.append("SouthAfricanIdentityNumber@").append(System.identityHashCode(this))
                 .append("{")
-                .append("South African Identity Number=").append(wrap(getNumber())).append(", ")
+                .append("South African Identity Number=").append(nullable(getNumber())).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super{").append(super.toString()).append("}")
                 .append("}");

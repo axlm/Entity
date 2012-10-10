@@ -15,7 +15,7 @@ package _4axka.common.entity;
 
 
 import static _4axka.util.lang.ToString.unroll;
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.nullable;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -309,9 +309,9 @@ public abstract class Contact<ID extends Serializable & Comparable<ID>> implemen
 
         builder_.append("Contact@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
-                .append("Legal Identifier=").append(wrap(getLegalIdentifier())).append(", ")
+                .append("Id=").append(nullable(getId())).append(", ")
+                .append("Version=").append(nullable(getVersion())).append(", ")
+                .append("Legal Identifier=").append(nullable(getLegalIdentifier())).append(", ")
                 .append("Email Addresses=").append(unroll(__emailAddresses)).append(", ")
                 .append("Telephone Numbers=").append(unroll(__telephoneNumbers)).append(", ")
                 .append("Addresses=").append(unroll(__addresses)).append(", ")
