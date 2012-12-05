@@ -20,6 +20,8 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -40,6 +42,9 @@ import _4axka.common.entity.Person.GenderType;
 @XmlType(name = "SouthAfricanIdentityNumber")
 @Embeddable
 public final class SouthAfricanIdentityNumber implements Serializable, Comparable<SouthAfricanIdentityNumber> {
+    private static final String NAME = SouthAfricanIdentityNumber.class.getName();
+    private static final Logger LOGGER = Logger.getLogger(NAME);
+
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -75,6 +80,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
      * arguments. <i>For state specifications see the see also section</i>.
      * 
      * @param number
+     *          The {@linkplain SouthAfricanIdentityNumber identity number}.
      */
     public SouthAfricanIdentityNumber(final String number) {
         this();
@@ -113,19 +119,33 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
     }
 
     /**
+     * Formats the {@linkplain SouthAfricanIdentityNumber identity number} for easy reading.
+     * <p>
+     * The format is as follows:
+     * <b>YYMMDD GSSS C R Z</b> where,
+     * <dl>
+     * <dt><b>YYMMDD</b></dt>
+     * <dd>is the date of birth, the first two digits being the year of birth,
+     *     the next two the month of birth and last two being the day of the month of birth,</dd>
+     * <dt><b>G</b></dt>
+     * <dd>is the gender where 0 - 4 indicates <i>female</i> and 5 -9 indicates <i>male</i>,</dd>
+     * <dt><b>SSS</b></dt>
+     * <dd>is a sequence number,</dd>
+     * <dd><b>C</b></dd>
+     * <dt>is the country of birth where 0 is South Africa and 1 is another country,</dt>
+     * <dd><b>R</b></dd>
+     * <dt>is reserved for future use and</dt>
+     * <dd><b>Z</b></dd>
+     * <dt>is the check digit</dt>.
+     * </dl>
+     * 
      * @param number
-     * @return
+     *          The {@link SouthAfricanIdentityNumber number} to format.
+     * @return  The formatted number.
      * @throws IllegalArgumentException
+     *          if the {@link SouthAfricanIdentityNumber#__number number} cannot be formatted.
      */
     private String format(final String number) throws IllegalArgumentException {
-        // format the number to look as follows:
-        // YYMMDD GSSS C R Z where
-        // YYMMDD is the date of birth
-        // G is the gender; 0 - 4 is female, 5 -9 is male
-        // SSS is a sequence number
-        // C country of birth; 0 is South Africa, 1 is another country
-        // R old race classification number, usually 8 or 9
-        // Z check digit
         if (number == null) {
             throw new IllegalArgumentException("Argument may not be null!");
         }
@@ -141,7 +161,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
                 .append(number_.substring(6, 10)).append(" ")
                 .append(number_.substring(10, 11)).append(" ")
                 .append(number_.substring(11, 12)).append(" ")
-                .append(number_.substring(12,  13)).append(" ");
+                .append(number_.substring(12, 13)).append(" ");
 
         final String result_ = builder_.toString();
 
@@ -156,15 +176,17 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
      *             when the date part of the identity number is not valid.
      */
     public Date getDateOfBirth() {
+        final String SIGNATURE = "Date getDateOfBirth()";
+
         Date result_ = null;
 
         final SimpleDateFormat format_ = new SimpleDateFormat("yyMMdd");
         try {
             result_ = format_.parse(__number.substring(
-                    Offsets.BIRHT_DATE_START.offset(),
-                    Offsets.BIRHT_DATE_STOP.offset()));
+                    Offsets.BIRTH_DATE_START.offset(),
+                    Offsets.BIRTH_DATE_STOP.offset()));
         } catch (final ParseException e_) {
-            // FIXME:
+            LOGGER.logp(Level.SEVERE, NAME, SIGNATURE, "Unable to pase date.", e_);
         }
 
         return result_;
@@ -209,19 +231,51 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
     }
 
     /**
-     * Obvious.
+     * Applies the {@link SouthAfricanIdentityNumber} validation algorithm to
+     * <code>this</code> instance.
+     * <p>
+     * Given an South African identity number
+     * Y<sub>1</sub>Y<sub>2</sub>M<sub>1</sub>M<sub>2</sub>D<sub>1</sub>D<sub>2</sub>
+     * GS<sub>1</sub>S<sub>2</sub>S<sub>3</sub> C R Z, the algorithm to calculate
+     * the check digit is as follows:
+     * <dl>
+     * <dt>Remove the check digit</dt>
+     * <dd>This yields Y<sub>1</sub>Y<sub>2</sub>M<sub>1</sub>M<sub>2</sub>D<sub>1</sub>D<sub>2</sub>
+     * GS<sub>1</sub>S<sub>2</sub>S<sub>3</sub> C R.</dd>
+     * <dt>Sum all odd digits</dt>
+     * <dd>S<sub>0</sub> = Y<sub>1</sub> + M<sub>1</sub> + D<sub>1</sub> + G + S<sub>2</sub> +
+     * C.</dd>
+     * <dt>Place even digits sequentially</dt>
+     * <dd>N<sub>e</sub> = Y<sub>2</sub>M<sub>2</sub>D<sub>2</sub>S<sub>1</sub>S<sub>3</sub>R.</dd>
+     * <dt>Multiply N<sub>e</sub> by two.</dt>
+     * <dd>N<sub>e2</sub> = N<sub>e</sub> x 2.</dd>
+     * <dt>Add the digits of N<sub>e2</sub> together</dt>
+     * <dd>While N<sub>e2</sub> has another digit S<sub>1</sub> += next(N<sub>e2</sub>).</dd>
+     * <dt>Add two sums together</dt>
+     * <dd>S<sub>2</sub> = S<sub>0</sub> + S<sub>1</sub>.</dd>
+     * <dt>Take the right most digit of S<sub>2</sub></dt>
+     * <dd>X = getRightDigit(S<sub>2</sub>).</dd>
+     * <dt>The checksum is 10 - X</dt>
+     * <dd>Z = 10 - X.</dd>
+     * </dl>
      * 
-     * @return The <code>this</code> instance's {@linkplain #__number validity}.
+     * @return {@code true} if <code>this</code> instance of
+     * {@linkplain SouthAfricanIdentityNumber the South African identity number}
+     * object is valid.
      */
     public Boolean isValid() {
         return isValid(__number);
     }
 
     /**
-     * TODO: Document!
+     * Determines if a
+     * {@linkplain SouthAfricanIdentityNumber South African identity number}
+     * is valid.
      *
      * @param number
-     * @return
+     *          The number to verify.
+     * @return  {@code true} if the {@link SouthAfricanIdentityNumber} is valid.
+     * @see     #isValid()
      */
     private Boolean isValid(final String number) {
         Boolean result_ = false;
@@ -232,21 +286,34 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
             return result_;
         }
 
+        final int checkSum_ = calculateCheckDigit(number);
+
         // 1. Remove redundant white space AND remove check digit - we will calculate it here!
         final String numberWithCheckDigit_ = number.replaceAll(" ", "");
-        final String numberWithoutCheckDigit_ = numberWithCheckDigit_.substring(0, 12);
+
+        // 9. The number obtained in 8.) must equal the id number check digit.
+        final int offset_ = numberWithCheckDigit_.length();
+        result_ = (checkSum_ == Integer.parseInt(
+                numberWithCheckDigit_.substring(offset_ - 1, offset_)));
+
+        return result_;
+    }
+
+    public int calculateCheckDigit(final String idNumber) {
+        // 1. Remove redundant white space AND remove check digit - we will calculate it here!
+        final String numberWithCheckDigit_ = idNumber.replaceAll(" ", "");
 
         // 2. Sum all odd digits, except for the 13th (last) one.
         int oddDigitSum_ = 0;
-        for (int i_ = 0; i_ < numberWithoutCheckDigit_.length(); i_ += 2) {
-            final String digitAsString_ = numberWithoutCheckDigit_.substring(i_, i_ + 1);
+        for (int i_ = 0; i_ < idNumber.length(); i_ += 2) {
+            final String digitAsString_ = idNumber.substring(i_, i_ + 1);
             oddDigitSum_ += Integer.parseInt(digitAsString_);
         }
 
         // 3. Build a number by placing even digits sequentially.
         final StringBuilder evenCatBuilder_ = new StringBuilder();
-        for (int i_ = 1; i_ < numberWithoutCheckDigit_.length(); i_ += 2) {
-            final String digitAsString_ = numberWithoutCheckDigit_.substring(i_, i_ + 1);
+        for (int i_ = 1; i_ < idNumber.length(); i_ += 2) {
+            final String digitAsString_ = idNumber.substring(i_, i_ + 1);
             evenCatBuilder_.append(digitAsString_);
         }
         final String evenCatAsString_ = evenCatBuilder_.toString();
@@ -269,15 +336,9 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         final int checkSumBaseRight_ = Integer.parseInt(
                 checkSumBaseAsString_.substring(checkSumBaseAsString_.length() - 1));
 
-        // 8. Subtract 10 from the number obtained in 7.).
+        // 8. Subtract the number obtained in 7.) from 10.
         final int checkSum_ = 10 - checkSumBaseRight_;
-
-        // 9. The number obtained in 8.) must equal the id number check digit.
-        final int offset_ = numberWithCheckDigit_.length();
-        result_ = (checkSum_ == Integer.parseInt(
-                    numberWithCheckDigit_.substring(offset_ - 1, offset_)));
-
-        return result_;
+        return checkSum_;
     }
 
     /** @{inheritDoc} */
@@ -346,27 +407,27 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
-        
+
         final String loadedFrom_ = getClass()
                 .getProtectionDomain()
                 .getCodeSource()
                 .getLocation()
                 .toString();
-        
+
         builder_.append("SouthAfricanIdentityNumber@").append(System.identityHashCode(this))
                 .append("{")
                 .append("South African Identity Number=").append(nullable(getNumber())).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super{").append(super.toString()).append("}")
                 .append("}");
-        
+
         return builder_.toString();
     }
 
     /* For internal use only. */
     private static enum Offsets {
-        BIRHT_DATE_START(0),
-        BIRHT_DATE_STOP(6),
+        BIRTH_DATE_START(0),
+        BIRTH_DATE_STOP(6),
         GENDER_START(7),
         GENDER_STOP(8),
         SEQUENCE_START(8),

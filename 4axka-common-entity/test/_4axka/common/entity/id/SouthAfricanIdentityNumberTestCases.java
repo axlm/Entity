@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -34,7 +36,6 @@ import _4axka.common.entity.Person.GenderType;
 public class SouthAfricanIdentityNumberTestCases {
     private static final Map<String, SouthAfricanIdentityNumberTestVector> __vectors = new HashMap<>();
     private static final Map<String, SouthAfricanIdentityNumber> __ids = new HashMap<>();
-
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {}
@@ -112,19 +113,34 @@ public class SouthAfricanIdentityNumberTestCases {
         private Boolean __wasBornInSA;
         private Boolean __isValid;
 
+        /**
+         * @param number
+         *          South African identity number.
+         * @param dob
+         *          The date of birth test vector value.
+         * @param gender
+         *          Gender test vector value.
+         * @param wasBornInSA
+         *          Whether the {@linkplain SouthAfricanIdentityNumber id number}
+         *          is that of someone born in South Africa.
+         * @param isValid
+         *          The validity of the test vector.
+         */
         private SouthAfricanIdentityNumberTestVector(
                 final String number,
                 final String dob,
                 final GenderType gender,
                 final Boolean wasBornInSA,
                 final Boolean isValid) {
-            final SimpleDateFormat format_ = new SimpleDateFormat("yyyy-MM-dd");
             __number = number;
             try {
-                __dob = format_.parse(dob);
+                __dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
             } catch (final ParseException e_) {
-                // FIXME! Log, or thrown?
-                e_.printStackTrace();
+                String name_ = SouthAfricanIdentityNumberTestVector.class.getName();
+                Logger logger_ = Logger.getLogger(name_);
+                if (logger_.isLoggable(Level.FINER)) {
+                    logger_.exiting(name_, "<init>()");
+                }
             }
             __gender = gender;
             __wasBornInSA = wasBornInSA;
