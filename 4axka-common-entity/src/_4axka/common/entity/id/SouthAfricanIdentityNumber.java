@@ -286,10 +286,9 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
             return result_;
         }
 
-        final int checkSum_ = calculateCheckDigit(number);
-
         // 1. Remove redundant white space AND remove check digit - we will calculate it here!
         final String numberWithCheckDigit_ = number.replaceAll(" ", "");
+        final int checkSum_ = calculateCheckDigit(number);
 
         // 9. The number obtained in 8.) must equal the id number check digit.
         final int offset_ = numberWithCheckDigit_.length();
@@ -299,21 +298,31 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         return result_;
     }
 
+    /**
+     * Calculates the check digit of a {@link SouthAfricanIdentityNumber}.
+     * 
+     * @param idNumber
+     *          The {@link SouthAfricanIdentityNumber} for which the check digit
+     *          should be calculated.
+     * @return  The check digit for the supplied identity number.
+     * @see     #isValid()
+     */
     public int calculateCheckDigit(final String idNumber) {
         // 1. Remove redundant white space AND remove check digit - we will calculate it here!
         final String numberWithCheckDigit_ = idNumber.replaceAll(" ", "");
+        final String numberWithoutCheckDigit_ = numberWithCheckDigit_.substring(0, 12);
 
         // 2. Sum all odd digits, except for the 13th (last) one.
         int oddDigitSum_ = 0;
-        for (int i_ = 0; i_ < idNumber.length(); i_ += 2) {
-            final String digitAsString_ = idNumber.substring(i_, i_ + 1);
+        for (int i_ = 0; i_ < numberWithoutCheckDigit_.length(); i_ += 2) {
+            final String digitAsString_ = numberWithoutCheckDigit_.substring(i_, i_ + 1);
             oddDigitSum_ += Integer.parseInt(digitAsString_);
         }
 
         // 3. Build a number by placing even digits sequentially.
         final StringBuilder evenCatBuilder_ = new StringBuilder();
-        for (int i_ = 1; i_ < idNumber.length(); i_ += 2) {
-            final String digitAsString_ = idNumber.substring(i_, i_ + 1);
+        for (int i_ = 1; i_ < numberWithoutCheckDigit_.length(); i_ += 2) {
+            final String digitAsString_ = numberWithoutCheckDigit_.substring(i_, i_ + 1);
             evenCatBuilder_.append(digitAsString_);
         }
         final String evenCatAsString_ = evenCatBuilder_.toString();

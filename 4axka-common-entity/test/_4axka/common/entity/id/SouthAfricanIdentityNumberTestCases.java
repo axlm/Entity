@@ -101,6 +101,17 @@ public class SouthAfricanIdentityNumberTestCases {
         }
     }
 
+    @Test
+    public void testCalculateCheckDigit() {
+        for (String key_ : __ids.keySet()) {
+            final int vectorCheckDigit_ = __vectors.get(key_).checkDigit();
+            final int checkDigit_ = __ids.get(key_).calculateCheckDigit(
+                    __ids.get(key_).getNumber());
+            final Boolean checkDigitsMatch_ = __ids.get(key_).isValid();
+            assertTrue((vectorCheckDigit_ == checkDigit_) == checkDigitsMatch_);
+        }
+    }
+
     private static enum SouthAfricanIdentityNumberTestVector {
         ID_6803015017089("680302 5017 0 8 9", "1968-03-02", GenderType.MALE, true, true),
         ID_6902040136088("690204 0136 0 8 8", "1969-02-04", GenderType.FEMALE, true, true),
@@ -165,6 +176,11 @@ public class SouthAfricanIdentityNumberTestCases {
 
         Boolean isValid() {
             return __isValid;
+        }
+
+        Integer checkDigit() {
+            char checkDigit_ = __number.charAt(__number.length() - 1);
+            return Integer.parseInt(Character.toString(checkDigit_));
         }
     }
 }
