@@ -14,7 +14,7 @@
 package _4axka.common.entity;
 
 
-import static _4axka.util.lang.ToString.nullable;
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 
@@ -106,7 +106,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
     @XmlTransient
     @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Contact<?> __entity;
+    private LegalEntity<?> __entity;
 
     /**
      * Default constructor.
@@ -278,7 +278,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    protected final Contact<?> getEntity() {
+    protected final LegalEntity<?> getEntity() {
         return __entity;
     }
 
@@ -288,7 +288,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    protected final void setEntity(final Contact<?> reference) {
+    protected final void setEntity(final LegalEntity<?> reference) {
         __entity = reference;
     }
 
@@ -422,13 +422,13 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
         builder_.append("TelephoneNumber@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(nullable(getId())).append(", ")
-                .append("Version=").append(nullable(getVersion())).append(", ")
-                .append("Type=").append(nullable(getType())).append(", ")
-                .append("Contry Code=").append(nullable(getCountryCode())).append(", ")
-                .append("Area Code=").append(nullable(getAreaCode())).append(", ")
-                .append("Number=").append(nullable(getNumber())).append(", ")
-                .append("Extension=").append(nullable(getExtension())).append(", ")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Type=").append(wrap(getType())).append(", ")
+                .append("Contry Code=").append(wrap(getCountryCode())).append(", ")
+                .append("Area Code=").append(wrap(getAreaCode())).append(", ")
+                .append("Number=").append(wrap(getNumber())).append(", ")
+                .append("Extension=").append(wrap(getExtension())).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())
                 .append("}");

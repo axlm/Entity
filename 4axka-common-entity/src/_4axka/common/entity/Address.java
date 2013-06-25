@@ -14,7 +14,7 @@
 package _4axka.common.entity;
 
 
-import static _4axka.util.lang.ToString.nullable;
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 
@@ -118,7 +118,7 @@ public class Address implements Serializable, Comparable<Address> {
     @XmlTransient
     @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Contact<?> __entity;
+    private LegalEntity<?> __entity;
 
     /**
      * Default constructor.
@@ -336,7 +336,7 @@ public class Address implements Serializable, Comparable<Address> {
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    protected final Contact<?> getEntity() {
+    protected final LegalEntity<?> getEntity() {
         return __entity;
     }
 
@@ -346,7 +346,7 @@ public class Address implements Serializable, Comparable<Address> {
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    protected final void setEntity(final Contact<?> reference) {
+    protected final void setEntity(final LegalEntity<?> reference) {
         __entity = reference;
     }
 
@@ -497,15 +497,15 @@ public class Address implements Serializable, Comparable<Address> {
 
         builder_.append("Address@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(nullable(getId())).append(", ")
-                .append("Version=").append(nullable(getVersion())).append(", ")
-                .append("Type=").append(nullable(getType())).append(", ")
-                .append("Location=").append(nullable(getLocation())).append(", ")
-                .append("Suburb=").append(nullable(getSuburb())).append(", ")
-                .append("City=").append(nullable(getCity())).append(", ")
-                .append("Region=").append(nullable(getRegion())).append(", ")
-                .append("Country=").append(nullable(getCountry())).append(", ")
-                .append("Code=").append(nullable(getCode())).append(", ")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Type=").append(wrap(getType())).append(", ")
+                .append("Location=").append(wrap(getLocation())).append(", ")
+                .append("Suburb=").append(wrap(getSuburb())).append(", ")
+                .append("City=").append(wrap(getCity())).append(", ")
+                .append("Region=").append(wrap(getRegion())).append(", ")
+                .append("Country=").append(wrap(getCountry())).append(", ")
+                .append("Code=").append(wrap(getCode())).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())
                 .append("}");

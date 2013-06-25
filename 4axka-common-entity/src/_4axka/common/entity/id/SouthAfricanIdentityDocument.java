@@ -14,7 +14,7 @@
 package _4axka.common.entity.id;
 
 
-import static _4axka.util.lang.ToString.nullable;
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -179,8 +179,8 @@ public final class SouthAfricanIdentityDocument implements Serializable, Compara
         
         builder_.append("SouthAfricanIdentityDocument@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Identity Number=").append(nullable(getIdentityNumber())).append(", ")
-                .append("Release Date=").append(nullable(getReleaseDate())).append(", ")
+                .append("Identity Number=").append(wrap(getIdentityNumber())).append(", ")
+                .append("Release Date=").append(wrap(getReleaseDate())).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())
                 .append("}");

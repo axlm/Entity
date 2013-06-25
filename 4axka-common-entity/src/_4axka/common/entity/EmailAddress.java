@@ -14,7 +14,7 @@
 package _4axka.common.entity;
 
 
-import static _4axka.util.lang.ToString.nullable;
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 
@@ -91,7 +91,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
     @XmlTransient
     @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Contact<?> __entity;
+    private LegalEntity<?> __entity;
 
     /**
      * Default constructor.
@@ -190,7 +190,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * 
      * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
      */
-    protected final Contact<?> getEntity() {
+    protected final LegalEntity<?> getEntity() {
         return __entity;
     }
 
@@ -200,7 +200,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * @param reference
      *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
      */
-    protected final void setEntity(final Contact<?> reference) {
+    protected final void setEntity(final LegalEntity<?> reference) {
         __entity = reference;
     }
 
@@ -294,10 +294,10 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
         builder_.append("EmailAddress@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(nullable(getId())).append(", ")
-                .append("Version=").append(nullable(getVersion())).append(", ")
-                .append("Type=").append(nullable(getType())).append(", ")
-                .append("Address=").append(nullable(getAddress())).append(", ")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Type=").append(wrap(getType())).append(", ")
+                .append("Address=").append(wrap(getAddress())).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())
                 .append("}");

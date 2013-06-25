@@ -15,7 +15,7 @@ package _4axka.common.entity;
 
 
 import static _4axka.util.lang.ToString.unroll;
-import static _4axka.util.lang.ToString.nullable;
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -47,13 +47,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * @param <ID>
  */
-@XmlRootElement(name = "entity")
-@XmlType(name = "Entity")
+@XmlRootElement(name = "legalEntity")
+@XmlType(name = "LegalEntity")
 @XmlSeeAlso({Person.class})
-@Entity(name = "Entity") // there are complaints if the fqn is not used
-@Table(name = "ENTITIES")
+@Entity(name = "LegalEntity") // there are complaints if the fqn is not used
+@Table(name = "LEGAL_ENTITIES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Contact<ID extends Serializable & Comparable<ID>> implements Serializable {
+public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> implements Serializable {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -110,7 +110,7 @@ public abstract class Contact<ID extends Serializable & Comparable<ID>> implemen
      * 
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
-    public Contact() {
+    public LegalEntity() {
         super();
     }
 
@@ -123,7 +123,7 @@ public abstract class Contact<ID extends Serializable & Comparable<ID>> implemen
      * @param numbers
      * @param addresses
      */
-    public Contact(
+    public LegalEntity(
             final ID legalIdentifier,
             final Iterable<EmailAddress> emailAddresses,
             final Iterable<TelephoneNumber> numbers,
@@ -139,10 +139,10 @@ public abstract class Contact<ID extends Serializable & Comparable<ID>> implemen
      * Copy constructor. <i>For state specifications see the see also section</i>.
      * 
      * @param template
-     *            Uses template as template to initialise {@linkplain Contact <code>this</code>}.
+     *            Uses template as template to initialise {@linkplain LegalEntity <code>this</code>}.
      * @see super
      */
-    public Contact(final Contact<ID> template) {
+    public LegalEntity(final LegalEntity<ID> template) {
         this(
                 template.getLegalIdentifier(),
                 template.getEmailAddresses(),
@@ -309,9 +309,9 @@ public abstract class Contact<ID extends Serializable & Comparable<ID>> implemen
 
         builder_.append("Contact@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(nullable(getId())).append(", ")
-                .append("Version=").append(nullable(getVersion())).append(", ")
-                .append("Legal Identifier=").append(nullable(getLegalIdentifier())).append(", ")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
+                .append("Legal Identifier=").append(wrap(getLegalIdentifier())).append(", ")
                 .append("Email Addresses=").append(unroll(__emailAddresses)).append(", ")
                 .append("Telephone Numbers=").append(unroll(__telephoneNumbers)).append(", ")
                 .append("Addresses=").append(unroll(__addresses)).append(", ")

@@ -15,7 +15,7 @@ package _4axka.common.entity;
 
 
 import static _4axka.util.lang.ToString.unroll;
-import static _4axka.util.lang.ToString.nullable;
+import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -51,7 +51,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Person")
 @Entity(name = "Person")
 @Table(name = "PERSONS")
-public abstract class Person<ID extends Comparable<ID> & Serializable> extends Contact<ID> {
+public abstract class Person<ID extends Serializable & Comparable<ID>> extends LegalEntity<ID> {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -443,16 +443,16 @@ public abstract class Person<ID extends Comparable<ID> & Serializable> extends C
 
         builder_.append("Person@").append(System.identityHashCode(this))
                 .append("{")
-                .append("Id=").append(nullable(getId())).append(", ")
-                .append("Version=").append(nullable(getVersion())).append(", ")
+                .append("Id=").append(wrap(getId())).append(", ")
+                .append("Version=").append(wrap(getVersion())).append(", ")
                 .append("Given Names=").append(unroll(__givenNames)).append(", ")
-                .append("Initials=").append(nullable(getInitials())).append(", ")
-                .append("Family Name=").append(nullable(getFamilyName())).append(", ")
+                .append("Initials=").append(wrap(getInitials())).append(", ")
+                .append("Family Name=").append(wrap(getFamilyName())).append(", ")
                 .append("Also Known As=").append(unroll(__alsoKnownAs)).append(", ")
-                .append("Preferred Given Name=").append(nullable(getPreferredGivenName())).append(", ")
-                .append("Date of Birth=").append(nullable(getDateOfBirth())).append(", ")
-                .append("Deceased On=").append(nullable(getDeceasedOn())).append(", ")
-                .append("Gender=").append(nullable(getGender())).append(", ")
+                .append("Preferred Given Name=").append(wrap(getPreferredGivenName())).append(", ")
+                .append("Date of Birth=").append(wrap(getDateOfBirth())).append(", ")
+                .append("Deceased On=").append(wrap(getDeceasedOn())).append(", ")
+                .append("Gender=").append(wrap(getGender())).append(", ")
                 .append("Titles=").append(unroll(__titles)).append(", ")
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())
