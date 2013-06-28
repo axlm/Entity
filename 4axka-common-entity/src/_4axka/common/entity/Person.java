@@ -68,14 +68,14 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     @XmlElementWrapper(name = "givenNames", required = true, nillable = false)
     @XmlElement(name = "name")
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "GIVEN_NAMES")
+    @CollectionTable(name = "PERSON_GIVEN_NAMES")
     @Column(name = "GIVEN_NAME", length = 63, nullable = false)
     private Set<String> __givenNames = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "aliases")
     @XmlElement(name = "alias")
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "ALIASES")
+    @CollectionTable(name = "PERSON_ALIASES")
     @Column(name = "ALIAS", length = 63, nullable = false)
     private Set<String> __alsoKnownAs = new ConcurrentSkipListSet<>();
 
@@ -112,10 +112,10 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     @XmlElementWrapper(name = "titles")
     @XmlElement(name = "title")
     // TODO: this should be a unidirectional many to one form the TitleType side to act like a
-    // lookup.
+    // lookup. A Person should have only ONE title.
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "TITLES")
+    @CollectionTable(name = "PERSON_TITLES")
     @Column(name = "TITLE", length = 15)
     private Set<TitleType> __titles = new ConcurrentSkipListSet<>();
 
@@ -149,7 +149,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      * @param titles
      */
     public Person(
-            // ENTITY PARAMETERS
+            // LEGAL ENTITY PARAMETERS
             final ID legalIdentifier,
             final Iterable<EmailAddress> emailAddresses,
             final Iterable<TelephoneNumber> numbers,

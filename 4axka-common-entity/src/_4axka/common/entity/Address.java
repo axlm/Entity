@@ -19,14 +19,11 @@ import static _4axka.util.lang.ToString.wrap;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
@@ -114,11 +111,6 @@ public class Address implements Serializable, Comparable<Address> {
     @Basic
     @Column(name = "CODE", length = 15, nullable = false)
     private String __code;
-
-    @XmlTransient
-    @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
-    @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private LegalEntity<?> __entity;
 
     /**
      * Default constructor.
@@ -329,25 +321,6 @@ public class Address implements Serializable, Comparable<Address> {
      */
     protected final void setCode(final String code) {
         __code = code;
-    }
-
-    /**
-     * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__entity entity reference}.
-     */
-    protected final LegalEntity<?> getEntity() {
-        return __entity;
-    }
-
-    /**
-     * Obvious.
-     * 
-     * @param reference
-     *            Value to assign to <code>this</code> {@linkplain #__entity entity reference}.
-     */
-    protected final void setEntity(final LegalEntity<?> reference) {
-        __entity = reference;
     }
 
     /** {@inheritDoc} */

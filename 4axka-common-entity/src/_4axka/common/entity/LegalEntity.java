@@ -29,12 +29,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 import javax.persistence.Version;
-import javax.swing.tree.TreeNode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,7 +51,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "LegalEntity")
 @XmlSeeAlso({Person.class})
 @Entity(name = "LegalEntity") // there are complaints if the fqn is not used
-@Table(name = "LEGAL_ENTITIES")
+@Table(
+		name = "LEGAL_ENTITIES",
+		schema = "ENTITY")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> implements Serializable {
     /**
@@ -89,17 +91,29 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     @XmlElementWrapper(name = "emailAddresses")
     @XmlElement(name = "emailAddress")
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "__entity")
+    @OneToMany(
+    		cascade = {CascadeType.ALL},
+    		fetch = FetchType.EAGER,
+    		orphanRemoval = true)
+    @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Set<EmailAddress> __emailAddresses = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "telephoneNumbers")
     @XmlElement(name = "telephoneNumber")
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "__entity")
+    @OneToMany(
+    		cascade = {CascadeType.ALL},
+    		fetch = FetchType.EAGER,
+    		orphanRemoval = true)
+    @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Set<TelephoneNumber> __telephoneNumbers = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "addresses")
     @XmlElement(name = "address")
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "__entity")
+    @OneToMany(
+    		cascade = {CascadeType.ALL},
+    		fetch = FetchType.EAGER,
+    		orphanRemoval = true)
+    @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Set<Address> __addresses = new ConcurrentSkipListSet<>();
 
     /**
@@ -221,8 +235,20 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      */
     public final void addEmailAddress(final EmailAddress address) {
         final EmailAddress address_ = new EmailAddress(address);
-        address_.setEntity(this);
         __emailAddresses.add(address_);
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @param address
+     * 			{@link EmailAddress} to remove from <code>this</code> {@linkplain #__emailAddresses
+     *  		email addresses}.
+     */
+    public final void removeEmailAddress(final EmailAddress address) {
+    	if (__emailAddresses.contains(address)) {
+			__emailAddresses.remove(address);
+		}
     }
 
     /**
@@ -257,8 +283,20 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      */
     public final void addTelephoneNumber(final TelephoneNumber number) {
         final TelephoneNumber number_ = new TelephoneNumber(number);
-        number_.setEntity(this);
         __telephoneNumbers.add(number_);
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @param number
+     * 			{@link TelephoneNumber} to remove from <code>this</code> {@linkplain
+     *  		#__telephoneNumbers telephone numbers}.
+     */
+    public final void removeTelephoneNumber(final TelephoneNumber number) {
+    	if (__emailAddresses.contains(number)) {
+			__emailAddresses.remove(number);
+		}
     }
 
     /**
@@ -292,8 +330,20 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      */
     public final void addAddress(final Address address) {
         final Address adress__ = new Address(address);
-        adress__.setEntity(this);
         __addresses.add(adress__);
+    }
+
+    /**
+     * Obvious.
+     * 
+     * @param address
+     * 			{@link TelephoneNumber} to remove from <code>this</code> {@linkplain #__addresses
+     *  		addresses}.
+     */
+    public final void removeAddress(final Address address) {
+    	if (__emailAddresses.contains(address)) {
+			__emailAddresses.remove(address);
+		}
     }
 
     /** {@inheritDoc} */
