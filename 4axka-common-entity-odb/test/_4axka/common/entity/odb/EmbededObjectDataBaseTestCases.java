@@ -78,7 +78,7 @@ public class EmbededObjectDataBaseTestCases {
                         new Address(
                                 AddressType.HOME,
                                 "321 Home Lane",
-                                "Homms",
+                                "Holms",
                                 "Homeville",
                                 "Homely",
                                 "South Africa",
@@ -113,7 +113,7 @@ public class EmbededObjectDataBaseTestCases {
                         new Address(
                                 AddressType.HOME,
                                 "321 Home Lane",
-                                "Homms",
+                                "Holms",
                                 "Homeville",
                                 "Homely",
                                 "South Africa",
@@ -197,15 +197,6 @@ public class EmbededObjectDataBaseTestCases {
         Iterable<SouthAfricanCitizen> saffers_ = null;
         try {
             saffers_ = eodb_.find(new Predicate<SouthAfricanCitizen>() {
-                /**
-                 * Determines if a de-serialised file is compatible with this class.
-                 * <p>
-                 * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-                 * this class is not compatible with the previous version. It is not necessary to include
-                 * in first version of the class, but included here as a reminder of its importance.
-                 * 
-                 * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
-                 */
                 private static final long serialVersionUID = 2068663185226793478L;
 
                 @Override
