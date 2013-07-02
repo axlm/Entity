@@ -31,6 +31,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
@@ -50,7 +51,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "legalEntity")
 @XmlType(name = "LegalEntity")
 @XmlSeeAlso({Person.class})
-@Entity(name = "LegalEntity") // there are complaints if the fqn is not used
+@Entity(name = "LegalEntity")
 @Table(
 		name = "LEGAL_ENTITIES",
 		schema = "ENTITY")
@@ -95,6 +96,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
     		cascade = {CascadeType.ALL},
     		fetch = FetchType.EAGER,
     		orphanRemoval = true)
+    @OrderBy("__type ASC")
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Set<EmailAddress> __emailAddresses = new ConcurrentSkipListSet<>();
 
@@ -104,6 +106,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
     		cascade = {CascadeType.ALL},
     		fetch = FetchType.EAGER,
     		orphanRemoval = true)
+    @OrderBy("__type ASC")
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Set<TelephoneNumber> __telephoneNumbers = new ConcurrentSkipListSet<>();
 
@@ -113,6 +116,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
     		cascade = {CascadeType.ALL},
     		fetch = FetchType.EAGER,
     		orphanRemoval = true)
+    @OrderBy("__type ASC")
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
     private Set<Address> __addresses = new ConcurrentSkipListSet<>();
 
