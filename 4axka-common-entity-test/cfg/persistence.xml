@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence:persistence
+    version="2.0"
+    xmlns:persistence="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd "
+>
+    <persistence:persistence-unit
+        name="entity-test"
+        transaction-type="RESOURCE_LOCAL"
+    >
+        <persistence:description>Description goes here.</persistence:description>
+        <persistence:class>_4axka.common.entitity.Address</persistence:class>
+        <persistence:class>_4axka.common.entitity.EmailAddress</persistence:class>
+        <persistence:class>_4axka.common.entitity.Factories</persistence:class>
+        <persistence:class>_4axka.common.entitity.LegalEntity</persistence:class>
+        <persistence:class>_4axka.common.entitity.NationalityType</persistence:class>
+        <persistence:class>_4axka.common.entitity.Person</persistence:class>
+        <persistence:class>_4axka.common.entitity.TelephoneNumber</persistence:class>
+        <persistence:properties>
+            <!-- logging properties -->
+            <persistence:property
+                name="eclipselink.ddl-generation.output-mode"
+                value="sql-script" />
+            <persistence:property
+                name="eclipselink.ddl.table-creation-suffix"
+                value=" ;" />
+            <persistence:property
+                name="eclipselink.logging.file"
+                value="./eclipselink.log" />
+            <persistence:property
+                name="eclipselink.logging.level"
+                value="ALL" />
+            <!-- jdbc connection properties -->
+            <persistence:property
+                name="eclipselink.connection-pool.initial"
+                value="2" />
+            <persistence:property
+                name="eclipselink.connection-pool.driver"
+                value="com.mysql.jdbc.Driver" />
+            <persistence:property
+                name="eclipselink.connection-pool.url"
+                value="jdbc:mysql://localhost:3306/entity" />
+            <persistence:property
+                name="eclipselink.connection-pool.user"
+                value="entity" />
+            <persistence:property
+                name="eclipselink.connection-pool.password"
+                value="P4ssw0rd" />
+        </persistence:properties>
+    </persistence:persistence-unit>
+</persistence:persistence>
+
