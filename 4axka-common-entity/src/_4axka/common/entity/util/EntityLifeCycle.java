@@ -64,11 +64,11 @@ public final class EntityLifeCycle {
     }
 
     public enum LifeCycleStateType {
-        CREATED(0, 1, 2, 4),
-        DESTROYED(1),
-        MODIFIED(2, 2, 4),
-        ACTIVATED(3, 1, 2, 4),
-        DEACTIVATED(4, 3, 1);
+        CREATED    (0, DESTROYED.state(), MODIFIED.state(), DEACTIVATED.state()),
+        MODIFIED   (1, DESTROYED.state(), MODIFIED.state(), DEACTIVATED.state()),
+        ACTIVATED  (2, DESTROYED.state(), MODIFIED.state(), DEACTIVATED.state()),
+        DEACTIVATED(3, DESTROYED.state(),                     ACTIVATED.state()),
+        DESTROYED  (4);
 
         private final int __state;
         private final Set<Integer> __nextStates = new HashSet<>();
@@ -78,6 +78,10 @@ public final class EntityLifeCycle {
             for (final int event_ : nextEvents) {
                 __nextStates.add(event_);
             }
+        }
+
+        public int state() {
+            return __state;
         }
 
         public Set<LifeCycleStateType> nextStates() {
