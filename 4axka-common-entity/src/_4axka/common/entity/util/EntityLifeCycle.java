@@ -15,6 +15,7 @@
 package _4axka.common.entity.util;
 
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -85,6 +86,7 @@ public final class EntityLifeCycle {
         }
 
         public Set<LifeCycleStateType> nextStates() {
+            /*
             final HashSet<LifeCycleStateType> result_ = new HashSet<>();
 
             for (final LifeCycleStateType state_ : LifeCycleStateType.values()) {
@@ -94,6 +96,8 @@ public final class EntityLifeCycle {
             }
 
             return result_;
+            */
+            return Collections.unmodifiableSet(__nextStates);
         }
     }
 }
