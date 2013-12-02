@@ -13,11 +13,13 @@
  */
 package _4axka.common.entity;
 
-
 import static _4axka.util.lang.ToString.unroll;
 import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
@@ -45,7 +47,7 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * 
+ *
  * @param <ID>
  */
 @XmlRootElement(name = "legalEntity")
@@ -53,17 +55,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({Person.class})
 @Entity(name = "LegalEntity")
 @Table(
-		name = "LEGAL_ENTITIES",
-		schema = "ENTITY")
+        name = "LEGAL_ENTITIES",
+        schema = "ENTITY")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> implements Serializable {
+
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-     * this class is not compatible with the previous version. It is not necessary to include
-     * in first version of the class, but included here as a reminder of its importance.
-     * 
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
+     * class is not compatible with the previous version. It is not necessary to include in first
+     * version of the class, but included here as a reminder of its importance.
+     *
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -93,39 +96,39 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
     @XmlElementWrapper(name = "emailAddresses")
     @XmlElement(name = "emailAddress")
     @OneToMany(
-    		cascade = {CascadeType.ALL},
-    		fetch = FetchType.EAGER,
-    		orphanRemoval = true)
+            cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
     @OrderBy("__type ASC")
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Set<EmailAddress> __emailAddresses = new ConcurrentSkipListSet<>();
+    private final Set<EmailAddress> __emailAddresses = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "telephoneNumbers")
     @XmlElement(name = "telephoneNumber")
     @OneToMany(
-    		cascade = {CascadeType.ALL},
-    		fetch = FetchType.EAGER,
-    		orphanRemoval = true)
+            cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
     @OrderBy("__type ASC")
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Set<TelephoneNumber> __telephoneNumbers = new ConcurrentSkipListSet<>();
+    private final Set<TelephoneNumber> __telephoneNumbers = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "addresses")
     @XmlElement(name = "address")
     @OneToMany(
-    		cascade = {CascadeType.ALL},
-    		fetch = FetchType.EAGER,
-    		orphanRemoval = true)
+            cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
     @OrderBy("__type ASC")
     @JoinColumn(name = "ENTITY_FK", referencedColumnName = "ID")
-    private Set<Address> __addresses = new ConcurrentSkipListSet<>();
+    private final Set<Address> __addresses = new ConcurrentSkipListSet<>();
 
     /**
      * Default constructor.
      * <p>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * 
+     *
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public LegalEntity() {
@@ -133,9 +136,9 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
     }
 
     /**
-     * Instance variable constructor. Initialise <code>this</code> instance with the specified
-     * arguments. <i>For state specifications see the see also section</i>.
-     * 
+     * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
+     * <i>For state specifications see the see also section</i>.
+     *
      * @param legalIdentifier
      * @param emailAddresses
      * @param numbers
@@ -155,9 +158,9 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * 
-     * @param template
-     *            Uses template as template to initialise {@linkplain LegalEntity <code>this</code>}.
+     *
+     * @param template Uses template as template to initialise
+     * {@linkplain LegalEntity {@code this}}.
      * @see super
      */
     public LegalEntity(final LegalEntity<ID> template) {
@@ -170,8 +173,8 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__id id}.
+     *
+     * @return The value of {@code this} instance's {@linkplain #__id id}.
      */
     public final Long getId() {
         return __id;
@@ -179,8 +182,8 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__version version}.
+     *
+     * @return The value of {@code this} instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
         return __version;
@@ -188,8 +191,8 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__legalIdentifier legal
+     *
+     * @return The value of {@code this} instance's {@linkplain #__legalIdentifier legal
      *         identifier}.
      */
     public final ID getLegalIdentifier() {
@@ -198,9 +201,8 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @param ID
-     *            Value to assign to <code>this</code> {@linkplain #__legalIdentifier legal
+     *
+     * @param id Value to assign to {@code this} {@linkplain #__legalIdentifier legal
      *            identifier}.
      */
     protected final void setLegalIdentifier(final ID id) {
@@ -209,56 +211,82 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__emailAddresses email
+     *
+     * @return The value of {@code this} instance's {@linkplain #__emailAddresses email
      *         addresses}.
      */
     public final Iterable<EmailAddress> getEmailAddresses() {
-        return __emailAddresses;
+        // what about defensive copies?
+        return Collections.unmodifiableSet(__emailAddresses);
     }
 
     /**
      * Obvious.
-     * 
+     *
+     * @param address
+     *      Instance to add to {@code this} {@linkplain #__emailAddresses email addresses}.
+     * @return
+     *      {@code true} if the {@linkplain Address address} was successfully added to {@code this}.
+     */
+    public final boolean addEmailAddress(final EmailAddress address) {
+        return __emailAddresses.add(new EmailAddress(address));
+    }
+
+    /**
+     * Obvious.
+     *
      * @param addresses
-     *            {@linkplain Iterable Collection} of {@linkplain EmailAddress email addresses}
-     *            to add to <code>this</code>.
+     *      {@linkplain Iterable Collection} of {@linkplain EmailAddress email addresses} to add to
+     *      {@code this}.
+     * @return
+     *      The {@link Address addresses} added to {@code this}.
      */
-    public final void addEmailAddresses(final Iterable<EmailAddress> addresses) {
+    public final Iterable<EmailAddress> addEmailAddresses(final Iterable<EmailAddress> addresses) {
+        final List<EmailAddress> result_ = new ArrayList<>();
+
         for (final EmailAddress address_ : addresses) {
-            addEmailAddress(address_);
+            if (addEmailAddress(address_)) {
+                result_.add(address_);
+            }
         }
+
+        return result_;
     }
 
     /**
      * Obvious.
-     * 
-     * @param address
-     *            Instance to add to <code>this</code> {@linkplain #__emailAddresses email
-     *            addresses}.
+     *
+     * @param addresses {@code Array} of {@linkplain EmailAddress email addresses} to add to
+     * {@code this}.
+     * @return The {@link Address addresses} added to {@code this}.
      */
-    public final void addEmailAddress(final EmailAddress address) {
-        final EmailAddress address_ = new EmailAddress(address);
-        __emailAddresses.add(address_);
+    public final Iterable<EmailAddress> addEmailAddresses(final EmailAddress... addresses) {
+        final List<EmailAddress> result_ = new ArrayList<>();
+
+        for (final EmailAddress address_ : addresses) {
+            if (addEmailAddress(address_)) {
+                result_.add(address_);
+            }
+        }
+
+        return result_;
     }
 
     /**
      * Obvious.
-     * 
-     * @param address
-     * 			{@link EmailAddress} to remove from <code>this</code> {@linkplain #__emailAddresses
+     *
+     * @param address {@link EmailAddress} to remove from {@code this} {@linkplain #__emailAddresses
      *  		email addresses}.
+     * @return {@code true} if the {@linkplain EmailAddress email addess} was removed.
      */
-    public final void removeEmailAddress(final EmailAddress address) {
-    	if (__emailAddresses.contains(address)) {
-			__emailAddresses.remove(address);
-		}
+    public final boolean removeEmailAddress(final EmailAddress address) {
+        return __emailAddresses.remove(address);
     }
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__telephoneNumbers
+     *
+     * @return The value of {@code this} instance's {@linkplain #__telephoneNumbers
      *         telephone numbers}.
      */
     public final Iterable<TelephoneNumber> getTelephoneNumbers() {
@@ -267,22 +295,20 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @param numbers
-     *            {@linkplain Iterable Collection} of {@linkplain TreeNode telephone numbers}
-     *            to add to <code>this</code>.
+     *
+     * @param numbers {@linkplain Iterable Collection} of {@linkplain TreeNode telephone numbers} to
+     * add to {@code this}.
      */
     public final void addTelephoneNumbers(final Iterable<TelephoneNumber> numbers) {
         for (final TelephoneNumber number_ : numbers) {
             addTelephoneNumber(number_);
         }
     }
-    
+
     /**
      * Obvious.
-     * 
-     * @param numbers
-     *            Instance to add to <code>this</code> {@linkplain #__telephoneNumbers
+     *
+     * @param number Instance to add to {@code this} {@linkplain #__telephoneNumbers
      *            telephone numbers}.
      */
     public final void addTelephoneNumber(final TelephoneNumber number) {
@@ -292,33 +318,30 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @param number
-     * 			{@link TelephoneNumber} to remove from <code>this</code> {@linkplain
+     *
+     * @param number {@link TelephoneNumber} to remove from {@code this} {@linkplain
      *  		#__telephoneNumbers telephone numbers}.
      */
     public final void removeTelephoneNumber(final TelephoneNumber number) {
-    	if (__emailAddresses.contains(number)) {
-			__emailAddresses.remove(number);
-		}
+        if (__telephoneNumbers.contains(number)) {
+            __telephoneNumbers.remove(number);
+        }
     }
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__addresses addresses}.
+     *
+     * @return The value of {@code this} instance's {@linkplain #__addresses addresses}.
      */
     public final Iterable<Address> getAddresses() {
         return __addresses;
     }
 
-
     /**
      * Obvious.
-     * 
-     * @param addresses
-     *            {@linkplain Iterable Collection} of {@linkplain Address addresses} to add to
-     *            <code>this</code>.
+     *
+     * @param addresses {@linkplain Iterable Collection} of {@linkplain Address addresses} to add to
+     * {@code this}.
      */
     public final void addAddresses(final Iterable<Address> addresses) {
         for (final Address address_ : addresses) {
@@ -328,9 +351,8 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @param address
-     *            Instance to add to <code>this</code> {@linkplain #__addresses  addresses}.
+     *
+     * @param address Instance to add to {@code this} {@linkplain #__addresses  addresses}.
      */
     public final void addAddress(final Address address) {
         final Address adress__ = new Address(address);
@@ -339,18 +361,19 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     * 
-     * @param address
-     * 			{@link TelephoneNumber} to remove from <code>this</code> {@linkplain #__addresses
+     *
+     * @param address {@link TelephoneNumber} to remove from {@code this} {@linkplain #__addresses
      *  		addresses}.
      */
     public final void removeAddress(final Address address) {
-    	if (__emailAddresses.contains(address)) {
-			__emailAddresses.remove(address);
-		}
+        if (__addresses.contains(address)) {
+            __addresses.remove(address);
+        }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
