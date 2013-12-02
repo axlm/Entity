@@ -3,7 +3,7 @@
 /*
  * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
  *
- * The content of ToStringTestCases.java is strictly CONFIDENTIAL.
+ * The content of ToStringTest.java is strictly CONFIDENTIAL.
  *
  * It may not be viewed as a whole, or in part by any unauthorised party unless
  * explicit permission has been granted by an authorised 4axka representative.
@@ -32,7 +32,7 @@ import _4axka.common.entity.id.SouthAfricanIdentityNumber;
 import _4axka.util.lang.ToString;
 
 
-public class ToStringTestCases {
+public class ToStringTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {}

@@ -14,6 +14,8 @@
 package _4axka.common.entity;
 
 
+import static _4axka.util.lang.Equals.isEqual;
+import static _4axka.util.lang.Equals.isDifferentTypes;
 import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
@@ -265,46 +267,25 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         __extension = extension;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @param that
+     */
    @Override
     public boolean equals(final Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (!(that.getClass().isAssignableFrom(TelephoneNumber.class))) {
-            return false;
-        }
-        final TelephoneNumber that_ = TelephoneNumber.class.cast(that);
-
-        if (getType() != that_.getType()) {
-            return false;
-        }
-        if (getCountryCode() == null) {
-            if (that_.getCountryCode() != null) {
-                return false;
-            }
-        } else if (!getCountryCode().equals(that_.getCountryCode())) {
-            return false;
-        }
-        if (getAreaCode() == null) {
-            if (that_.getAreaCode() != null) {
-                return false;
-            }
-        } else if (!getAreaCode().equals(that_.getAreaCode())) {
-            return false;
-        }
-        if (getAreaCode() == null) {
-            if (that_.getAreaCode() != null) {
-                return false;
-            }
-        } else if (!getAreaCode().equals(that_.getAreaCode())) {
-            return false;
-        }
-
-        return true;
+        if (this == that && that != null) {
+           return true;
+       }
+       if (isDifferentTypes(this, that)) {
+           return false;
+       }
+       
+       final TelephoneNumber that_ = TelephoneNumber.class.cast(that);
+       
+       return isEqual(getType(), that_.getType()) &&
+              isEqual(getCountryCode(), that_.getCountryCode()) &&
+              isEqual(getAreaCode(), that_.getAreaCode()) &&
+              isEqual(getNumber(), that_.getNumber());
     }
 
    /** {@inheritDoc} */

@@ -15,16 +15,19 @@
 package _4axka.common.entity.util;
 
 
-import java.util.Collections;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Embeddable;
 
-
+/**
+ *
+ * @author axl.mattheus@4axka.net
+ */
 @Embeddable
-public final class EntityLifeCycle {
+public class EntityLifeCycle implements Serializable {
     private LifeCycleStateType __state;
     private String __source;
     private Date __timestamp;
@@ -65,12 +68,12 @@ public final class EntityLifeCycle {
     }
 
     public enum LifeCycleStateType {
-        CREATED    (0, DESTROYED.state(), MODIFIED.state(), DEACTIVATED.state()),
-        MODIFIED   (1, DESTROYED.state(), MODIFIED.state(), DEACTIVATED.state()),
-        ACTIVATED  (2, DESTROYED.state(), MODIFIED.state(), DEACTIVATED.state()),
-        DEACTIVATED(3, DESTROYED.state(),                     ACTIVATED.state()),
+        CREATED    (0, 4, 1, 3),
+        MODIFIED   (1, 4, 1, 3),
+        ACTIVATED  (2, 4, 1, 3),
+        DEACTIVATED(3, 4, 2),
         DESTROYED  (4);
-
+        
         private final int __state;
         private final Set<Integer> __nextStates = new HashSet<>();
 
@@ -81,12 +84,7 @@ public final class EntityLifeCycle {
             }
         }
 
-        public int state() {
-            return __state;
-        }
-
         public Set<LifeCycleStateType> nextStates() {
-            /*
             final HashSet<LifeCycleStateType> result_ = new HashSet<>();
 
             for (final LifeCycleStateType state_ : LifeCycleStateType.values()) {
@@ -96,8 +94,6 @@ public final class EntityLifeCycle {
             }
 
             return result_;
-            */
-            return Collections.unmodifiableSet(__nextStates);
         }
     }
 }

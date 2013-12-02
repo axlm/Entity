@@ -118,11 +118,11 @@ public class SouthAfricanIdentityNumberTestCases {
         ID_7611020032089("761102 0032 0 8 9", "1976-11-02", GenderType.FEMALE, true, true),
         ID_7001014001129("700101 4001 1 2 9", "1970-01-01", GenderType.FEMALE, false, false);
 
-        private String __number;
+        private final String __number;
         private Date __dob;
-        private GenderType __gender;
-        private Boolean __wasBornInSA;
-        private Boolean __isValid;
+        private final GenderType __gender;
+        private final Boolean __wasBornInSA;
+        private final Boolean __isValid;
 
         /**
          * @param number

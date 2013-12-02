@@ -14,6 +14,8 @@
 package _4axka.common.entity;
 
 
+import static _4axka.util.lang.Equals.isEqual;
+import static _4axka.util.lang.Equals.isDifferentTypes;
 import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
@@ -177,32 +179,23 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         __address = address;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @param that
+     */
     @Override
     public boolean equals(final Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (!(that.getClass().isAssignableFrom(EmailAddress.class))) {
-            return false;
-        }
+        if (this == that && that != null) {
+           return true;
+       }
+       if (isDifferentTypes(this, that)) {
+           return false;
+       }
 
         final EmailAddress that_ = EmailAddress.class.cast(that);
-        if (getType() != that_.getType()) {
-            return false;
-        }
-        if (getAddress() == null) {
-            if (that_.getAddress() != null) {
-                return false;
-            }
-        } else if (!getAddress().equals(that_.getAddress())) {
-            return false;
-        }
 
-        return true;
+        return isEqual(getType(), that_.getType()) &&
+               isEqual(getAddress(), that_.getAddress());
     }
 
     /** {@inheritDoc} */

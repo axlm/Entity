@@ -15,6 +15,7 @@ package _4axka.common.entity;
 
 
 import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.Equals.*;
 
 import java.io.Serializable;
 
@@ -323,53 +324,25 @@ public class Address implements Serializable, Comparable<Address> {
         __code = code;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @param that
+     */
     @Override
     public boolean equals(final Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (!(that.getClass().isAssignableFrom(Address.class))) {
-            return false;
-        }
+        if (this == that && that != null) {
+           return true;
+       }
+       if (isDifferentTypes(this, that)) {
+           return false;
+       }
 
         final Address that_ = Address.class.cast(that);
-        if (getType() != that_.getType()) {
-            return false;
-        }
-        if (getCode() == null) {
-            if (that_.getCode() != null) {
-                return false;
-            }
-        } else if (!getCode().equals(that_.getCode())) {
-            return false;
-        }
-        if (getLocation() == null) {
-            if (that_.getLocation() != null) {
-                return false;
-            }
-        } else if (!getLocation().equals(that_.getLocation())) {
-            return false;
-        }
-        if (getCity() == null) {
-            if (that_.getCity() != null) {
-                return false;
-            }
-        } else if (!getCity().equals(that_.getCity())) {
-            return false;
-        }
-        if (getCity() == null) {
-            if (that_.getCity() != null) {
-                return false;
-            }
-        } else if (!getCity().equals(that_.getCity())) {
-            return false;
-        }
 
-        return true;
+        return isEqual(getType(), that_.getType()) &&
+               isEqual(getCode(), that_.getCode()) &&
+               isEqual(getLocation(), that_.getLocation()) &&
+               isEqual(getCity(), that_.getCity());
     }
 
     /** {@inheritDoc} */
