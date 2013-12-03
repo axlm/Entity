@@ -13,8 +13,8 @@
  */
 package _4axka.common.entity;
 
-import static _4axka.util.lang.ToString.unroll;
-import static _4axka.util.lang.ToString.wrap;
+import _4axka.util.functor.Modifier;
+import _4axka.util.functor.Predicate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -45,9 +45,12 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import static _4axka.util.lang.ToString.unroll;
+import static _4axka.util.lang.ToString.wrap;
+
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- *
+ * <p>
  * @param <ID>
  */
 @XmlRootElement(name = "legalEntity")
@@ -66,7 +69,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
      * class is not compatible with the previous version. It is not necessary to include in first
      * version of the class, but included here as a reminder of its importance.
-     *
+     * <p>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -128,7 +131,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      * <p>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     *
+     * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public LegalEntity() {
@@ -138,7 +141,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
     /**
      * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
      * <i>For state specifications see the see also section</i>.
-     *
+     * <p>
      * @param legalIdentifier
      * @param emailAddresses
      * @param numbers
@@ -158,9 +161,10 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     *
+     * <p>
      * @param template Uses template as template to initialise
-     * {@linkplain LegalEntity {@code this}}.
+     *                 {@linkplain LegalEntity {@code this}}.
+     * <p>
      * @see super
      */
     public LegalEntity(final LegalEntity<ID> template) {
@@ -173,7 +177,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     *
+     * <p>
      * @return The value of {@code this} instance's {@linkplain #__id id}.
      */
     public final Long getId() {
@@ -182,7 +186,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     *
+     * <p>
      * @return The value of {@code this} instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
@@ -191,7 +195,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     *
+     * <p>
      * @return The value of {@code this} instance's {@linkplain #__legalIdentifier legal
      *         identifier}.
      */
@@ -201,52 +205,60 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     *
-     * @param id Value to assign to {@code this} {@linkplain #__legalIdentifier legal
-     *            identifier}.
+     * <p>
+     * @param id Value to assign to {@code this} {@linkplain #__legalIdentifier legal identifier}.
      */
-    protected final void setLegalIdentifier(final ID id) {
+    void setLegalIdentifier(final ID id) {
         __legalIdentifier = id;
     }
 
     /**
      * Obvious.
-     *
-     * @return The value of {@code this} instance's {@linkplain #__emailAddresses email
-     *         addresses}.
+     * <p>
+     * @return All the {@linkplain #__emailAddresses email addresses} associated with {@code this}
+     *         {@linkplain LegalEntity legal entity}.
+     * <p>
+     * @note This operation returns a defensive copy of each {@link EmailAddress} associated with
+     * {@code this} {@linkplain LegalEntity legal entity}.
      */
     public final Iterable<EmailAddress> getEmailAddresses() {
-        // what about defensive copies?
-        return Collections.unmodifiableSet(__emailAddresses);
+        // make defensive copies for thread safety
+        final List<EmailAddress> result_ = new ArrayList<>();
+
+        for (EmailAddress ea_ : __emailAddresses) {
+            result_.add(new EmailAddress(ea_));
+        }
+
+        return Collections.unmodifiableList(result_);
     }
 
     /**
      * Obvious.
-     *
-     * @param address
-     *      Instance to add to {@code this} {@linkplain #__emailAddresses email addresses}.
-     * @return
-     *      {@code true} if the {@linkplain Address address} was successfully added to {@code this}.
+     * <p>
+     * @param address {@link EmailAddress Email address} to associate with {@link LegalEntity this}
+     *                legal entity.
+     * <p>
+     * @return {@code true} if the {@linkplain EmailAddress email address} was successfully added.
      */
     public final boolean addEmailAddress(final EmailAddress address) {
-        return __emailAddresses.add(new EmailAddress(address));
+        return __emailAddresses.add(address);
     }
 
     /**
      * Obvious.
-     *
-     * @param addresses
-     *      {@linkplain Iterable Collection} of {@linkplain EmailAddress email addresses} to add to
-     *      {@code this}.
-     * @return
-     *      The {@link Address addresses} added to {@code this}.
+     * <p>
+     * @param addresses A {@linkplain Iterable collection} of
+     *                  {@linkplain EmailAddress email addresses} to add to {@code this}
+     *                  {@link LegalEntity}.
+     * <p>
+     * @return A {@linkplain Iterable sequence} of {@link EmailAddress addresses} added to {@code this}.
      */
     public final Iterable<EmailAddress> addEmailAddresses(final Iterable<EmailAddress> addresses) {
         final List<EmailAddress> result_ = new ArrayList<>();
 
-        for (final EmailAddress address_ : addresses) {
-            if (addEmailAddress(address_)) {
-                result_.add(address_);
+        for (final EmailAddress ea_ : addresses) {
+            if (addEmailAddress(ea_)) {
+                result_.add(ea_);
             }
         }
 
@@ -255,17 +267,18 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     *
+     * <p>
      * @param addresses {@code Array} of {@linkplain EmailAddress email addresses} to add to
-     * {@code this}.
+     *                  {@code this}.
+     * <p>
      * @return The {@link Address addresses} added to {@code this}.
      */
     public final Iterable<EmailAddress> addEmailAddresses(final EmailAddress... addresses) {
         final List<EmailAddress> result_ = new ArrayList<>();
 
-        for (final EmailAddress address_ : addresses) {
-            if (addEmailAddress(address_)) {
-                result_.add(address_);
+        for (final EmailAddress ea_ : addresses) {
+            if (addEmailAddress(ea_)) {
+                result_.add(ea_);
             }
         }
 
@@ -274,9 +287,10 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
 
     /**
      * Obvious.
-     *
+     * <p>
      * @param address {@link EmailAddress} to remove from {@code this} {@linkplain #__emailAddresses
      *  		email addresses}.
+     * <p>
      * @return {@code true} if the {@linkplain EmailAddress email addess} was removed.
      */
     public final boolean removeEmailAddress(final EmailAddress address) {
@@ -284,93 +298,253 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
     }
 
     /**
-     * Obvious.
-     *
-     * @return The value of {@code this} instance's {@linkplain #__telephoneNumbers
-     *         telephone numbers}.
+     * Removes a {@code EmailAddress} matched by the supplied {@linkplain Predicate predicate}.
+     * <p>
+     * @param predicate <p>
+     * @return
      */
+    public final Iterable<EmailAddress> removeEmailAddresses(
+            final Predicate<EmailAddress, IllegalStateException> predicate) {
+        // how should a predicate behave? should it throw any exceptions?
+        final List<EmailAddress> result_ = new ArrayList<>();
+
+        for (EmailAddress ea_ : __emailAddresses) {
+            if (predicate.match(ea_)) {
+                if (removeEmailAddress(ea_)) {
+                    result_.add(ea_);
+                }
+            }
+        }
+
+        return result_;
+    }
+
+    /**
+     *
+     * @param predicate <p>
+     * @return
+     */
+    public Iterable<EmailAddress> findEmailAddresses(
+            final Predicate<EmailAddress, IllegalStateException> predicate) {
+        final List<EmailAddress> result_ = new ArrayList<>();
+
+        for (EmailAddress ea_ : __emailAddresses) {
+            if (predicate.match(ea_)) {
+                result_.add(ea_);
+            }
+        }
+
+        return result_;
+    }
+
+    /**
+     *
+     * @param predicate
+     * @param modifier  <p>
+     * @return
+     */
+    public Iterable<EmailAddress> modifyEmailAddresses(
+            final Predicate<EmailAddress, IllegalStateException> predicate,
+            final Modifier<EmailAddress, EmailAddress, IllegalStateException> modifier) {
+        final List<EmailAddress> result_ = new ArrayList<>();
+
+        for (EmailAddress ea_ : __emailAddresses) {
+            if (predicate.match(ea_)) {
+                if (removeEmailAddress(ea_)) {
+                    final EmailAddress mea_ = modifier.modify(ea_);
+                    if (addEmailAddress(mea_)) {
+                        result_.add(mea_);
+                    }
+                }
+            }
+        }
+
+        return result_;
+    }
+
     public final Iterable<TelephoneNumber> getTelephoneNumbers() {
-        return __telephoneNumbers;
-    }
-
-    /**
-     * Obvious.
-     *
-     * @param numbers {@linkplain Iterable Collection} of {@linkplain TreeNode telephone numbers} to
-     * add to {@code this}.
-     */
-    public final void addTelephoneNumbers(final Iterable<TelephoneNumber> numbers) {
-        for (final TelephoneNumber number_ : numbers) {
-            addTelephoneNumber(number_);
+        // make defensive copies for thread safety
+        final List<TelephoneNumber> result_ = new ArrayList<>();
+        
+        for (TelephoneNumber t_ : __telephoneNumbers) {
+            result_.add(new TelephoneNumber(t_));
         }
+        
+        return Collections.unmodifiableList(result_);
     }
-
-    /**
-     * Obvious.
-     *
-     * @param number Instance to add to {@code this} {@linkplain #__telephoneNumbers
-     *            telephone numbers}.
-     */
-    public final void addTelephoneNumber(final TelephoneNumber number) {
-        final TelephoneNumber number_ = new TelephoneNumber(number);
-        __telephoneNumbers.add(number_);
+    
+    public final boolean addTelephoneNumber(final TelephoneNumber number) {
+        return __telephoneNumbers.add(number);
     }
-
-    /**
-     * Obvious.
-     *
-     * @param number {@link TelephoneNumber} to remove from {@code this} {@linkplain
-     *  		#__telephoneNumbers telephone numbers}.
-     */
-    public final void removeTelephoneNumber(final TelephoneNumber number) {
-        if (__telephoneNumbers.contains(number)) {
-            __telephoneNumbers.remove(number);
+    
+    public final Iterable<TelephoneNumber> addTelephoneNumbers(
+            final Iterable<TelephoneNumber> numbers) {
+        final List<TelephoneNumber> result_ = new ArrayList<>();
+        
+        for (final TelephoneNumber t_ : numbers) {
+            if (addTelephoneNumber(t_)) {
+                result_.add(t_);
+            }
         }
+        
+        return result_;
+    }
+    
+    public final Iterable<TelephoneNumber> addTelephoneNumbers(final TelephoneNumber... numbers) {
+        final List<TelephoneNumber> result_ = new ArrayList<>();
+        
+        for (final TelephoneNumber t_ : numbers) {
+            if (addTelephoneNumber(t_)) {
+                result_.add(t_);
+            }
+        }
+        
+        return result_;
+    }
+    
+    public final boolean removeTelephoneNumber(final TelephoneNumber number) {
+        return __telephoneNumbers.remove(number);
+    }
+    
+    public final Iterable<TelephoneNumber> removeTelephoneNumbers(
+            final Predicate<TelephoneNumber, IllegalStateException> predicate) {
+        // how should a predicate behave? should it throw any exceptions?
+        final List<TelephoneNumber> result_ = new ArrayList<>();
+        
+        for (TelephoneNumber t_ : __telephoneNumbers) {
+            if (predicate.match(t_)) {
+                if (removeTelephoneNumber(t_)) {
+                    result_.add(t_);
+                }
+            }
+        }
+        
+        return result_;
+    }
+    
+    public Iterable<TelephoneNumber> findTelephoneNumbers(
+            final Predicate<TelephoneNumber, IllegalStateException> predicate) {
+        final List<TelephoneNumber> result_ = new ArrayList<>();
+        
+        for (TelephoneNumber t_ : __telephoneNumbers) {
+            if (predicate.match(t_)) {
+                result_.add(t_);
+            }
+        }
+        
+        return result_;
+    }
+    
+    public Iterable<TelephoneNumber> modifyTelephoneNumbers(
+            final Predicate<TelephoneNumber, IllegalStateException> predicate,
+            final Modifier<TelephoneNumber, TelephoneNumber, IllegalStateException> modifier) {
+        final List<TelephoneNumber> result_ = new ArrayList<>();
+        
+        for (TelephoneNumber t_ : __telephoneNumbers) {
+            if (predicate.match(t_)) {
+                if (removeTelephoneNumber(t_)) {
+                    final TelephoneNumber mt_ = modifier.modify(t_);
+                    if (addTelephoneNumber(mt_)) {
+                        result_.add(mt_);
+                    }
+                }
+            }
+        }
+        
+        return result_;
     }
 
-    /**
-     * Obvious.
-     *
-     * @return The value of {@code this} instance's {@linkplain #__addresses addresses}.
-     */
     public final Iterable<Address> getAddresses() {
-        return __addresses;
-    }
-
-    /**
-     * Obvious.
-     *
-     * @param addresses {@linkplain Iterable Collection} of {@linkplain Address addresses} to add to
-     * {@code this}.
-     */
-    public final void addAddresses(final Iterable<Address> addresses) {
-        for (final Address address_ : addresses) {
-            addAddress(address_);
+        // make defensive copies for thread safety
+        final List<Address> result_ = new ArrayList<>();
+        
+        for (Address a_ : __addresses) {
+            result_.add(new Address(a_));
         }
+        
+        return Collections.unmodifiableList(result_);
     }
-
-    /**
-     * Obvious.
-     *
-     * @param address Instance to add to {@code this} {@linkplain #__addresses  addresses}.
-     */
-    public final void addAddress(final Address address) {
-        final Address adress__ = new Address(address);
-        __addresses.add(adress__);
+    
+    public final boolean addAddress(final Address address) {
+        return __addresses.add(address);
     }
-
-    /**
-     * Obvious.
-     *
-     * @param address {@link TelephoneNumber} to remove from {@code this} {@linkplain #__addresses
-     *  		addresses}.
-     */
-    public final void removeAddress(final Address address) {
-        if (__addresses.contains(address)) {
-            __addresses.remove(address);
+    
+    public final Iterable<Address> addAddresses(final Iterable<Address> addresses) {
+        final List<Address> result_ = new ArrayList<>();
+        
+        for (final Address a_ : addresses) {
+            if (addAddress(a_)) {
+                result_.add(a_);
+            }
         }
+        
+        return result_;
     }
-
+    
+    public final Iterable<Address> addAddresses(final Address... addresses) {
+        final List<Address> result_ = new ArrayList<>();
+        
+        for (final Address a_ : addresses) {
+            if (addAddress(a_)) {
+                result_.add(a_);
+            }
+        }
+        
+        return result_;
+    }
+    
+    public final boolean removeAddress(final Address address) {
+        return __addresses.remove(address);
+    }
+    
+    public final Iterable<Address> removeAddresses(
+            final Predicate<Address, IllegalStateException> predicate) {
+        // how should a predicate behave? should it throw any exceptions?
+        final List<Address> result_ = new ArrayList<>();
+        
+        for (Address a_ : __addresses) {
+            if (predicate.match(a_)) {
+                if (removeAddress(a_)) {
+                    result_.add(a_);
+                }
+            }
+        }
+        
+        return result_;
+    }
+    
+    public Iterable<Address> findAddresses(
+            final Predicate<Address, IllegalStateException> predicate) {
+        final List<Address> result_ = new ArrayList<>();
+        
+        for (Address a_ : __addresses) {
+            if (predicate.match(a_)) {
+                result_.add(a_);
+            }
+        }
+        
+        return result_;
+    }
+    
+    public Iterable<Address> modifyAddresses(
+            final Predicate<Address, IllegalStateException> predicate,
+            final Modifier<Address, Address, IllegalStateException> modifier) {
+        final List<Address> result_ = new ArrayList<>();
+        
+        for (Address a_ : __addresses) {
+            if (predicate.match(a_)) {
+                if (removeAddress(a_)) {
+                    final Address ma_ = modifier.modify(a_);
+                    if (addAddress(ma_)) {
+                        result_.add(ma_);
+                    }
+                }
+            }
+        }
+        
+        return result_;
+    }
+    
     /**
      * {@inheritDoc}
      */
