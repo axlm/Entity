@@ -13,9 +13,9 @@
  */
 package _4axka.common.entity;
 
-
-import static _4axka.util.lang.Equals.isEqual;
-import static _4axka.util.lang.Equals.isDifferentTypes;
+import static _4axka.util.lang.CompareTo.compareToBuilder;
+import static _4axka.util.lang.Equals.equalsBuilder;
+import static _4axka.util.lang.Equals.isEquatable;
 import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
@@ -38,23 +38,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * 
+ * <p>
  */
 @XmlRootElement(name = "emailAddress")
 @XmlType(name = "EmailAddress")
 @Entity(name = "EmailAddress")
 @Table(name = "EMAIL_ADDRESSES")
 public class EmailAddress implements Serializable, Comparable<EmailAddress> {
+
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-     * this class is not compatible with the previous version. It is not necessary to include
-     * in first version of the class, but included here as a reminder of its importance.
-     * 
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
+     * class is not compatible with the previous version. It is not necessary to include in first
+     * version of the class, but included here as a reminder of its importance.
+     * <p>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -92,7 +92,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * <p>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * 
+     * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public EmailAddress() {
@@ -100,9 +100,9 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
     }
 
     /**
-     * Instance variable constructor. Initialise <code>this</code> instance with the specified
-     * arguments. <i>For state specifications see the see also section</i>.
-     * 
+     * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
+     * <i>For state specifications see the see also section</i>.
+     * <p>
      * @param type
      * @param address
      */
@@ -114,10 +114,9 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * 
-     * @param template
-     *            Uses template as template to initialise {@linkplain EmailAddress
-     *            <code>this</code>}.
+     * <p>
+     * @param template Uses template as template to initialise {@linkplain EmailAddress
+     *            {@code this}}.
      */
     public EmailAddress(final EmailAddress template) {
         this(template.getType(), template.getAddress());
@@ -125,8 +124,8 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__id id}.
+     * <p>
+     * @return The value of {@code this} instance's {@linkplain #__id id}.
      */
     public final Long getId() {
         return __id;
@@ -134,8 +133,8 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__version version}.
+     * <p>
+     * @return The value of {@code this} instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
         return __version;
@@ -143,8 +142,8 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__type type}.
+     * <p>
+     * @return The value of {@code this} instance's {@linkplain #__type type}.
      */
     public final EmailAddressType getType() {
         return __type;
@@ -152,9 +151,8 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * 
-     * @param type
-     *            Value to assign to <code>this</code> {@linkplain #__type email address type}.
+     * <p>
+     * @param type Value to assign to {@code this} {@linkplain #__type email address type}.
      */
     protected final void setType(final EmailAddressType type) {
         __type = type;
@@ -162,8 +160,8 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * 
-     * @return The value of <code>this</code> instance's {@linkplain #__address address}.
+     * <p>
+     * @return The value of {@code this} instance's {@linkplain #__address address}.
      */
     public final String getAddress() {
         return __address;
@@ -171,9 +169,8 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * 
-     * @param address
-     *            Value to assign to <code>this</code> {@linkplain #__address address}.
+     * <p>
+     * @param address Value to assign to {@code this} {@linkplain #__address address}.
      */
     protected final void setAddress(final String address) {
         __address = address;
@@ -181,61 +178,41 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * {@inheritDoc}
+     * <p>
      * @param that
      */
     @Override
     public boolean equals(final Object that) {
-        if (this == that && that != null) {
-           return true;
-       }
-       if (isDifferentTypes(this, that)) {
-           return false;
-       }
+        boolean result_ = false;
 
-        final EmailAddress that_ = EmailAddress.class.cast(that);
+        if (isEquatable(this, that)) {
+            final EmailAddress that_ = EmailAddress.class.cast(that);
 
-        return isEqual(getType(), that_.getType()) &&
-               isEqual(getAddress(), that_.getAddress());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int compareTo(final EmailAddress that) {
-        int result_ = 0;
-
-        if (this == that) {
-            return result_;
-        }
-        if (that == null) {
-            return 1;
-        }
-
-        if (null == getType()) {
-            if (null != that.getType()) {
-                result_ = -1;
-            }
-        } else if (null != that.getType()) {
-            result_ = getType().compareTo(that.getType());
-        }
-        if (result_ != 0) {
-            return result_;
-        }
-
-        if (null == getAddress()) {
-            if (null != that.getAddress()) {
-                result_ = -1;
-            }
-        } else if (null != that.getAddress()) {
-            result_ = getAddress().compareTo(that.getAddress());
-        }
-        if (result_ != 0) {
-            return result_;
+            result_ = equalsBuilder()
+                    .append(getType(), that_.getType())
+                    .append(getAddress(), that_.getAddress())
+                    .isEqual();
         }
 
         return result_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * @param that
+     */
+    @Override
+    public int compareTo(final EmailAddress that) {
+        return compareToBuilder()
+                .append(getType(), that.getType())
+                .append(getAddress(), that.getAddress())
+                .compare();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result_ = 1;
@@ -247,7 +224,9 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         return result_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
@@ -277,6 +256,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
     @XmlType(name = "EmailAddressType")
     @XmlEnum
     public enum EmailAddressType {
+
         @XmlEnumValue("Home")
         HOME,
         @XmlEnumValue("Office")
