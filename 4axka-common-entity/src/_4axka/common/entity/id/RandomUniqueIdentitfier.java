@@ -13,6 +13,9 @@
  */
 package _4axka.common.entity.id;
 
+import static _4axka.util.lang.CompareTo.compareToBuilder;
+import static _4axka.util.lang.Equals.equalsBuilder;
+import static _4axka.util.lang.Equals.isEquatable;
 import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
@@ -28,21 +31,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  */
 @XmlRootElement(name = "randomUniqueIdentity")
 @XmlType(name = "RandomUniqueIdentity")
 @Embeddable
-public final class RandomUniqueIdentitfier implements Serializable, Comparable<RandomUniqueIdentitfier> {
+public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomUniqueIdentitfier> {
+
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-     * this class is not compatible with the previous version. It is not necessary to include
-     * in first version of the class, but included here as a reminder of its importance.
-     * 
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
+     * class is not compatible with the previous version. It is not necessary to include in first
+     * version of the class, but included here as a reminder of its importance.
+     * <p>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -59,7 +62,7 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
      * <p>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * 
+     * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public RandomUniqueIdentitfier() {
@@ -69,7 +72,7 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
     /**
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
-     * 
+     * <p>
      * @param id
      */
     public RandomUniqueIdentitfier(final String id) {
@@ -79,9 +82,8 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * 
-     * @param template
-     *            Uses template as template to initialise {@linkplain RandomUniqueIdentitfier
+     * <p>
+     * @param template Uses template as template to initialise {@linkplain RandomUniqueIdentitfier
      *            <code>this</code>}.
      */
     public RandomUniqueIdentitfier(final RandomUniqueIdentitfier template) {
@@ -90,7 +92,7 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
 
     /**
      * Creates a new {@link RandomUniqueIdentitfier}.
-     * 
+     * <p>
      * @return A newly created {@link RandomUniqueIdentitfier}.
      */
     public static RandomUniqueIdentitfier generate() {
@@ -99,7 +101,7 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__id identifier}.
      */
     public String getId() {
@@ -108,67 +110,45 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
 
     /**
      * Obvious.
-     * 
-     * @param id
-     *            Value to assign to <code>this</code> {@linkplain #__id identifier}.
+     * <p>
+     * @param id Value to assign to <code>this</code> {@linkplain #__id identifier}.
      */
-    void setId(final String id) {
+    final void setId(final String id) {
         final BigInteger radix32Identifier_ = new BigInteger(id.getBytes());
         __id = radix32Identifier_.toString(32);
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @param that
+     * @{inheritDoc}
+     */
     @Override
     public boolean equals(final Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (!(that.getClass().isAssignableFrom(RandomUniqueIdentitfier.class))) {
-            return false;
-        }
-        final RandomUniqueIdentitfier that_ = RandomUniqueIdentitfier.class.cast(that);
+        boolean result_ = false;
 
-        if (getId() == null) {
-            if (that_.getId() != null) {
-                return false;
-            }
-        } else if (!getId().equals(that_.getId())) {
-            return false;
-        }
+        if (isEquatable(this, that)) {
+            final RandomUniqueIdentitfier that_ = RandomUniqueIdentitfier.class.cast(that);
 
-        return true;
-    }
-
-    /** @{inheritDoc} */
-    @Override
-    public int compareTo(final RandomUniqueIdentitfier that) {
-        int result_ = 0;
-
-        if (this == that) {
-            return result_;
-        }
-        if (that == null) {
-            return 1;
-        }
-
-        if (null == getId()) {
-            if (null != that.getId()) {
-                result_ = -1;
-            }
-        } else if (null != that.getId()) {
-            result_ = getId().compareTo(that.getId());
-        }
-        if (result_ != 0) {
-            return result_;
+            result_ = equalsBuilder().append(getId(), that_.getId()).isEqual();
         }
 
         return result_;
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @param that
+     * @{inheritDoc}
+     */
+    @Override
+    public int compareTo(final RandomUniqueIdentitfier that) {
+        return compareToBuilder()
+                .append(getId(), that.getId())
+                .compare();
+    }
+
+    /**
+     * @{inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result_ = 1;
@@ -179,24 +159,26 @@ public final class RandomUniqueIdentitfier implements Serializable, Comparable<R
         return result_;
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @{inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
-        
+
         final String loadedFrom_ = getClass()
                 .getProtectionDomain()
                 .getCodeSource()
                 .getLocation()
                 .toString();
-        
+
         builder_.append("RandomUniqueIdentitfier@").append(System.identityHashCode(this))
-        .append("=[")
-        .append("Radix 32 Universally Unique Identity=").append(wrap(getId())).append(", ")
-        .append("Bytecode Location=").append(loadedFrom_).append(", ")
-        .append("super=[").append(super.toString()).append("]")
-        .append("]");
-        
+                .append("=[")
+                .append("Radix 32 Universally Unique Identity=").append(wrap(getId())).append(", ")
+                .append("Bytecode Location=").append(loadedFrom_).append(", ")
+                .append("super=[").append(super.toString()).append("]")
+                .append("]");
+
         return builder_.toString();
     }
 }

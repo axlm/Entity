@@ -13,9 +13,9 @@
  */
 package _4axka.common.entity;
 
-
-import static _4axka.util.lang.Equals.isEqual;
-import static _4axka.util.lang.Equals.isDifferentTypes;
+import static _4axka.util.lang.CompareTo.compareToBuilder;
+import static _4axka.util.lang.Equals.equalsBuilder;
+import static _4axka.util.lang.Equals.isEquatable;
 import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
@@ -38,23 +38,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * 
+ * <p>
  */
 @XmlRootElement(name = "telephoneNumber")
 @XmlType(name = "TelephoneNumber")
 @Entity(name = "TelephoneNumber")
 @Table(name = "TELEPHONE_NUMBERS")
 public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber> {
+
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-     * this class is not compatible with the previous version. It is not necessary to include
-     * in first version of the class, but included here as a reminder of its importance.
-     * 
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
+     * class is not compatible with the previous version. It is not necessary to include in first
+     * version of the class, but included here as a reminder of its importance.
+     * <p>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -107,7 +107,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * <p>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * 
+     * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public TelephoneNumber() {
@@ -117,7 +117,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
     /**
      * Instance variable constructor. Initialize <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
-     * 
+     * <p>
      * @param type
      * @param countryCode
      * @param areaCode
@@ -140,9 +140,8 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * 
-     * @param template
-     *            Uses template as template to initialise {@linkplain TelephoneNumber
+     * <p>
+     * @param template Uses template as template to initialise {@linkplain TelephoneNumber
      *            <code>this</code>}.
      */
     public TelephoneNumber(final TelephoneNumber template) {
@@ -156,7 +155,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__id id}.
      */
     public final Long getId() {
@@ -165,7 +164,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
@@ -174,7 +173,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__type telephone number type}.
      */
     public final TelephoneNumberType getType() {
@@ -183,9 +182,8 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
-     * @param type
-     *            Value to assign to <code>this</code> {@linkplain #__type telephone number type}.
+     * <p>
+     * @param type Value to assign to <code>this</code> {@linkplain #__type telephone number type}.
      */
     protected final void setType(final TelephoneNumberType type) {
         __type = type;
@@ -193,7 +191,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__countryCode country code}.
      */
     public final String getCountryCode() {
@@ -202,9 +200,8 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
-     * @param code
-     *            Value to assign to <code>this</code> {@linkplain #__countryCode country code}.
+     * <p>
+     * @param code Value to assign to <code>this</code> {@linkplain #__countryCode country code}.
      */
     protected final void setCountryCode(final String code) {
         __countryCode = code;
@@ -212,7 +209,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__areaCode area code}.
      */
     public final String getAreaCode() {
@@ -221,9 +218,8 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
-     * @param code
-     *            Value to assign to <code>this</code> {@linkplain #__areaCode area code}.
+     * <p>
+     * @param code Value to assign to <code>this</code> {@linkplain #__areaCode area code}.
      */
     protected final void setAreaCode(final String code) {
         __areaCode = code;
@@ -231,7 +227,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__number number}.
      */
     public final String getNumber() {
@@ -240,9 +236,8 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
-     * @param number
-     *            Value to assign to <code>this</code> {@linkplain #__number number}.
+     * <p>
+     * @param number Value to assign to <code>this</code> {@linkplain #__number number}.
      */
     protected final void setNumber(final String number) {
         __number = number;
@@ -250,7 +245,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__extension extension}.
      */
     public final String getExtension() {
@@ -259,9 +254,8 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * 
-     * @param extension
-     *            Value to assign to <code>this</code> {@linkplain #__extension extension}.
+     * <p>
+     * @param extension Value to assign to <code>this</code> {@linkplain #__extension extension}.
      */
     protected final void setExtension(final String extension) {
         __extension = extension;
@@ -269,86 +263,45 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * {@inheritDoc}
+     * <p>
      * @param that
      */
-   @Override
-    public boolean equals(final Object that) {
-        if (this == that && that != null) {
-           return true;
-       }
-       if (isDifferentTypes(this, that)) {
-           return false;
-       }
-       
-       final TelephoneNumber that_ = TelephoneNumber.class.cast(that);
-       
-       return isEqual(getType(), that_.getType()) &&
-              isEqual(getCountryCode(), that_.getCountryCode()) &&
-              isEqual(getAreaCode(), that_.getAreaCode()) &&
-              isEqual(getNumber(), that_.getNumber());
-    }
-
-   /** {@inheritDoc} */
     @Override
-    public int compareTo(final TelephoneNumber that) {
-        int result_ = 0;
+    public boolean equals(final Object that) {
+        boolean result_ = false;
 
-        if (this == that) {
-            return result_;
-        }
-        if (that == null) {
-            return 1;
-        }
+        if (isEquatable(this, that)) {
+            final TelephoneNumber that_ = TelephoneNumber.class.cast(that);
 
-        if (null == getType()) {
-            if (null != that.getType()) {
-                result_ = -1;
-            }
-        } else if (null != that.getType()) {
-            result_ = getType().compareTo(that.getType());
-        }
-        if (result_ != 0) {
-            return result_;
-        }
-
-        if (null == getCountryCode()) {
-            if (null != that.getCountryCode()) {
-                result_ = -1;
-            }
-        } else if (null != that.getCountryCode()) {
-            result_ = getCountryCode().compareTo(that.getCountryCode());
-        }
-        if (result_ != 0) {
-            return result_;
-        }
-
-        if (null == getAreaCode()) {
-            if (null != that.getAreaCode()) {
-                result_ = -1;
-            }
-        } else if (null != that.getAreaCode()) {
-            result_ = getAreaCode().compareTo(that.getAreaCode());
-        }
-        if (result_ != 0) {
-            return result_;
-        }
-
-        if (null == getNumber()) {
-            if (null != that.getNumber()) {
-                result_ = -1;
-            }
-        } else if (null != that.getNumber()) {
-            result_ = getNumber().compareTo(that.getNumber());
-        }
-        if (result_ != 0) {
-            return result_;
+            result_ = equalsBuilder()
+                    .append(getType(), that_.getType())
+                    .append(getCountryCode(), that_.getCountryCode())
+                    .append(getAreaCode(), that_.getAreaCode())
+                    .append(getNumber(), that_.getNumber())
+                    .isEqual();
         }
 
         return result_;
     }
 
-    /** {@inheritDoc} */
-   @Override
+    /**
+     * {@inheritDoc}
+     * @param that
+     */
+    @Override
+    public int compareTo(final TelephoneNumber that) {
+        return compareToBuilder()
+                .append(getType(), that.getType())
+                .append(getCountryCode(), that.getCountryCode())
+                .append(getAreaCode(), that.getAreaCode())
+                .append(getNumber(), that.getNumber())
+                .compare();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int hashCode() {
         int result_ = 1;
 
@@ -362,8 +315,9 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         return result_;
     }
 
-    
-   /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
@@ -390,13 +344,13 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         return builder_.toString();
     }
 
-
     /**
      * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
      */
     @XmlType(name = "TelephoneNumberType")
     @XmlEnum
     public enum TelephoneNumberType {
+
         @XmlEnumValue("Home")
         HOME,
         @XmlEnumValue("Office")

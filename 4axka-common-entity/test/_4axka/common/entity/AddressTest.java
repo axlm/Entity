@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package _4axka.common.entity;
 
 import org.junit.After;
@@ -13,34 +7,27 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author adolf.mattheus
- */
 public class AddressTest {
-    
+
     public AddressTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
-    /**
-     * Test of equals method, of class Address.
-     */
     @Test
     public void testEquals() {
         final Address lhs_ = new Address(
@@ -52,7 +39,7 @@ public class AddressTest {
                 "Test Country",
                 "Test Code");
         final Address rhs_ = new Address(lhs_);
-        
+
         assertEquals(lhs_, rhs_);
     }
     
@@ -64,16 +51,65 @@ public class AddressTest {
         assertTrue(!lhs_.equals(rhs_));
     }
 
-    /**
-     * Test of compareTo method, of class Address.
-     */
     @Test
-    public void testCompareTo() {
+    public void testCompareToZero() {
+        final Address lhs_ = new Address(
+                Address.AddressType.HOME,
+                "Test Street",
+                "Test Suburb",
+                "Test City",
+                "Test Region",
+                "Test Country",
+                "Test Code");
+        final Address rhs_ = new Address(lhs_);
+
+        assertTrue(lhs_.compareTo(rhs_) == 0);
     }
 
-    /**
-     * Test of toString method, of class Address.
-     */
+    @Test
+    public void testCompareToGreaterThan() {
+        final Address lhs_ = new Address(
+                Address.AddressType.OFFICE,
+                "Test Street",
+                "Test Suburb",
+                "Test City",
+                "Test Region",
+                "Test Country",
+                "Test Code");
+        final Address rhs_ = new Address(
+                Address.AddressType.HOME,
+                "Test Street",
+                "Test Suburb",
+                "Test City",
+                "Test Region",
+                "Test Country",
+                "Test Code");
+
+        assertTrue(lhs_.compareTo(rhs_) > 0);
+    }
+
+    @Test
+    public void testCompareToLessThan() {
+        final Address lhs_ = new Address(
+                Address.AddressType.HOME,
+                "Test Street",
+                "Test Suburb",
+                "Test City",
+                "Test Region",
+                "Test Country",
+                "Test Code");
+        final Address rhs_ = new Address(
+                Address.AddressType.OFFICE,
+                "Test Street",
+                "Test Suburb",
+                "Test City",
+                "Test Region",
+                "Test Country",
+                "Test Code");
+
+        assertTrue(lhs_.compareTo(rhs_) < 0);
+    }
+
     @Test
     public void testToString() {
     }

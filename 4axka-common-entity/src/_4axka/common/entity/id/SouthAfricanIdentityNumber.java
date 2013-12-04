@@ -13,8 +13,10 @@
  */
 package _4axka.common.entity.id;
 
-
 import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.CompareTo.compareToBuilder;
+import static _4axka.util.lang.Equals.equalsBuilder;
+import static _4axka.util.lang.Equals.isEquatable;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -34,24 +36,24 @@ import javax.xml.bind.annotation.XmlType;
 
 import _4axka.common.entity.Person.GenderType;
 
-
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  */
 @XmlRootElement(name = "southAfricanIdentityNumber")
 @XmlType(name = "SouthAfricanIdentityNumber")
 @Embeddable
-public final class SouthAfricanIdentityNumber implements Serializable, Comparable<SouthAfricanIdentityNumber> {
+public class SouthAfricanIdentityNumber implements Serializable, Comparable<SouthAfricanIdentityNumber> {
+
     private static final String NAME = SouthAfricanIdentityNumber.class.getName();
     private static final Logger LOGGER = Logger.getLogger(NAME);
 
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-     * this class is not compatible with the previous version. It is not necessary to include
-     * in first version of the class, but included here as a reminder of its importance.
-     * 
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
+     * class is not compatible with the previous version. It is not necessary to include in first
+     * version of the class, but included here as a reminder of its importance.
+     * <p>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -68,7 +70,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
      * <p>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * 
+     * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public SouthAfricanIdentityNumber() {
@@ -78,9 +80,8 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
     /**
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
-     * 
-     * @param number
-     *          The {@linkplain SouthAfricanIdentityNumber identity number}.
+     * <p>
+     * @param number The {@linkplain SouthAfricanIdentityNumber identity number}.
      */
     public SouthAfricanIdentityNumber(final String number) {
         this();
@@ -89,9 +90,8 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * 
-     * @param number
-     *            Uses number as template to initialise {@linkplain SouthAfricanIdentityNumber
+     * <p>
+     * @param number Uses number as template to initialise {@linkplain SouthAfricanIdentityNumber
      *            <code>this</code>}.
      */
     public SouthAfricanIdentityNumber(final SouthAfricanIdentityNumber number) {
@@ -100,7 +100,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__number identity number}.
      */
     public String getNumber() {
@@ -109,11 +109,10 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
     /**
      * Obvious.
-     * 
-     * @param number
-     *            Value to assign to <code>this</code> {@linkplain #__number identiy number}.
+     * <p>
+     * @param number Value to assign to <code>this</code> {@linkplain #__number identiy number}.
      */
-    void setNumber(final String number) {
+    final void setNumber(final String number) {
         final String number_ = format(number);
         __number = number_;
     }
@@ -125,8 +124,8 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
      * <b>YYMMDD GSSS C R Z</b> where,
      * <dl>
      * <dt><b>YYMMDD</b></dt>
-     * <dd>is the date of birth, the first two digits being the year of birth,
-     *     the next two the month of birth and last two being the day of the month of birth,</dd>
+     * <dd>is the date of birth, the first two digits being the year of birth, the next two the
+     * month of birth and last two being the day of the month of birth,</dd>
      * <dt><b>G</b></dt>
      * <dd>is the gender where 0 - 4 indicates <i>female</i> and 5 -9 indicates <i>male</i>,</dd>
      * <dt><b>SSS</b></dt>
@@ -138,12 +137,13 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
      * <dd><b>Z</b></dd>
      * <dt>is the check digit</dt>.
      * </dl>
-     * 
-     * @param number
-     *          The {@link SouthAfricanIdentityNumber number} to format.
-     * @return  The formatted number.
-     * @throws IllegalArgumentException
-     *          if the {@link SouthAfricanIdentityNumber#__number number} cannot be formatted.
+     * <p>
+     * @param number The {@link SouthAfricanIdentityNumber number} to format.
+     * <p>
+     * @return The formatted number.
+     * <p>
+     * @throws IllegalArgumentException if the {@link SouthAfricanIdentityNumber#__number number}
+     *                                  cannot be formatted.
      */
     private String format(final String number) throws IllegalArgumentException {
         if (number == null) {
@@ -170,10 +170,8 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__number date of birth}.
-     * @throws ParseException
-     *             when the date part of the identity number is not valid.
      */
     public Date getDateOfBirth() {
         final String SIGNATURE = "Date getDateOfBirth()";
@@ -194,7 +192,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__number gender}.
      */
     public GenderType getGender() {
@@ -214,7 +212,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__number country of birth}.
      */
     public Boolean wasBornInSouthAfrica() {
@@ -231,16 +229,17 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
     }
 
     /**
-     * Applies the {@link SouthAfricanIdentityNumber} validation algorithm to
-     * <code>this</code> instance.
+     * Applies the {@link SouthAfricanIdentityNumber} validation algorithm to <code>this</code>
+     * instance.
      * <p>
      * Given an South African identity number
      * Y<sub>1</sub>Y<sub>2</sub>M<sub>1</sub>M<sub>2</sub>D<sub>1</sub>D<sub>2</sub>
-     * GS<sub>1</sub>S<sub>2</sub>S<sub>3</sub> C R Z, the algorithm to calculate
-     * the check digit is as follows:
+     * GS<sub>1</sub>S<sub>2</sub>S<sub>3</sub> C R Z, the algorithm to calculate the check digit is
+     * as follows:
      * <dl>
      * <dt>Remove the check digit</dt>
-     * <dd>This yields Y<sub>1</sub>Y<sub>2</sub>M<sub>1</sub>M<sub>2</sub>D<sub>1</sub>D<sub>2</sub>
+     * <dd>This yields
+     * Y<sub>1</sub>Y<sub>2</sub>M<sub>1</sub>M<sub>2</sub>D<sub>1</sub>D<sub>2</sub>
      * GS<sub>1</sub>S<sub>2</sub>S<sub>3</sub> C R.</dd>
      * <dt>Sum all odd digits</dt>
      * <dd>S<sub>0</sub> = Y<sub>1</sub> + M<sub>1</sub> + D<sub>1</sub> + G + S<sub>2</sub> +
@@ -258,27 +257,27 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
      * <dt>The checksum is 10 - X</dt>
      * <dd>Z = 10 - X.</dd>
      * </dl>
-     * 
+     * <p>
      * @return {@code true} if <code>this</code> instance of
-     * {@linkplain SouthAfricanIdentityNumber the South African identity number}
-     * object is valid.
+     *         {@linkplain SouthAfricanIdentityNumber the South African identity number} object is
+     *         valid.
      */
     public Boolean isValid() {
         return isValid(__number);
     }
 
     /**
-     * Determines if a
-     * {@linkplain SouthAfricanIdentityNumber South African identity number}
-     * is valid.
-     *
-     * @param number
-     *          The number to verify.
-     * @return  {@code true} if the {@link SouthAfricanIdentityNumber} is valid.
-     * @see     #isValid()
+     * Determines if a {@linkplain SouthAfricanIdentityNumber South African identity number} is
+     * valid.
+     * <p>
+     * @param number The number to verify.
+     * <p>
+     * @return {@code true} if the {@link SouthAfricanIdentityNumber} is valid.
+     * <p>
+     * @see #isValid()
      */
     private Boolean isValid(final String number) {
-        Boolean result_ = false;
+        Boolean result_;
 
         // Check the validity of the date first.
         result_ = getDateOfBirth() != null;
@@ -300,12 +299,13 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
     /**
      * Calculates the check digit of a {@link SouthAfricanIdentityNumber}.
-     * 
-     * @param idNumber
-     *          The {@link SouthAfricanIdentityNumber} for which the check digit
-     *          should be calculated.
-     * @return  The check digit for the supplied identity number.
-     * @see     #isValid()
+     * <p>
+     * @param idNumber The {@link SouthAfricanIdentityNumber} for which the check digit should be
+     *                 calculated.
+     * <p>
+     * @return The check digit for the supplied identity number.
+     * <p>
+     * @see #isValid()
      */
     public int calculateCheckDigit(final String idNumber) {
         // 1. Remove redundant white space AND remove check digit - we will calculate it here!
@@ -350,58 +350,39 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         return checkSum_;
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @{inheritDoc}
+     * @param that
+     */
     @Override
     public boolean equals(final Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (!(that.getClass().isAssignableFrom(SouthAfricanIdentityNumber.class))) {
-            return false;
-        }
-        final SouthAfricanIdentityNumber that_ = SouthAfricanIdentityNumber.class.cast(that);
+        boolean result_ = false;
 
-        if (getNumber() == null) {
-            if (that_.getNumber() != null) {
-                return false;
-            }
-        } else if (!getNumber().equals(that_.getNumber())) {
-            return false;
-        }
+        if (!isEquatable(this, that)) {
+            final SouthAfricanIdentityNumber that_ = SouthAfricanIdentityNumber.class.cast(that);
 
-        return true;
-    }
-
-    /** @{inheritDoc} */
-    @Override
-    public int compareTo(final SouthAfricanIdentityNumber that) {
-        int result_ = 0;
-
-        if (this == that) {
-            return result_;
-        }
-        if (that == null) {
-            return 1;
-        }
-
-        if (null == getNumber()) {
-            if (null != that.getNumber()) {
-                result_ = -1;
-            }
-        } else if (null != that.getNumber()) {
-            result_ = getNumber().compareTo(that.getNumber());
-        }
-        if (result_ != 0) {
-            return result_;
+            result_ = equalsBuilder()
+                    .append(getNumber(), that_.getNumber())
+                    .isEqual();
         }
 
         return result_;
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @{inheritDoc}
+     * @param that
+     */
+    @Override
+    public int compareTo(final SouthAfricanIdentityNumber that) {
+        return compareToBuilder()
+                .append(getNumber(), that.getNumber())
+                .compare();
+    }
+
+    /**
+     * @{inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result_ = 1;
@@ -412,7 +393,9 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         return result_;
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @{inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
@@ -435,6 +418,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
 
     /* For internal use only. */
     private static enum Offsets {
+
         BIRTH_DATE_START(0),
         BIRTH_DATE_STOP(6),
         GENDER_START(7),
@@ -448,7 +432,7 @@ public final class SouthAfricanIdentityNumber implements Serializable, Comparabl
         CHECKDIGIT_START(16),
         CHECKDIGIT_STOP(17);
 
-        private int __offset;
+        private final int __offset;
 
         private Offsets(final int offset) {
             __offset = offset;

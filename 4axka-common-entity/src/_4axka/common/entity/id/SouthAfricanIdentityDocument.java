@@ -13,7 +13,9 @@
  */
 package _4axka.common.entity.id;
 
-
+import static _4axka.util.lang.CompareTo.compareToBuilder;
+import static _4axka.util.lang.Equals.equalsBuilder;
+import static _4axka.util.lang.Equals.isEquatable;
 import static _4axka.util.lang.ToString.wrap;
 
 import java.io.Serializable;
@@ -30,18 +32,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-
 @XmlRootElement(name = "southAfricanIdentityDocument")
 @XmlType(name = "SouthAfricanIdentityDocument")
 @Embeddable
-public final class SouthAfricanIdentityDocument implements Serializable, Comparable<SouthAfricanIdentityDocument> {
+public class SouthAfricanIdentityDocument implements Serializable, Comparable<SouthAfricanIdentityDocument> {
+
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-     * this class is not compatible with the previous version. It is not necessary to include
-     * in first version of the class, but included here as a reminder of its importance.
-     * 
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
+     * class is not compatible with the previous version. It is not necessary to include in first
+     * version of the class, but included here as a reminder of its importance.
+     * <p>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -84,7 +86,7 @@ public final class SouthAfricanIdentityDocument implements Serializable, Compara
         return __number;
     }
 
-    void setIdentityNumber(final String number) {
+    final void setIdentityNumber(final String number) {
         __number = number;
     }
 
@@ -92,7 +94,7 @@ public final class SouthAfricanIdentityDocument implements Serializable, Compara
         return __image;
     }
 
-    void setImage(final Byte[] image) {
+    final void setImage(final Byte[] image) {
         __image = image;
     }
 
@@ -100,62 +102,43 @@ public final class SouthAfricanIdentityDocument implements Serializable, Compara
         return __releaseDate;
     }
 
-    void setReleaseDate(final Date date) {
+    final void setReleaseDate(final Date date) {
         __releaseDate = date;
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @{inheritDoc}
+     * @param that
+     */
     @Override
     public boolean equals(final Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (!(that.getClass().isAssignableFrom(SouthAfricanIdentityDocument.class))) {
-            return false;
-        }
-        final SouthAfricanIdentityDocument that_ = SouthAfricanIdentityDocument.class.cast(that);
+        boolean result_ = false;
 
-        if (getIdentityNumber() == null) {
-            if (that_.getIdentityNumber() != null) {
-                return false;
-            }
-        } else if (!getIdentityNumber().equals(that_.getIdentityNumber())) {
-            return false;
-        }
-        
-        return true;
-    }
-    
-    /** @{inheritDoc} */
-    @Override
-    public int compareTo(final SouthAfricanIdentityDocument that) {
-        int result_ = 0;
+        if (isEquatable(this, that)) {
+            final SouthAfricanIdentityDocument that_ = SouthAfricanIdentityDocument.class.cast(that);
 
-        if (this == that) {
-            return result_;
-        }
-        if (that == null) {
-            return 1;
-        }
-
-        if (null == getIdentityNumber()) {
-            if (null != that.getIdentityNumber()) {
-                result_ = -1;
-            }
-        } else if (null != that.getIdentityNumber()) {
-            result_ = getIdentityNumber().compareTo(that.getIdentityNumber());
-        }
-        if (result_ != 0) {
-            return result_;
+            result_ = equalsBuilder()
+                    .append(getIdentityNumber(), that_.getIdentityNumber())
+                    .isEqual();
         }
 
         return result_;
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @{inheritDoc}
+     * @param that
+     */
+    @Override
+    public int compareTo(final SouthAfricanIdentityDocument that) {
+        return compareToBuilder()
+                .append(getIdentityNumber(), that.getIdentityNumber())
+                .compare();
+    }
+
+    /**
+     * @{inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result_ = 1;
@@ -166,17 +149,19 @@ public final class SouthAfricanIdentityDocument implements Serializable, Compara
         return result_;
     }
 
-    /** @{inheritDoc} */
+    /**
+     * @{inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder builder_ = new StringBuilder();
-        
+
         final String loadedFrom_ = getClass()
                 .getProtectionDomain()
                 .getCodeSource()
                 .getLocation()
                 .toString();
-        
+
         builder_.append("SouthAfricanIdentityDocument@").append(System.identityHashCode(this))
                 .append("{")
                 .append("Identity Number=").append(wrap(getIdentityNumber())).append(", ")
@@ -184,7 +169,7 @@ public final class SouthAfricanIdentityDocument implements Serializable, Compara
                 .append("Bytecode Location=").append(loadedFrom_).append(", ")
                 .append("super=").append(super.toString())
                 .append("}");
-        
+
         return builder_.toString();
     }
 }
