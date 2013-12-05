@@ -13,8 +13,8 @@
  */
 package _4axka.common.entity;
 
-
 import static org.junit.Assert.assertNotNull;
+import static _4axka.util.lang.ToString.toStringBuilder;
 
 import java.util.Date;
 
@@ -29,22 +29,25 @@ import _4axka.common.entity.EmailAddress.EmailAddressType;
 import _4axka.common.entity.Person.TitleType;
 import _4axka.common.entity.TelephoneNumber.TelephoneNumberType;
 import _4axka.common.entity.id.SouthAfricanIdentityNumber;
-import _4axka.util.lang.ToString;
-
+import org.junit.Ignore;
 
 public class ToStringTest {
 
     @BeforeClass
-    public static void setUpBeforeClass() throws Exception {}
+    public static void setUpBeforeClass() throws Exception {
+    }
 
     @AfterClass
-    public static void tearDownAfterClass() throws Exception {}
+    public static void tearDownAfterClass() throws Exception {
+    }
 
     @Before
-    public void setUp() throws Exception {}
+    public void setUp() throws Exception {
+    }
 
     @After
-    public void tearDown() throws Exception {}
+    public void tearDown() throws Exception {
+    }
 
     @Test
     public final void testAddressToString() {
@@ -136,7 +139,7 @@ public class ToStringTest {
                 "7852"));
         person_.addTitle(TitleType.MISTER);
         person_.setDateOfBirth(new Date());
-        final String personToString_ = ToString.prettyPrint(person_.toString());
+        final String personToString_ = toStringBuilder(this).prettyPrint(person_.toString());
         System.out.println(personToString_);
         assertNotNull(personToString_);
     }

@@ -16,7 +16,8 @@ package _4axka.common.entity;
 import static _4axka.util.lang.CompareTo.compareToBuilder;
 import static _4axka.util.lang.Equals.equalsBuilder;
 import static _4axka.util.lang.Equals.isEquatable;
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.HashCode.hashCodeBuilder;
+import static _4axka.util.lang.ToString.toStringBuilder;
 
 import java.io.Serializable;
 
@@ -303,16 +304,12 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      */
     @Override
     public int hashCode() {
-        int result_ = 1;
-
-        final int PRIME = 31;
-
-        result_ = PRIME * result_ + ((getType() == null) ? 0 : getType().hashCode());
-        result_ = PRIME * result_ + ((getAreaCode() == null) ? 0 : getAreaCode().hashCode());
-        result_ = PRIME * result_ + ((getCountryCode() == null) ? 0 : getCountryCode().hashCode());
-        result_ = PRIME * result_ + ((getNumber() == null) ? 0 : getNumber().hashCode());
-
-        return result_;
+        return hashCodeBuilder()
+                .append(getType())
+                .append(getAreaCode())
+                .append(getCountryCode())
+                .append(getNumber())
+                .hash();
     }
 
     /**
@@ -320,28 +317,16 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      */
     @Override
     public String toString() {
-        final StringBuilder builder_ = new StringBuilder();
-
-        final String loadedFrom_ = getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toString();
-
-        builder_.append("TelephoneNumber@").append(System.identityHashCode(this))
-                .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
-                .append("Type=").append(wrap(getType())).append(", ")
-                .append("Contry Code=").append(wrap(getCountryCode())).append(", ")
-                .append("Area Code=").append(wrap(getAreaCode())).append(", ")
-                .append("Number=").append(wrap(getNumber())).append(", ")
-                .append("Extension=").append(wrap(getExtension())).append(", ")
-                .append("Bytecode Location=").append(loadedFrom_).append(", ")
-                .append("super=").append(super.toString())
-                .append("}");
-
-        return builder_.toString();
+        return toStringBuilder(this)
+                .append("Id", getId())
+                .append("Version", getVersion())
+                .append("Type", getType())
+                .append("Contry Code", getCountryCode())
+                .append("Area Code", getAreaCode())
+                .append("Number", getNumber())
+                .append("Extension", getExtension())
+                .append("super", super.toString())
+                .string();
     }
 
     /**

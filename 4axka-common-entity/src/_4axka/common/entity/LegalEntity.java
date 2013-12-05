@@ -13,6 +13,8 @@
  */
 package _4axka.common.entity;
 
+import static _4axka.util.lang.ToString.toStringBuilder;
+
 import _4axka.util.functor.Modifier;
 import _4axka.util.functor.Predicate;
 
@@ -44,9 +46,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
-import static _4axka.util.lang.ToString.unroll;
-import static _4axka.util.lang.ToString.wrap;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -251,7 +250,8 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      *                  {@linkplain EmailAddress email addresses} to add to {@code this}
      *                  {@link LegalEntity}.
      * <p>
-     * @return A {@linkplain Iterable sequence} of {@link EmailAddress addresses} added to {@code this}.
+     * @return A {@linkplain Iterable sequence} of {@link EmailAddress addresses} added to
+     *         {@code this}.
      */
     public final Iterable<EmailAddress> addEmailAddresses(final Iterable<EmailAddress> addresses) {
         final List<EmailAddress> result_ = new ArrayList<>();
@@ -365,52 +365,52 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
     public final Iterable<TelephoneNumber> getTelephoneNumbers() {
         // make defensive copies for thread safety
         final List<TelephoneNumber> result_ = new ArrayList<>();
-        
+
         for (TelephoneNumber t_ : __telephoneNumbers) {
             result_.add(new TelephoneNumber(t_));
         }
-        
+
         return Collections.unmodifiableList(result_);
     }
-    
+
     public final boolean addTelephoneNumber(final TelephoneNumber number) {
         return __telephoneNumbers.add(number);
     }
-    
+
     public final Iterable<TelephoneNumber> addTelephoneNumbers(
             final Iterable<TelephoneNumber> numbers) {
         final List<TelephoneNumber> result_ = new ArrayList<>();
-        
+
         for (final TelephoneNumber t_ : numbers) {
             if (addTelephoneNumber(t_)) {
                 result_.add(t_);
             }
         }
-        
+
         return result_;
     }
-    
+
     public final Iterable<TelephoneNumber> addTelephoneNumbers(final TelephoneNumber... numbers) {
         final List<TelephoneNumber> result_ = new ArrayList<>();
-        
+
         for (final TelephoneNumber t_ : numbers) {
             if (addTelephoneNumber(t_)) {
                 result_.add(t_);
             }
         }
-        
+
         return result_;
     }
-    
+
     public final boolean removeTelephoneNumber(final TelephoneNumber number) {
         return __telephoneNumbers.remove(number);
     }
-    
+
     public final Iterable<TelephoneNumber> removeTelephoneNumbers(
             final Predicate<TelephoneNumber, IllegalStateException> predicate) {
         // how should a predicate behave? should it throw any exceptions?
         final List<TelephoneNumber> result_ = new ArrayList<>();
-        
+
         for (TelephoneNumber t_ : __telephoneNumbers) {
             if (predicate.match(t_)) {
                 if (removeTelephoneNumber(t_)) {
@@ -418,28 +418,28 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
                 }
             }
         }
-        
+
         return result_;
     }
-    
+
     public Iterable<TelephoneNumber> findTelephoneNumbers(
             final Predicate<TelephoneNumber, IllegalStateException> predicate) {
         final List<TelephoneNumber> result_ = new ArrayList<>();
-        
+
         for (TelephoneNumber t_ : __telephoneNumbers) {
             if (predicate.match(t_)) {
                 result_.add(t_);
             }
         }
-        
+
         return result_;
     }
-    
+
     public Iterable<TelephoneNumber> modifyTelephoneNumbers(
             final Predicate<TelephoneNumber, IllegalStateException> predicate,
             final Modifier<TelephoneNumber, TelephoneNumber, IllegalStateException> modifier) {
         final List<TelephoneNumber> result_ = new ArrayList<>();
-        
+
         for (TelephoneNumber t_ : __telephoneNumbers) {
             if (predicate.match(t_)) {
                 if (removeTelephoneNumber(t_)) {
@@ -450,58 +450,58 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
                 }
             }
         }
-        
+
         return result_;
     }
 
     public final Iterable<Address> getAddresses() {
         // make defensive copies for thread safety
         final List<Address> result_ = new ArrayList<>();
-        
+
         for (Address a_ : __addresses) {
             result_.add(new Address(a_));
         }
-        
+
         return Collections.unmodifiableList(result_);
     }
-    
+
     public final boolean addAddress(final Address address) {
         return __addresses.add(address);
     }
-    
+
     public final Iterable<Address> addAddresses(final Iterable<Address> addresses) {
         final List<Address> result_ = new ArrayList<>();
-        
+
         for (final Address a_ : addresses) {
             if (addAddress(a_)) {
                 result_.add(a_);
             }
         }
-        
+
         return result_;
     }
-    
+
     public final Iterable<Address> addAddresses(final Address... addresses) {
         final List<Address> result_ = new ArrayList<>();
-        
+
         for (final Address a_ : addresses) {
             if (addAddress(a_)) {
                 result_.add(a_);
             }
         }
-        
+
         return result_;
     }
-    
+
     public final boolean removeAddress(final Address address) {
         return __addresses.remove(address);
     }
-    
+
     public final Iterable<Address> removeAddresses(
             final Predicate<Address, IllegalStateException> predicate) {
         // how should a predicate behave? should it throw any exceptions?
         final List<Address> result_ = new ArrayList<>();
-        
+
         for (Address a_ : __addresses) {
             if (predicate.match(a_)) {
                 if (removeAddress(a_)) {
@@ -509,28 +509,28 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
                 }
             }
         }
-        
+
         return result_;
     }
-    
+
     public Iterable<Address> findAddresses(
             final Predicate<Address, IllegalStateException> predicate) {
         final List<Address> result_ = new ArrayList<>();
-        
+
         for (Address a_ : __addresses) {
             if (predicate.match(a_)) {
                 result_.add(a_);
             }
         }
-        
+
         return result_;
     }
-    
+
     public Iterable<Address> modifyAddresses(
             final Predicate<Address, IllegalStateException> predicate,
             final Modifier<Address, Address, IllegalStateException> modifier) {
         final List<Address> result_ = new ArrayList<>();
-        
+
         for (Address a_ : __addresses) {
             if (predicate.match(a_)) {
                 if (removeAddress(a_)) {
@@ -541,35 +541,23 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
                 }
             }
         }
-        
+
         return result_;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        final StringBuilder builder_ = new StringBuilder();
-
-        final String loadedFrom_ = getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toString();
-
-        builder_.append("Contact@").append(System.identityHashCode(this))
-                .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
-                .append("Legal Identifier=").append(wrap(getLegalIdentifier())).append(", ")
-                .append("Email Addresses=").append(unroll(__emailAddresses)).append(", ")
-                .append("Telephone Numbers=").append(unroll(__telephoneNumbers)).append(", ")
-                .append("Addresses=").append(unroll(__addresses)).append(", ")
-                .append("Bytecode Location=").append(loadedFrom_).append(", ")
-                .append("super=").append(super.toString())
-                .append("}");
-
-        return builder_.toString();
+        return toStringBuilder(this)
+                .append("Id", getId())
+                .append("Version", getVersion())
+                .append("Legal Identifier", getLegalIdentifier())
+                .append("Email Addresses", __emailAddresses)
+                .append("Telephone Numbers", __telephoneNumbers)
+                .append("Addresses", __addresses)
+                .append("super", super.toString())
+                .string();
     }
 }

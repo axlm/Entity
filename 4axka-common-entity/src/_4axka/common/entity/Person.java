@@ -13,9 +13,7 @@
  */
 package _4axka.common.entity;
 
-
-import static _4axka.util.lang.ToString.unroll;
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.ToString.toStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -42,23 +40,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- *
+ * <p>
+ * @param <ID>
  */
 @XmlRootElement(name = "person")
 @XmlType(name = "Person")
 @Entity(name = "Person")
 @Table(name = "PERSONS")
 public abstract class Person<ID extends Serializable & Comparable<ID>> extends LegalEntity<ID> {
+
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-     * this class is not compatible with the previous version. It is not necessary to include
-     * in first version of the class, but included here as a reminder of its importance.
-     * 
+     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
+     * class is not compatible with the previous version. It is not necessary to include in first
+     * version of the class, but included here as a reminder of its importance.
+     * <p>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -70,14 +69,14 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERSON_GIVEN_NAMES")
     @Column(name = "GIVEN_NAME", length = 63, nullable = false)
-    private Set<String> __givenNames = new ConcurrentSkipListSet<>();
+    private final Set<String> __givenNames = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "aliases")
     @XmlElement(name = "alias")
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERSON_ALIASES")
-    @Column(name = "ALIAS", length = 63, nullable = false)
-    private Set<String> __alsoKnownAs = new ConcurrentSkipListSet<>();
+    @Column(name = "AKA", length = 63, nullable = false)
+    private final Set<String> __alsoKnownAs = new ConcurrentSkipListSet<>();
 
     @XmlElement(name = "preferredGivenName")
     @Basic
@@ -117,14 +116,14 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERSON_TITLES")
     @Column(name = "TITLE", length = 15)
-    private Set<TitleType> __titles = new ConcurrentSkipListSet<>();
+    private final Set<TitleType> __titles = new ConcurrentSkipListSet<>();
 
     /**
      * Default constructor.
      * <p>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * 
+     * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public Person() {
@@ -134,7 +133,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     /**
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
-     * 
+     * <p>
      * @param legalIdentifier
      * @param emailAddresses
      * @param numbers
@@ -145,6 +144,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      * @param nickName
      * @param familyName
      * @param dateOfBirth
+     * @param deceasedOn
      * @param gender
      * @param titles
      */
@@ -178,11 +178,11 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * 
-     * @param template
-     *            Uses template as template to initialise {@linkplain Person <code>this</code>}.
+     * <p>
+     * @param template Uses template as template to initialise {@linkplain Person
+     *                 <code>this</code>}.
      */
-   public Person(final Person<ID> template) {
+    public Person(final Person<ID> template) {
         super(template);
         addGivenNames(template.getGivenNames());
         addAliases(template.getAlsoKnownAs());
@@ -197,7 +197,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__givenNames given names}.
      */
     public final Iterable<String> getGivenNames() {
@@ -206,11 +206,10 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param names
-     *            {@linkplain Iterable Collection} of {@linkplain #__givenNames given names} to
-     *            add to <code>this</code> instance.
-     */     
+     * <p>
+     * @param names {@linkplain Iterable Collection} of {@linkplain #__givenNames given names} to
+     *              add to <code>this</code> instance.
+     */
     public final void addGivenNames(final Iterable<String> names) {
         if (null != names) {
             for (final String name_ : names) {
@@ -221,9 +220,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param name
-     *            Instance of given name to add to <code>this</code> {@linkplain #__givenNames
+     * <p>
+     * @param name Instance of given name to add to <code>this</code> {@linkplain #__givenNames
      *            given names} instance.
      */
     public final void addGivenName(final String name) {
@@ -232,7 +230,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's initials.
      */
     public final String getInitials() {
@@ -247,7 +245,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__alsoKnownAs aliases}.
      */
     public final Iterable<String> getAlsoKnownAs() {
@@ -256,9 +254,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param aka
-     *            {@linkplain Iterable Collection} of {@linkplain # aliases} to add to
+     * <p>
+     * @param aka {@linkplain Iterable Collection} of {@linkplain # aliases} to add to
      *            <code>this</code> instance.
      */
     public final void addAliases(final Iterable<String> aka) {
@@ -271,9 +268,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param alias
-     *            Instance of an alias to add to <code>this</code> {@linkplain #__alsoKnownAs
+     * <p>
+     * @param alias Instance of an alias to add to <code>this</code> {@linkplain #__alsoKnownAs
      *            aliases} instance.
      */
     public final void addAlias(final String alias) {
@@ -282,7 +278,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__preferredGivenName
      *         preferred given name}.
      */
@@ -292,9 +288,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param name
-     *            Value to assign to <code>this</code> {@linkplain #__preferredGivenName
+     * <p>
+     * @param name Value to assign to <code>this</code> {@linkplain #__preferredGivenName
      *            preferred given name}.
      */
     protected final void setPreferredGivenName(final String name) {
@@ -303,7 +298,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__nickName nickname}.
      */
     public final String getNickName() {
@@ -312,9 +307,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param name
-     *            Value to assign to <code>this</code> {@linkplain #__nickName nick name}.
+     * <p>
+     * @param name Value to assign to <code>this</code> {@linkplain #__nickName nick name}.
      */
     protected final void setNickName(final String name) {
         __nickName = name;
@@ -322,7 +316,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__familyName family name}.
      */
     public final String getFamilyName() {
@@ -331,9 +325,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param name
-     *            Value to assign to <code>this</code> {@linkplain #__familyName family name}.
+     * <p>
+     * @param name Value to assign to <code>this</code> {@linkplain #__familyName family name}.
      */
     protected final void setFamilyName(final String name) {
         __familyName = name;
@@ -341,7 +334,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__deceasedOn date of death}.
      */
     public final Date getDeceasedOn() {
@@ -350,9 +343,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param date
-     *            Value to assign to <code>this</code> {@linkplain #__deceasedOn date of death}.
+     * <p>
+     * @param date Value to assign to <code>this</code> {@linkplain #__deceasedOn date of death}.
      */
     protected final void setDeceasedOn(final Date date) {
         __deceasedOn = date;
@@ -360,7 +352,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__dateOfBirth date of birth}.
      */
     public final Date getDateOfBirth() {
@@ -369,9 +361,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param date
-     *            Value to assign to <code>this</code> {@linkplain #__dateOfBirth date of birth}.
+     * <p>
+     * @param date Value to assign to <code>this</code> {@linkplain #__dateOfBirth date of birth}.
      */
     protected final void setDateOfBirth(final Date date) {
         __dateOfBirth = date;
@@ -379,7 +370,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__gender gender}.
      */
     public final GenderType getGender() {
@@ -388,9 +379,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param gender
-     *            Value to assign to <code>this</code> {@linkplain #__gender gender}.
+     * <p>
+     * @param gender Value to assign to <code>this</code> {@linkplain #__gender gender}.
      */
     protected final void setGender(final GenderType gender) {
         __gender = gender;
@@ -398,7 +388,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
+     * <p>
      * @return The value of <code>this</code> instance's {@linkplain #__titles titiles}.
      */
     public final Iterable<TitleType> getTitles() {
@@ -407,9 +397,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param titles
-     *            Value to assign to <code>this</code> {@linkplain #__titles titles}.
+     * <p>
+     * @param titles Value to assign to <code>this</code> {@linkplain #__titles titles}.
      */
     public final void addTitles(final Iterable<TitleType> titles) {
         if (null != titles) {
@@ -421,44 +410,34 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * Obvious.
-     * 
-     * @param title
-     *            Instance of title to add to <code>this</code> {@linkplain #__titles titles}
-     *            instance.
+     * <p>
+     * @param title Instance of title to add to <code>this</code> {@linkplain #__titles titles}
+     *              instance.
      */
     public final void addTitle(final TitleType title) {
         __titles.add(title);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @return 
+     */
     @Override
     public String toString() {
-        final StringBuilder builder_ = new StringBuilder();
-
-        final String loadedFrom_ = getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toString();
-
-        builder_.append("Person@").append(System.identityHashCode(this))
-                .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
-                .append("Given Names=").append(unroll(__givenNames)).append(", ")
-                .append("Initials=").append(wrap(getInitials())).append(", ")
-                .append("Family Name=").append(wrap(getFamilyName())).append(", ")
-                .append("Also Known As=").append(unroll(__alsoKnownAs)).append(", ")
-                .append("Preferred Given Name=").append(wrap(getPreferredGivenName())).append(", ")
-                .append("Date of Birth=").append(wrap(getDateOfBirth())).append(", ")
-                .append("Deceased On=").append(wrap(getDeceasedOn())).append(", ")
-                .append("Gender=").append(wrap(getGender())).append(", ")
-                .append("Titles=").append(unroll(__titles)).append(", ")
-                .append("Bytecode Location=").append(loadedFrom_).append(", ")
-                .append("super=").append(super.toString())
-                .append("}");
-
-        return builder_.toString();
+        return toStringBuilder(this)
+                .append("Id", getId())
+                .append("Version", getVersion())
+                .append("Given Names", __givenNames)
+                .append("Initials", getInitials())
+                .append("Family Name", getFamilyName())
+                .append("Also Known As", __alsoKnownAs)
+                .append("Preferred Given Name", getPreferredGivenName())
+                .append("Date of Birth", getDateOfBirth())
+                .append("Deceased On", getDeceasedOn())
+                .append("Gender", getGender())
+                .append("Titles", __titles)
+                .append("super", super.toString())
+                .string();
     }
 
     /**
@@ -467,6 +446,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     @XmlType(name = "GenderType")
     @XmlEnum
     public enum GenderType {
+
         @XmlEnumValue("Female")
         FEMALE,
         @XmlEnumValue("Male")
@@ -479,6 +459,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     @XmlType(name = "TitleType")
     @XmlEnum
     public enum TitleType {
+
         @XmlEnumValue("Mr")
         MISTER("Mr."),
         @XmlEnumValue("Mrs")
@@ -492,13 +473,14 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
         @XmlEnumValue("Dr")
         DOCTOR("Dr.");
 
-        /**  */
+        /**
+         *         */
         private final String __abbreviation;
 
         /**
-         * Instance variable constructor. Initialise <code>this</code> instance with the
-         * specified arguments. <i>For state specifications see the see also section</i>.
-         * 
+         * Instance variable constructor. Initialise <code>this</code> instance with the specified
+         * arguments. <i>For state specifications see the see also section</i>.
+         * <p>
          * @param abbreviation
          */
         private TitleType(final String abbreviation) {
@@ -507,7 +489,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
         /**
          * Obvious.
-         * 
+         * <p>
          * @return The value of <code>this</code> instance's {@linkplain #__abbreviation
          *         abbreviation}.
          */

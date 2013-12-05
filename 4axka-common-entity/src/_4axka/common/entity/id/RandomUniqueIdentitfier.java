@@ -16,7 +16,8 @@ package _4axka.common.entity.id;
 import static _4axka.util.lang.CompareTo.compareToBuilder;
 import static _4axka.util.lang.Equals.equalsBuilder;
 import static _4axka.util.lang.Equals.isEquatable;
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.HashCode.hashCodeBuilder;
+import static _4axka.util.lang.ToString.toStringBuilder;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -120,6 +121,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * @param that
+     * <p>
      * @{inheritDoc}
      */
     @Override
@@ -137,6 +139,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * @param that
+     * <p>
      * @{inheritDoc}
      */
     @Override
@@ -151,12 +154,9 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      */
     @Override
     public int hashCode() {
-        int result_ = 1;
-        final int PRIME = 31;
-
-        result_ = PRIME * result_ + ((getId() == null) ? 0 : getId().hashCode());
-
-        return result_;
+        return hashCodeBuilder()
+                .append(getId())
+                .hash();
     }
 
     /**
@@ -164,21 +164,9 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      */
     @Override
     public String toString() {
-        final StringBuilder builder_ = new StringBuilder();
-
-        final String loadedFrom_ = getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toString();
-
-        builder_.append("RandomUniqueIdentitfier@").append(System.identityHashCode(this))
-                .append("=[")
-                .append("Radix 32 Universally Unique Identity=").append(wrap(getId())).append(", ")
-                .append("Bytecode Location=").append(loadedFrom_).append(", ")
-                .append("super=[").append(super.toString()).append("]")
-                .append("]");
-
-        return builder_.toString();
+        return toStringBuilder(this)
+                .append("Radix 32 Universally Unique Identity", getId())
+                .append("super", super.toString())
+                .string();
     }
 }

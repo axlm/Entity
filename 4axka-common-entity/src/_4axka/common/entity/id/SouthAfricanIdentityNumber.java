@@ -13,10 +13,11 @@
  */
 package _4axka.common.entity.id;
 
-import static _4axka.util.lang.ToString.wrap;
 import static _4axka.util.lang.CompareTo.compareToBuilder;
 import static _4axka.util.lang.Equals.equalsBuilder;
 import static _4axka.util.lang.Equals.isEquatable;
+import static _4axka.util.lang.HashCode.hashCodeBuilder;
+import static _4axka.util.lang.ToString.toStringBuilder;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -385,12 +386,9 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
      */
     @Override
     public int hashCode() {
-        int result_ = 1;
-        final int PRIME = 31;
-
-        result_ = PRIME * result_ + ((getNumber() == null) ? 0 : getNumber().hashCode());
-
-        return result_;
+        return hashCodeBuilder()
+                .append(getNumber())
+                .hash();
     }
 
     /**
@@ -398,22 +396,10 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
      */
     @Override
     public String toString() {
-        final StringBuilder builder_ = new StringBuilder();
-
-        final String loadedFrom_ = getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toString();
-
-        builder_.append("SouthAfricanIdentityNumber@").append(System.identityHashCode(this))
-                .append("{")
-                .append("South African Identity Number=").append(wrap(getNumber())).append(", ")
-                .append("Bytecode Location=").append(loadedFrom_).append(", ")
-                .append("super{").append(super.toString()).append("}")
-                .append("}");
-
-        return builder_.toString();
+        return toStringBuilder(this)
+                .append("South African Identity Number", getNumber())
+                .append("super", super.toString())
+                .string();
     }
 
     /* For internal use only. */

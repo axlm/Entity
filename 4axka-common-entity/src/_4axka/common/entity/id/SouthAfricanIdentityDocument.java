@@ -16,7 +16,8 @@ package _4axka.common.entity.id;
 import static _4axka.util.lang.CompareTo.compareToBuilder;
 import static _4axka.util.lang.Equals.equalsBuilder;
 import static _4axka.util.lang.Equals.isEquatable;
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.HashCode.hashCodeBuilder;
+import static _4axka.util.lang.ToString.toStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -141,12 +142,9 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
      */
     @Override
     public int hashCode() {
-        int result_ = 1;
-
-        final int PRIME = 31;
-        result_ = PRIME * result_ + ((getIdentityNumber() == null) ? 0 : getIdentityNumber().hashCode());
-
-        return result_;
+        return hashCodeBuilder()
+                .append(getIdentityNumber())
+                .hash();
     }
 
     /**
@@ -154,22 +152,10 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
      */
     @Override
     public String toString() {
-        final StringBuilder builder_ = new StringBuilder();
-
-        final String loadedFrom_ = getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toString();
-
-        builder_.append("SouthAfricanIdentityDocument@").append(System.identityHashCode(this))
-                .append("{")
-                .append("Identity Number=").append(wrap(getIdentityNumber())).append(", ")
-                .append("Release Date=").append(wrap(getReleaseDate())).append(", ")
-                .append("Bytecode Location=").append(loadedFrom_).append(", ")
-                .append("super=").append(super.toString())
-                .append("}");
-
-        return builder_.toString();
+        return toStringBuilder(this)
+                .append("Identity Number", getIdentityNumber())
+                .append("Release Date", getReleaseDate())
+                .append("super", super.toString())
+                .string();
     }
 }

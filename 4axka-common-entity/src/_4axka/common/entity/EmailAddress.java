@@ -16,7 +16,8 @@ package _4axka.common.entity;
 import static _4axka.util.lang.CompareTo.compareToBuilder;
 import static _4axka.util.lang.Equals.equalsBuilder;
 import static _4axka.util.lang.Equals.isEquatable;
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.HashCode.hashCodeBuilder;
+import static _4axka.util.lang.ToString.toStringBuilder;
 
 import java.io.Serializable;
 
@@ -215,13 +216,10 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      */
     @Override
     public int hashCode() {
-        int result_ = 1;
-
-        final int PRIME = 31;
-        result_ = PRIME * result_ + ((getType() == null) ? 0 : getType().hashCode());
-        result_ = PRIME * result_ + ((getAddress() == null) ? 0 : getAddress().hashCode());
-
-        return result_;
+        return hashCodeBuilder()
+                .append(getType())
+                .append(getAddress())
+                .hash();
     }
 
     /**
@@ -229,25 +227,13 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      */
     @Override
     public String toString() {
-        final StringBuilder builder_ = new StringBuilder();
-
-        final String loadedFrom_ = getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toString();
-
-        builder_.append("EmailAddress@").append(System.identityHashCode(this))
-                .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
-                .append("Type=").append(wrap(getType())).append(", ")
-                .append("Address=").append(wrap(getAddress())).append(", ")
-                .append("Bytecode Location=").append(loadedFrom_).append(", ")
-                .append("super=").append(super.toString())
-                .append("}");
-
-        return builder_.toString();
+        return toStringBuilder(this)
+                .append("Id", getId())
+                .append("Version", getVersion())
+                .append("Type", getType())
+                .append("Address", getAddress())
+                .append("super", super.toString())
+                .string();
     }
 
     /**

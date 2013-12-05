@@ -16,7 +16,8 @@ package _4axka.common.entity;
 import static _4axka.util.lang.CompareTo.compareToBuilder;
 import static _4axka.util.lang.Equals.equalsBuilder;
 import static _4axka.util.lang.Equals.isEquatable;
-import static _4axka.util.lang.ToString.wrap;
+import static _4axka.util.lang.HashCode.hashCodeBuilder;
+import static _4axka.util.lang.ToString.toStringBuilder;
 
 import java.io.Serializable;
 
@@ -361,16 +362,13 @@ public class Address implements Serializable, Comparable<Address> {
      */
     @Override
     public int hashCode() {
-        int result_ = 1;
-
-        final int PRIME = 31;
-        result_ = PRIME * result_ + ((getType() == null) ? 0 : getType().hashCode());
-        result_ = PRIME * result_ + ((getCode() == null) ? 0 : getCode().hashCode());
-        result_ = PRIME * result_ + ((getLocation() == null) ? 0 : getLocation().hashCode());
-        result_ = PRIME * result_ + ((getCity() == null) ? 0 : getCity().hashCode());
-        result_ = PRIME * result_ + ((getSuburb() == null) ? 0 : getSuburb().hashCode());
-
-        return result_;
+        return hashCodeBuilder()
+                .append(getType())
+                .append(getCode())
+                .append(getLocation())
+                .append(getCity())
+                .append(getSuburb())
+                .hash();
     }
 
     /**
@@ -378,30 +376,18 @@ public class Address implements Serializable, Comparable<Address> {
      */
     @Override
     public String toString() {
-        final StringBuilder builder_ = new StringBuilder();
-
-        final String loadedFrom_ = getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toString();
-
-        builder_.append("Address@").append(System.identityHashCode(this))
-                .append("{")
-                .append("Id=").append(wrap(getId())).append(", ")
-                .append("Version=").append(wrap(getVersion())).append(", ")
-                .append("Type=").append(wrap(getType())).append(", ")
-                .append("Location=").append(wrap(getLocation())).append(", ")
-                .append("Suburb=").append(wrap(getSuburb())).append(", ")
-                .append("City=").append(wrap(getCity())).append(", ")
-                .append("Region=").append(wrap(getRegion())).append(", ")
-                .append("Country=").append(wrap(getCountry())).append(", ")
-                .append("Code=").append(wrap(getCode())).append(", ")
-                .append("Bytecode Location=").append(loadedFrom_).append(", ")
-                .append("super=").append(super.toString())
-                .append("}");
-
-        return builder_.toString();
+        return toStringBuilder(this)
+                .append("Id", getId())
+                .append("Version", getVersion())
+                .append("Type", getType())
+                .append("Location", getLocation())
+                .append("Suburb", getSuburb())
+                .append("City", getCity())
+                .append("Region", getRegion())
+                .append("Country", getCountry())
+                .append("Code", getCode())
+                .append("super", super.toString())
+                .string();
     }
 
     /**
