@@ -42,6 +42,14 @@ public class AddressTest {
 
         assertEquals(lhs_, rhs_);
     }
+    
+    @Test
+    public void testNotEqual() {
+        final Address lhs_ = new Address(Address.AddressType.HOME, "A", "B", "C", "D", "E", "F");
+        final Address rhs_ = new Address(Address.AddressType.OFFICE, "Z", "Y", "X", "W", "V", "U");
+        
+        assertTrue(!lhs_.equals(rhs_));
+    }
 
     @Test
     public void testCompareToZero() {
