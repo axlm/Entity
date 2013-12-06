@@ -13,8 +13,7 @@
  */
 package _4axka.common.entity.id;
 
-
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,37 +23,39 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import _4axka.common.entity.Person.GenderType;
-
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class SouthAfricanIdentityNumberTestCases {
+
     private static final Map<String, SouthAfricanIdentityNumberTestVector> __vectors = new HashMap<>();
     private static final Map<String, SouthAfricanIdentityNumber> __ids = new HashMap<>();
 
     @BeforeClass
-    public static void setUpBeforeClass() throws Exception {}
+    public static void setUpBeforeClass() throws Exception {
+    }
 
     @AfterClass
-    public static void tearDownAfterClass() throws Exception {}
+    public static void tearDownAfterClass() throws Exception {
+    }
 
-    @Before
+    @BeforeMethod
     public void setUp() throws Exception {
-        final SouthAfricanIdentityNumberTestVector[] vectors_ =
-                SouthAfricanIdentityNumberTestVector.values();
+        final SouthAfricanIdentityNumberTestVector[] vectors_
+                = SouthAfricanIdentityNumberTestVector.values();
         for (final SouthAfricanIdentityNumberTestVector vector_ : vectors_) {
             __vectors.put(vector_.number(), vector_);
             __ids.put(vector_.number(), new SouthAfricanIdentityNumber(vector_.number()));
         }
     }
 
-    @After
-    public void tearDown() throws Exception {}
+    @AfterMethod
+    public void tearDown() throws Exception {
+    }
 
     @Test
     public final void testGetNumber() {
@@ -113,6 +114,7 @@ public class SouthAfricanIdentityNumberTestCases {
     }
 
     private static enum SouthAfricanIdentityNumberTestVector {
+
         ID_6803015017089("680302 5017 0 8 9", "1968-03-02", GenderType.MALE, true, true),
         ID_6902040136088("690204 0136 0 8 8", "1969-02-04", GenderType.FEMALE, true, true),
         ID_7611020032089("761102 0032 0 8 9", "1976-11-02", GenderType.FEMALE, true, true),
@@ -125,17 +127,12 @@ public class SouthAfricanIdentityNumberTestCases {
         private final Boolean __isValid;
 
         /**
-         * @param number
-         *          South African identity number.
-         * @param dob
-         *          The date of birth test vector value.
-         * @param gender
-         *          Gender test vector value.
-         * @param wasBornInSA
-         *          Whether the {@linkplain SouthAfricanIdentityNumber id number}
-         *          is that of someone born in South Africa.
-         * @param isValid
-         *          The validity of the test vector.
+         * @param number      South African identity number.
+         * @param dob         The date of birth test vector value.
+         * @param gender      Gender test vector value.
+         * @param wasBornInSA Whether the {@linkplain SouthAfricanIdentityNumber id number} is that
+         *                    of someone born in South Africa.
+         * @param isValid     The validity of the test vector.
          */
         private SouthAfricanIdentityNumberTestVector(
                 final String number,

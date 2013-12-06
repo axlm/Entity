@@ -6,12 +6,14 @@
 
 package _4axka.common.entity;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.testng.Assert.assertEquals;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 
 /**
  *
@@ -30,11 +32,11 @@ public class EmailAddressTest {
     public static void tearDownClass() {
     }
     
-    @Before
+    @BeforeMethod
     public void setUp() {
     }
     
-    @After
+    @AfterMethod
     public void tearDown() {
     }
 

@@ -1,11 +1,13 @@
 package _4axka.common.entity;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class AddressTest {
 
@@ -20,11 +22,11 @@ public class AddressTest {
     public static void tearDownClass() {
     }
 
-    @Before
+    @BeforeMethod
     public void setUp() {
     }
 
-    @After
+    @AfterMethod
     public void tearDown() {
     }
 
@@ -42,12 +44,12 @@ public class AddressTest {
 
         assertEquals(lhs_, rhs_);
     }
-    
+
     @Test
     public void testNotEqual() {
         final Address lhs_ = new Address(Address.AddressType.HOME, "A", "B", "C", "D", "E", "F");
         final Address rhs_ = new Address(Address.AddressType.OFFICE, "Z", "Y", "X", "W", "V", "U");
-        
+
         assertTrue(!lhs_.equals(rhs_));
     }
 
