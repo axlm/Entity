@@ -401,6 +401,8 @@ public class Address implements Serializable, Comparable<Address> {
         @XmlEnumValue("Office")
         OFFICE,
         @XmlEnumValue("Postal")
-        POSTAL;
+        POSTAL,
+        @XmlEnumValue("Unspecified")
+        UNSPECIFIED;
     }
 }

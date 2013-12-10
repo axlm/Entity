@@ -246,6 +246,8 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         @XmlEnumValue("Home")
         HOME,
         @XmlEnumValue("Office")
-        OFFICE;
+        OFFICE,
+        @XmlEnumValue("Unspecified")
+        UNSPECIFIED;
     }
 }

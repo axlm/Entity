@@ -451,7 +451,9 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
         @XmlEnumValue("Female")
         FEMALE,
         @XmlEnumValue("Male")
-        MALE;
+        MALE,
+        @XmlEnumValue("Unspecified")
+        UNSPECIFIED;
     }
 
     /**
@@ -472,7 +474,9 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
         @XmlEnumValue("Prof")
         PROFESSOR("Prof."),
         @XmlEnumValue("Dr")
-        DOCTOR("Dr.");
+        DOCTOR("Dr."),
+        @XmlEnumValue("Unspecified")
+        UNSPECIFIED("");
 
         /**
          *

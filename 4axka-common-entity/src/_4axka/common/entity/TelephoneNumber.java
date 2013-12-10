@@ -343,7 +343,11 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         OFFICE,
         @XmlEnumValue("Mobile")
         MOBILE,
+        @XmlEnumValue("Satelite")
+        SATELITE,
         @XmlEnumValue("Fax")
-        FAX;
+        FAX,
+        @XmlEnumValue("Unspecified")
+        UNSPECIFIED;
     }
 }
