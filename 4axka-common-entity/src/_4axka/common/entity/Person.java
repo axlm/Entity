@@ -49,7 +49,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Person")
 @Entity(name = "Person")
 @Table(name = "PERSONS")
-public abstract class Person<ID extends Serializable & Comparable<ID>> extends LegalEntity<ID> {
+public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> extends LegalEntity<ID> {
 
     /**
      * Determines if a de-serialised file is compatible with this class.
