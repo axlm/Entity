@@ -292,7 +292,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * @param name Value to assign to <code>this</code> {@linkplain #__preferredGivenName
      *            preferred given name}.
      */
-    protected final void setPreferredGivenName(final String name) {
+    final void setPreferredGivenName(final String name) {
         __preferredGivenName = name;
     }
 
@@ -310,7 +310,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * <p>
      * @param name Value to assign to <code>this</code> {@linkplain #__nickName nick name}.
      */
-    protected final void setNickName(final String name) {
+    final void setNickName(final String name) {
         __nickName = name;
     }
 
@@ -328,7 +328,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * <p>
      * @param name Value to assign to <code>this</code> {@linkplain #__familyName family name}.
      */
-    protected final void setFamilyName(final String name) {
+    final void setFamilyName(final String name) {
         __familyName = name;
     }
 
@@ -346,7 +346,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * <p>
      * @param date Value to assign to <code>this</code> {@linkplain #__deceasedOn date of death}.
      */
-    protected final void setDeceasedOn(final Date date) {
+    final void setDeceasedOn(final Date date) {
         __deceasedOn = date;
     }
 
@@ -364,7 +364,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * <p>
      * @param date Value to assign to <code>this</code> {@linkplain #__dateOfBirth date of birth}.
      */
-    protected final void setDateOfBirth(final Date date) {
+    final void setDateOfBirth(final Date date) {
         __dateOfBirth = date;
     }
 
@@ -382,7 +382,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * <p>
      * @param gender Value to assign to <code>this</code> {@linkplain #__gender gender}.
      */
-    protected final void setGender(final GenderType gender) {
+    final void setGender(final GenderType gender) {
         __gender = gender;
     }
 

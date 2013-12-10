@@ -186,7 +186,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * <p>
      * @param type Value to assign to <code>this</code> {@linkplain #__type telephone number type}.
      */
-    protected final void setType(final TelephoneNumberType type) {
+    final void setType(final TelephoneNumberType type) {
         __type = type;
     }
 
@@ -204,7 +204,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * <p>
      * @param code Value to assign to <code>this</code> {@linkplain #__countryCode country code}.
      */
-    protected final void setCountryCode(final String code) {
+    final void setCountryCode(final String code) {
         __countryCode = code;
     }
 
@@ -222,7 +222,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * <p>
      * @param code Value to assign to <code>this</code> {@linkplain #__areaCode area code}.
      */
-    protected final void setAreaCode(final String code) {
+    final void setAreaCode(final String code) {
         __areaCode = code;
     }
 
@@ -240,7 +240,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * <p>
      * @param number Value to assign to <code>this</code> {@linkplain #__number number}.
      */
-    protected final void setNumber(final String number) {
+    final void setNumber(final String number) {
         __number = number;
     }
 
@@ -258,7 +258,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * <p>
      * @param extension Value to assign to <code>this</code> {@linkplain #__extension extension}.
      */
-    protected final void setExtension(final String extension) {
+    final void setExtension(final String extension) {
         __extension = extension;
     }
 

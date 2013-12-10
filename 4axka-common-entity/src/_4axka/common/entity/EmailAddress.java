@@ -155,7 +155,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * <p>
      * @param type Value to assign to {@code this} {@linkplain #__type email address type}.
      */
-    protected final void setType(final EmailAddressType type) {
+    final void setType(final EmailAddressType type) {
         __type = type;
     }
 
@@ -173,7 +173,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * <p>
      * @param address Value to assign to {@code this} {@linkplain #__address address}.
      */
-    protected final void setAddress(final String address) {
+    final void setAddress(final String address) {
         __address = address;
     }
 

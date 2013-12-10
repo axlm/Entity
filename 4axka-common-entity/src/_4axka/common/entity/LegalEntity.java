@@ -207,7 +207,7 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      * <p>
      * @param id Value to assign to {@code this} {@linkplain #__legalIdentifier legal identifier}.
      */
-    void setLegalIdentifier(final ID id) {
+    final void setLegalIdentifier(final ID id) {
         __legalIdentifier = id;
     }
 
