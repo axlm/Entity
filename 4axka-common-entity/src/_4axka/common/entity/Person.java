@@ -134,19 +134,19 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
      * <p>
-     * @param legalIdentifier
-     * @param emailAddresses
-     * @param numbers
-     * @param addresses
-     * @param givenNames
-     * @param aka
-     * @param preferedGivenName
-     * @param nickName
-     * @param familyName
-     * @param dateOfBirth
-     * @param deceasedOn
-     * @param gender
-     * @param titles
+     * @param legalIdentifier   see {@link #getLegalIdentifier() legal identifier}.
+     * @param emailAddresses    see {@link #getEmailAddresses() email addresses}.
+     * @param numbers           see {@link #getTelephoneNumbers() telephone numbers}.
+     * @param addresses         see {@link #getAddresses() addresses}.
+     * @param givenNames        see {@link #getGivenNames() given names}.
+     * @param aka               see {@link #getAlsoKnownAs() aliases}.
+     * @param preferedGivenName see {@link #getPreferredGivenName() preferred given name}.
+     * @param nickName          see {@link #getNickName() nick name}.
+     * @param familyName        see {@link #getFamilyName() family name}.
+     * @param dateOfBirth       see {@link #getDateOfBirth() birth date}.
+     * @param deceasedOn        see {@link #getDeceasedOn() died on}.
+     * @param gender            see {@link #getGender() gender}.
+     * @param titles            see {@link #getTitles() titles}.
      */
     public Person(
             // LEGAL ENTITY PARAMETERS
@@ -420,7 +420,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
 
     /**
      * {@inheritDoc}
-     * @return 
+     * <p>
+     * @return
      */
     @Override
     public String toString() {
@@ -474,7 +475,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
         DOCTOR("Dr.");
 
         /**
-         *         */
+         *
+         */
         private final String __abbreviation;
 
         /**

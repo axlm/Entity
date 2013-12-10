@@ -104,8 +104,8 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
      * <i>For state specifications see the see also section</i>.
      * <p>
-     * @param type
-     * @param address
+     * @param type    see {@link #getType() type}.
+     * @param address see {@link #getAddress() address}.
      */
     public EmailAddress(final EmailAddressType type, final String address) {
         this();

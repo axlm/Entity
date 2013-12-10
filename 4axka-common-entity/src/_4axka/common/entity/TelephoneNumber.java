@@ -119,11 +119,11 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      * Instance variable constructor. Initialize <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
      * <p>
-     * @param type
-     * @param countryCode
-     * @param areaCode
-     * @param number
-     * @param extension
+     * @param type        see {@link #getType() type}.
+     * @param countryCode see {@link #getCountryCode() coutry code}.
+     * @param areaCode    see {@link #getAreaCode() area code}.
+     * @param number      see {@link #getNumber() number}.
+     * @param extension   see {@link #getExtension() extension}.
      */
     public TelephoneNumber(
             final TelephoneNumberType type,
@@ -287,6 +287,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * {@inheritDoc}
+     * <p>
      * @param that
      */
     @Override

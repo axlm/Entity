@@ -141,10 +141,10 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
      * <i>For state specifications see the see also section</i>.
      * <p>
-     * @param legalIdentifier
-     * @param emailAddresses
-     * @param numbers
-     * @param addresses
+     * @param legalIdentifier see {@link LegalEntity#getLegalIdentifier() legal identifier}.
+     * @param emailAddresses  see {@link LegalEntity#getEmailAddresses() email addresses}.
+     * @param numbers         see {@link LegalEntity#getTelephoneNumbers() telephone numbers}.
+     * @param addresses       see {@link LegalEntity#getAddresses() addresses}.
      */
     public LegalEntity(
             final ID legalIdentifier,
