@@ -40,7 +40,8 @@ public class Builders {
     }
 
     public static final <ID extends Serializable & Comparable<ID>> PersonBuilder<ID> personBuilder() {
-        return new PersonBuilder<>();
+        return new PersonBuilder<ID>() {
+        };
     }
 
     public static final class AddressBuilder implements Builder<Address> {
@@ -51,23 +52,13 @@ public class Builders {
             super();
         }
 
-        public final AddressBuilder setCity(final String city) {
-            __.setCity(city);
+        public final AddressBuilder setType(final AddressType type) {
+            __.setType(type);
             return this;
         }
 
-        public final AddressBuilder setCode(final String code) {
-            __.setCode(code);
-            return this;
-        }
-
-        public final AddressBuilder setCountry(final String country) {
-            __.setCountry(country);
-            return this;
-        }
-
-        public final AddressBuilder setRegion(final String region) {
-            __.setRegion(region);
+        public final AddressBuilder setLocation(final String location) {
+            __.setLocation(location);
             return this;
         }
 
@@ -76,8 +67,23 @@ public class Builders {
             return this;
         }
 
-        public final AddressBuilder setType(final AddressType type) {
-            __.setType(type);
+        public final AddressBuilder setCity(final String city) {
+            __.setCity(city);
+            return this;
+        }
+
+        public final AddressBuilder setRegion(final String region) {
+            __.setRegion(region);
+            return this;
+        }
+
+        public final AddressBuilder setCountry(final String country) {
+            __.setCountry(country);
+            return this;
+        }
+
+        public final AddressBuilder setCode(final String code) {
+            __.setCode(code);
             return this;
         }
 
@@ -146,17 +152,18 @@ public class Builders {
 
         @Override
         public TelephoneNumber build() {
-            return null;
+            return __;
         }
     }
 
-    public static final class PersonBuilder<ID extends Serializable & Comparable<ID>> implements
+    public static abstract class PersonBuilder<ID extends Serializable & Comparable<ID>> implements
             Builder<Person<ID>> {
 
-        private final Person<ID> __ = new Person<>();
+        private final Person<ID> __;
 
-        private PersonBuilder() {
-            super();
+        public PersonBuilder() {
+            this.__ = new Person<ID>() {
+            };
         }
 
         public PersonBuilder<ID> setLegalIdentifier(ID id) {
@@ -226,7 +233,7 @@ public class Builders {
 
         @Override
         public Person<ID> build() {
-            return null;
+            return __;
         }
     }
 }

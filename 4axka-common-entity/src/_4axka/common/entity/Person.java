@@ -49,7 +49,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Person")
 @Entity(name = "Person")
 @Table(name = "PERSONS")
-public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> extends LegalEntity<ID> {
+public abstract class Person<ID extends Serializable & Comparable<ID>> extends LegalEntity<ID> {
 
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -126,7 +126,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
-    public Person() {
+    protected Person() {
         super();
     }
 
@@ -148,7 +148,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * @param gender            see {@link #getGender() gender}.
      * @param titles            see {@link #getTitles() titles}.
      */
-    public Person(
+    protected Person(
             // LEGAL ENTITY PARAMETERS
             final ID legalIdentifier,
             final Iterable<EmailAddress> emailAddresses,
@@ -182,7 +182,7 @@ public /*abstract*/ class Person<ID extends Serializable & Comparable<ID>> exten
      * @param template Uses template as template to initialise {@linkplain Person
      *                 <code>this</code>}.
      */
-    public Person(final Person<ID> template) {
+    protected Person(final Person<ID> template) {
         super(template);
         addGivenNames(template.getGivenNames());
         addAliases(template.getAlsoKnownAs());
