@@ -39,11 +39,6 @@ public class Builders {
         return new TelephoneNumberBuilder();
     }
 
-    public static final <ID extends Serializable & Comparable<ID>> PersonBuilder<ID> personBuilder() {
-        return new PersonBuilder<ID>() {
-        };
-    }
-
     public static final class AddressBuilder implements Builder<Address> {
 
         private final Address __ = new Address();
@@ -159,11 +154,9 @@ public class Builders {
     public static abstract class PersonBuilder<ID extends Serializable & Comparable<ID>> implements
             Builder<Person<ID>> {
 
-        private final Person<ID> __;
+        protected Person<ID> __;
 
-        public PersonBuilder() {
-            this.__ = new Person<ID>() {
-            };
+        protected PersonBuilder() {
         }
 
         public PersonBuilder<ID> setLegalIdentifier(ID id) {
