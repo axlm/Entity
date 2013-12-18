@@ -22,6 +22,7 @@
         <class>_4axka.common.entity.LegalEntity</class>
         <class>_4axka.common.entity.Person</class>
         <class>_4axka.common.entity.TelephoneNumber</class>
+        <class>_4axka.common.entity.SouthAfricanCitizen</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:Rolodex"/>
