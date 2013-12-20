@@ -151,17 +151,12 @@ public class Builders {
         }
     }
 
-    public static abstract class PersonBuilder<ID extends Serializable & Comparable<ID>> implements
-            Builder<Person<ID>> {
+    public static abstract class PersonBuilder implements
+            Builder<Person> {
 
-        protected Person<ID> __;
+        protected Person __;
 
         protected PersonBuilder() {
-        }
-
-        public PersonBuilder<ID> setLegalIdentifier(ID id) {
-            __.setLegalIdentifier(id);
-            return this;
         }
 
         public PersonBuilder addEmailAddress(final EmailAddress address) {
@@ -225,7 +220,7 @@ public class Builders {
         }
 
         @Override
-        public Person<ID> build() {
+        public Person build() {
             return __;
         }
     }

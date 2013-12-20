@@ -35,7 +35,7 @@ import javax.persistence.Persistence;
  */
 public class EntityJPAPersistenceTests {
     private static EntityManager __manager = null;
-    private static final Set<Person<SouthAfricanIdentityDocument>> __saffas = new HashSet<>();
+    private static final Set<SouthAfricanCitizen> __saffas = new HashSet<>();
 
     /**
      * Constructs ...

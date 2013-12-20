@@ -60,7 +60,7 @@ import javax.xml.bind.annotation.XmlType;
         name = "LEGAL_ENTITIES",
         schema = "ENTITY")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> implements Serializable {
+public abstract class LegalEntity implements Serializable {
 
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -84,16 +84,12 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
             pkColumnValue = "entity_id",
             valueColumnName = "VALUE")
     @Column(name = "ID")
-    private Long __id;
+     Long __id;
 
     @XmlTransient
     @Version
     @Column(name = "VERSION_LOCK")
     private Integer __version;
-
-    @XmlElement(name = "identifier", required = true, nillable = false)
-    @Embedded
-    private ID __legalIdentifier;
 
     @XmlElementWrapper(name = "emailAddresses")
     @XmlElement(name = "emailAddress")
@@ -141,18 +137,15 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
      * <i>For state specifications see the see also section</i>.
      * <p>
-     * @param legalIdentifier see {@link LegalEntity#getLegalIdentifier() legal identifier}.
      * @param emailAddresses  see {@link LegalEntity#getEmailAddresses() email addresses}.
      * @param numbers         see {@link LegalEntity#getTelephoneNumbers() telephone numbers}.
      * @param addresses       see {@link LegalEntity#getAddresses() addresses}.
      */
     public LegalEntity(
-            final ID legalIdentifier,
             final Iterable<EmailAddress> emailAddresses,
             final Iterable<TelephoneNumber> numbers,
             final Iterable<Address> addresses) {
         this();
-        setLegalIdentifier(legalIdentifier);
         addEmailAddresses(emailAddresses);
         addTelephoneNumbers(numbers);
         addAddresses(addresses);
@@ -166,9 +159,8 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      * <p>
      * @see super
      */
-    public LegalEntity(final LegalEntity<ID> template) {
+    public LegalEntity(final LegalEntity template) {
         this(
-                template.getLegalIdentifier(),
                 template.getEmailAddresses(),
                 template.getTelephoneNumbers(),
                 template.getAddresses());
@@ -190,25 +182,6 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
      */
     public final Integer getVersion() {
         return __version;
-    }
-
-    /**
-     * Obvious.
-     * <p>
-     * @return The value of {@code this} instance's {@linkplain #__legalIdentifier legal
-     *         identifier}.
-     */
-    public final ID getLegalIdentifier() {
-        return __legalIdentifier;
-    }
-
-    /**
-     * Obvious.
-     * <p>
-     * @param id Value to assign to {@code this} {@linkplain #__legalIdentifier legal identifier}.
-     */
-    final void setLegalIdentifier(final ID id) {
-        __legalIdentifier = id;
     }
 
     /**
@@ -553,7 +526,6 @@ public abstract class LegalEntity<ID extends Serializable & Comparable<ID>> impl
         return toStringBuilder(this)
                 .append("Id", getId())
                 .append("Version", getVersion())
-                .append("Legal Identifier", getLegalIdentifier())
                 .append("Email Addresses", __emailAddresses)
                 .append("Telephone Numbers", __telephoneNumbers)
                 .append("Addresses", __addresses)

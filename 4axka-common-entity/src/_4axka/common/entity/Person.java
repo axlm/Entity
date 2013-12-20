@@ -49,7 +49,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Person")
 @Entity(name = "Person")
 @Table(name = "PERSONS")
-public abstract class Person<ID extends Serializable & Comparable<ID>> extends LegalEntity<ID> {
+public abstract class Person extends LegalEntity {
 
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -150,7 +150,6 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      */
     protected Person(
             // LEGAL ENTITY PARAMETERS
-            final ID legalIdentifier,
             final Iterable<EmailAddress> emailAddresses,
             final Iterable<TelephoneNumber> numbers,
             final Iterable<Address> addresses,
@@ -164,7 +163,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
             final Date deceasedOn,
             final GenderType gender,
             final Iterable<TitleType> titles) {
-        super(legalIdentifier, emailAddresses, numbers, addresses);
+        super(emailAddresses, numbers, addresses);
         addGivenNames(givenNames);
         addAliases(aka);
         setPreferredGivenName(preferedGivenName);
@@ -182,7 +181,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      * @param template Uses template as template to initialise {@linkplain Person
      *                 <code>this</code>}.
      */
-    protected Person(final Person<ID> template) {
+    protected Person(final Person template) {
         super(template);
         addGivenNames(template.getGivenNames());
         addAliases(template.getAlsoKnownAs());

@@ -14,7 +14,6 @@
 package _4axka.common.entity.family;
 
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -27,7 +26,7 @@ import javax.persistence.OneToMany;
 import _4axka.common.entity.Person;
 
 
-public final class Member<ID extends Comparable<ID> & Serializable> extends Person<ID> {
+public final class Member extends Person {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -42,34 +41,34 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
-    private final ConcurrentSkipListSet<Member<ID>> __spouses = new ConcurrentSkipListSet<>();
+    private final ConcurrentSkipListSet<Member> __spouses = new ConcurrentSkipListSet<>();
 
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
-    private final ConcurrentSkipListSet<Member<ID>> __parents = new ConcurrentSkipListSet<>();
+    private final ConcurrentSkipListSet<Member> __parents = new ConcurrentSkipListSet<>();
 
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
-    private final ConcurrentSkipListSet<Member<ID>> __siblings = new ConcurrentSkipListSet<>();
+    private final ConcurrentSkipListSet<Member> __siblings = new ConcurrentSkipListSet<>();
 
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
-    private final ConcurrentSkipListSet<Member<ID>> __children = new ConcurrentSkipListSet<>();
+    private final ConcurrentSkipListSet<Member> __children = new ConcurrentSkipListSet<>();
 
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
-    private final ConcurrentSkipListSet<Member<ID>> __gaurdians = new ConcurrentSkipListSet<>();
+    private final ConcurrentSkipListSet<Member> __gaurdians = new ConcurrentSkipListSet<>();
 
     @JoinColumn(name = "MEMBER_FK", referencedColumnName = "ID")
-    private Member<ID> __member;
+    private Member __member;
 
     public Member() {}
 
-    public Member(final Member<ID> member) {
+    public Member(final Member member) {
         addSpouses(member.getSpouses());
         addParents(member.getParents());
         addSiblings(member.getSiblings());
@@ -77,94 +76,94 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         addGuardians(member.getGuardians());
     }
 
-    public Iterable<Member<ID>> getSpouses() {
+    public Iterable<Member> getSpouses() {
         return __spouses;
     }
 
-    public void addSpouses(final Iterable<Member<ID>> spouses) {
-        for (final Member<ID> spouse_ : spouses) {
+    public void addSpouses(final Iterable<Member> spouses) {
+        for (final Member spouse_ : spouses) {
             addSpouse(spouse_);
         }
     }
 
-    public void addSpouse(final Member<ID> spouse) {
-        final Member<ID> spouse_ = new Member<>(spouse);
+    public void addSpouse(final Member spouse) {
+        final Member spouse_ = new Member(spouse);
         __spouses.add(spouse_);
         spouse.setMember(this);
     }
 
-    public Iterable<Member<ID>> getParents() {
+    public Iterable<Member> getParents() {
         return __parents;
     }
 
-    public void addParents(final Iterable<Member<ID>> parents) {
-        for (final Member<ID> parent_ : parents) {
+    public void addParents(final Iterable<Member> parents) {
+        for (final Member parent_ : parents) {
             addParent(parent_);
         }
     }
 
-    public void addParent(final Member<ID> parent) {
-        final Member<ID> parent_ = new Member<>(parent);
+    public void addParent(final Member parent) {
+        final Member parent_ = new Member(parent);
         __parents.add(parent_);
         parent.setMember(this);
     }
 
-    public Iterable<Member<ID>> getSiblings() {
+    public Iterable<Member> getSiblings() {
         return __siblings;
     }
 
-    public void addSiblings(final Iterable<Member<ID>> siblings) {
-        for (final Member<ID> sibling_ : siblings) {
+    public void addSiblings(final Iterable<Member> siblings) {
+        for (final Member sibling_ : siblings) {
             addSibling(sibling_);
         }
     }
 
-    public void addSibling(final Member<ID> sibling) {
-        final Member<ID> sibling_ = new Member<>(sibling);
+    public void addSibling(final Member sibling) {
+        final Member sibling_ = new Member(sibling);
         __siblings.add(sibling_);
         sibling.setMember(this);
     }
 
-    public Iterable<Member<ID>> getChildren() {
+    public Iterable<Member> getChildren() {
         return __children;
     }
 
-    public void addChildren(final Iterable<Member<ID>> children) {
-        for (final Member<ID> child_ : children) {
+    public void addChildren(final Iterable<Member> children) {
+        for (final Member child_ : children) {
             addChild(child_);
         }
     }
 
-    public void addChild(final Member<ID> child) {
-        final Member<ID> child_ = new Member<>(child);
+    public void addChild(final Member child) {
+        final Member child_ = new Member(child);
         __children.add(child_);
         child.setMember(this);
     }
 
-    public Iterable<Member<ID>> getGuardians() {
+    public Iterable<Member> getGuardians() {
         return __gaurdians;
     }
 
-    public void addGuardians(final Iterable<Member<ID>> guardians) {
-        for (final Member<ID> guardian_ : guardians) {
+    public void addGuardians(final Iterable<Member> guardians) {
+        for (final Member guardian_ : guardians) {
             addGuardian(guardian_);
         }
     }
 
-    public void addGuardian(final Member<ID> guardian) {
-        final Member<ID> guardian_ = new Member<>(guardian);
+    public void addGuardian(final Member guardian) {
+        final Member guardian_ = new Member(guardian);
         __gaurdians.add(guardian_);
         guardian.setMember(this);
     }
 
-    protected void setMember(final Member<ID> member) {
+    protected void setMember(final Member member) {
         __member = member;
     }
 
-    public Iterable<Member<ID>> getSisters() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getSisters() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (Member<ID> sibling_ : getSiblings()) {
+        for (Member sibling_ : getSiblings()) {
             if (sibling_.getGender() == GenderType.FEMALE) {
                 result_.add(sibling_);
             }
@@ -173,10 +172,10 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         return result_;
     }
 
-    public Iterable<Member<ID>> getBrotehrs() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getBrotehrs() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (Member<ID> sibling_ : getSiblings()) {
+        for (Member sibling_ : getSiblings()) {
             if (sibling_.getGender() == GenderType.MALE) {
                 result_.add(sibling_);
             }
@@ -185,21 +184,21 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         return result_;
     }
 
-    public Iterable<Member<ID>> getGrandParents() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getGrandParents() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (final Member<ID> parent_ : getParents()) {
-            result_.addAll((Collection<? extends Member<ID>>) parent_.getParents());
+        for (final Member parent_ : getParents()) {
+            result_.addAll((Collection<? extends Member>) parent_.getParents());
         }
 
         return result_;
     }
 
-    public Iterable<Member<ID>> getGrandMothers() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getGrandMothers() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (Member<ID> parent_ : getParents()) {
-            for (Member<ID> grandParent_ : parent_.getParents()) {
+        for (Member parent_ : getParents()) {
+            for (Member grandParent_ : parent_.getParents()) {
                 if (grandParent_.getGender() == GenderType.FEMALE) {
                     result_.add(grandParent_);
                 }
@@ -209,11 +208,11 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         return result_;
     }
 
-    public Iterable<Member<ID>> getGrandFathers() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getGrandFathers() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (Member<ID> parent_ : getParents()) {
-            for (Member<ID> grandParent_ : parent_.getParents()) {
+        for (Member parent_ : getParents()) {
+            for (Member grandParent_ : parent_.getParents()) {
                 if (grandParent_.getGender() == GenderType.MALE) {
                     result_.add(grandParent_);
                 }
@@ -223,24 +222,24 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         return result_;
     }
 
-    public Iterable<Member<ID>> getCousins() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getCousins() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (final Member<ID> parent_ : getParents()) {
-            for (final Member<ID> sibling_ : parent_.getSiblings()) {
-                result_.addAll((Collection<? extends Member<ID>>) sibling_.getChildren());
+        for (final Member parent_ : getParents()) {
+            for (final Member sibling_ : parent_.getSiblings()) {
+                result_.addAll((Collection<? extends Member>) sibling_.getChildren());
             }
         }
 
         return result_;
     }
 
-    public Iterable<Member<ID>> getCousins(final GenderType gender) {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getCousins(final GenderType gender) {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (final Member<ID> parent_ : getParents()) {
-            for (final Member<ID> sibling_ : parent_.getSiblings()) {
-                for (Member<ID> cousin_ : sibling_.getChildren()) {
+        for (final Member parent_ : getParents()) {
+            for (final Member sibling_ : parent_.getSiblings()) {
+                for (Member cousin_ : sibling_.getChildren()) {
                     if (cousin_.getGender() == gender) {
                         result_.add(cousin_);
                     }
@@ -251,11 +250,11 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         return result_;
     }
 
-    public Iterable<Member<ID>> getAunts() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getAunts() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (final Member<ID> parent_ : getParents()) {
-            for (Member<ID> sibling_ : parent_.getSiblings()) {
+        for (final Member parent_ : getParents()) {
+            for (Member sibling_ : parent_.getSiblings()) {
                 if (sibling_.getGender() == GenderType.FEMALE) {
                     result_.add(sibling_);
                 }
@@ -265,11 +264,11 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         return result_;
     }
 
-    public Iterable<Member<ID>> getUncles() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getUncles() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (final Member<ID> parent_ : getParents()) {
-            for (Member<ID> sibling_ : parent_.getSiblings()) {
+        for (final Member parent_ : getParents()) {
+            for (Member sibling_ : parent_.getSiblings()) {
                 if (sibling_.getGender() == GenderType.MALE) {
                     result_.add(sibling_);
                 }
@@ -279,11 +278,11 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         return result_;
     }
 
-    public Iterable<Member<ID>> getNices() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getNices() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (final Member<ID> sibling_ : getSiblings()) {
-            for (final Member<ID> child_ : sibling_.getChildren()) {
+        for (final Member sibling_ : getSiblings()) {
+            for (final Member child_ : sibling_.getChildren()) {
                 if (child_.getGender() == GenderType.FEMALE) {
                     result_.add(child_);
                 }
@@ -293,11 +292,11 @@ public final class Member<ID extends Comparable<ID> & Serializable> extends Pers
         return result_;
     }
 
-    public Iterable<Member<ID>> getNephews() {
-        final CopyOnWriteArrayList<Member<ID>> result_ = new CopyOnWriteArrayList<>();
+    public Iterable<Member> getNephews() {
+        final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
-        for (final Member<ID> sibling_ : getSiblings()) {
-            for (final Member<ID> child_ : sibling_.getChildren()) {
+        for (final Member sibling_ : getSiblings()) {
+            for (final Member child_ : sibling_.getChildren()) {
                 if (child_.getGender() == GenderType.MALE) {
                     result_.add(child_);
                 }

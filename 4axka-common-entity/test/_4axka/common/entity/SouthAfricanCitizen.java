@@ -1,17 +1,74 @@
 package _4axka.common.entity;
 
 import _4axka.common.entity.id.SouthAfricanIdentityDocument;
+import _4axka.util.data.Identifiable;
 import _4axka.util.functor.Builder;
 import java.util.Date;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity(name = "SouthAfricanCitizen")
 @Table(name = "SOUTH_AFTICAN_CITIZENS")
-public class SouthAfricanCitizen extends Person<SouthAfricanIdentityDocument> {
+public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfricanIdentityDocument> {
+    @XmlElement(name = "identifier", required = true, nillable = false)
+    @Embedded
+    private SouthAfricanIdentityDocument __id;
 
+    protected SouthAfricanCitizen() {
+    }
+
+    public SouthAfricanCitizen(final SouthAfricanIdentityDocument id, final Person template) {
+        super(template);
+        __id = id;
+    }
+
+    public SouthAfricanCitizen(
+            final SouthAfricanIdentityDocument id,
+            final Iterable<EmailAddress> emailAddresses,
+            final Iterable<TelephoneNumber> numbers,
+            final Iterable<Address> addresses,
+            final Iterable<String> givenNames,
+            final Iterable<String> aka,
+            final String preferedGivenName,
+            final String nickName,
+            final String familyName,
+            final Date dateOfBirth,
+            final Date deceasedOn,
+            final GenderType gender,
+            final Iterable<TitleType> titles) {
+        super(
+                emailAddresses,
+                numbers,
+                addresses,
+                givenNames,
+                aka,
+                preferedGivenName,
+                nickName,
+                familyName,
+                dateOfBirth,
+                deceasedOn,
+                gender,
+                titles);
+        __id = id;
+    }
+
+    public SouthAfricanCitizen(SouthAfricanIdentityDocument __id) {
+        this.__id = __id;
+    }
+    
     public static final SouthAfricanCitizenBuilder southAfricanCitizenBuilder() {
         return new SouthAfricanCitizenBuilder();
+    }
+
+    @Override
+    public SouthAfricanIdentityDocument getIdentifier() {
+        return __id;
+    }
+    
+    void setIdentifier(final SouthAfricanIdentityDocument id) {
+        __id = id;
     }
 
     public static final class SouthAfricanCitizenBuilder implements Builder<SouthAfricanCitizen> {
@@ -22,7 +79,7 @@ public class SouthAfricanCitizen extends Person<SouthAfricanIdentityDocument> {
         }
 
         public SouthAfricanCitizenBuilder setLegalIdentifier(SouthAfricanIdentityDocument id) {
-            __.setLegalIdentifier(id);
+            __.setIdentifier(id);
             return this;
         }
 
