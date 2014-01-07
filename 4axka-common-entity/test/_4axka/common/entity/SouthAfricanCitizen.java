@@ -10,22 +10,24 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 
 @Entity(name = "SouthAfricanCitizen")
-@Table(name = "SOUTH_AFTICAN_CITIZENS")
+@Table(
+        name = "SOUTH_AFTICAN_CITIZENS",
+        schema = "TEST")
 public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfricanIdentityDocument> {
     @XmlElement(name = "identifier", required = true, nillable = false)
     @Embedded
-    private SouthAfricanIdentityDocument __id;
+    private SouthAfricanIdentityDocument __identifier;
 
     protected SouthAfricanCitizen() {
     }
 
-    public SouthAfricanCitizen(final SouthAfricanIdentityDocument id, final Person template) {
+    public SouthAfricanCitizen(final SouthAfricanIdentityDocument identifier, final Person template) {
         super(template);
-        __id = id;
+        __identifier = identifier;
     }
 
     public SouthAfricanCitizen(
-            final SouthAfricanIdentityDocument id,
+            final SouthAfricanIdentityDocument identifier,
             final Iterable<EmailAddress> emailAddresses,
             final Iterable<TelephoneNumber> numbers,
             final Iterable<Address> addresses,
@@ -51,11 +53,11 @@ public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfr
                 deceasedOn,
                 gender,
                 titles);
-        __id = id;
+        __identifier = identifier;
     }
 
-    public SouthAfricanCitizen(SouthAfricanIdentityDocument __id) {
-        this.__id = __id;
+    public SouthAfricanCitizen(final SouthAfricanIdentityDocument id) {
+        __identifier = id;
     }
     
     public static final SouthAfricanCitizenBuilder southAfricanCitizenBuilder() {
@@ -64,11 +66,11 @@ public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfr
 
     @Override
     public SouthAfricanIdentityDocument getIdentifier() {
-        return __id;
+        return __identifier;
     }
     
     void setIdentifier(final SouthAfricanIdentityDocument id) {
-        __id = id;
+        __identifier = id;
     }
 
     public static final class SouthAfricanCitizenBuilder implements Builder<SouthAfricanCitizen> {
@@ -76,6 +78,11 @@ public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfr
         private static final SouthAfricanCitizen __ = new SouthAfricanCitizen();
 
         protected SouthAfricanCitizenBuilder() {
+        }
+
+        public final SouthAfricanCitizenBuilder setId(final Long id) {
+            __.setId(id);
+            return this;
         }
 
         public SouthAfricanCitizenBuilder setLegalIdentifier(SouthAfricanIdentityDocument id) {
@@ -87,9 +94,19 @@ public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfr
             __.addEmailAddress(address);
             return this;
         }
+        
+        public SouthAfricanCitizenBuilder addEmailAddresses(final Iterable<EmailAddress> addresses) {
+            __.addEmailAddresses(addresses);
+            return this;
+        }
 
         public SouthAfricanCitizenBuilder addTelephoneNumber(final TelephoneNumber number) {
             __.addTelephoneNumber(number);
+            return this;
+        }
+        
+        public SouthAfricanCitizenBuilder addTelephoneNumbers(final Iterable<TelephoneNumber> numbers) {
+            __.addTelephoneNumbers(numbers);
             return this;
         }
 
@@ -97,9 +114,19 @@ public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfr
             __.addAddress(address);
             return this;
         }
+        
+        public SouthAfricanCitizenBuilder addAddresses(final Iterable<Address> addresses) {
+            __.addAddresses(addresses);
+            return this;
+        }
 
         public SouthAfricanCitizenBuilder addGivenName(final String name) {
             __.addGivenName(name);
+            return this;
+        }
+        
+        public SouthAfricanCitizenBuilder addGivenNames(final Iterable<String> names) {
+            __.addGivenNames(names);
             return this;
         }
 
