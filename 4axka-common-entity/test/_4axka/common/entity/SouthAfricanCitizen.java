@@ -1,17 +1,74 @@
 package _4axka.common.entity;
 
 import _4axka.common.entity.id.SouthAfricanIdentityDocument;
+import _4axka.util.data.Identifiable;
 import _4axka.util.functor.Builder;
 import java.util.Date;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity(name = "SouthAfricanCitizen")
 @Table(name = "SOUTH_AFTICAN_CITIZENS")
-public class SouthAfricanCitizen extends Person<SouthAfricanIdentityDocument> {
+public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfricanIdentityDocument> {
+    @XmlElement(name = "identifier", required = true, nillable = false)
+    @Embedded
+    private SouthAfricanIdentityDocument __identifier;
 
+    protected SouthAfricanCitizen() {
+    }
+
+    public SouthAfricanCitizen(final SouthAfricanIdentityDocument identifier, final Person template) {
+        super(template);
+        __identifier = identifier;
+    }
+
+    public SouthAfricanCitizen(
+            final SouthAfricanIdentityDocument identifier,
+            final Iterable<EmailAddress> emailAddresses,
+            final Iterable<TelephoneNumber> numbers,
+            final Iterable<Address> addresses,
+            final Iterable<String> givenNames,
+            final Iterable<String> aka,
+            final String preferedGivenName,
+            final String nickName,
+            final String familyName,
+            final Date dateOfBirth,
+            final Date deceasedOn,
+            final GenderType gender,
+            final Iterable<TitleType> titles) {
+        super(
+                emailAddresses,
+                numbers,
+                addresses,
+                givenNames,
+                aka,
+                preferedGivenName,
+                nickName,
+                familyName,
+                dateOfBirth,
+                deceasedOn,
+                gender,
+                titles);
+        __identifier = identifier;
+    }
+
+    public SouthAfricanCitizen(final SouthAfricanIdentityDocument id) {
+        __identifier = id;
+    }
+    
     public static final SouthAfricanCitizenBuilder southAfricanCitizenBuilder() {
         return new SouthAfricanCitizenBuilder();
+    }
+
+    @Override
+    public SouthAfricanIdentityDocument getIdentifier() {
+        return __identifier;
+    }
+    
+    void setIdentifier(final SouthAfricanIdentityDocument id) {
+        __identifier = id;
     }
 
     public static final class SouthAfricanCitizenBuilder implements Builder<SouthAfricanCitizen> {
@@ -21,8 +78,13 @@ public class SouthAfricanCitizen extends Person<SouthAfricanIdentityDocument> {
         protected SouthAfricanCitizenBuilder() {
         }
 
+        public final SouthAfricanCitizenBuilder setId(final Long id) {
+            __.setId(id);
+            return this;
+        }
+
         public SouthAfricanCitizenBuilder setLegalIdentifier(SouthAfricanIdentityDocument id) {
-            __.setLegalIdentifier(id);
+            __.setIdentifier(id);
             return this;
         }
 
@@ -30,9 +92,19 @@ public class SouthAfricanCitizen extends Person<SouthAfricanIdentityDocument> {
             __.addEmailAddress(address);
             return this;
         }
+        
+        public SouthAfricanCitizenBuilder addEmailAddresses(final Iterable<EmailAddress> addresses) {
+            __.addEmailAddresses(addresses);
+            return this;
+        }
 
         public SouthAfricanCitizenBuilder addTelephoneNumber(final TelephoneNumber number) {
             __.addTelephoneNumber(number);
+            return this;
+        }
+        
+        public SouthAfricanCitizenBuilder addTelephoneNumbers(final Iterable<TelephoneNumber> numbers) {
+            __.addTelephoneNumbers(numbers);
             return this;
         }
 
@@ -40,9 +112,19 @@ public class SouthAfricanCitizen extends Person<SouthAfricanIdentityDocument> {
             __.addAddress(address);
             return this;
         }
+        
+        public SouthAfricanCitizenBuilder addAddresses(final Iterable<Address> addresses) {
+            __.addAddresses(addresses);
+            return this;
+        }
 
         public SouthAfricanCitizenBuilder addGivenName(final String name) {
             __.addGivenName(name);
+            return this;
+        }
+        
+        public SouthAfricanCitizenBuilder addGivenNames(final Iterable<String> names) {
+            __.addGivenNames(names);
             return this;
         }
 

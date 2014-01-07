@@ -15,7 +15,6 @@ package _4axka.common.entity;
 
 import static _4axka.util.lang.ToString.toStringBuilder;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -28,6 +27,10 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,14 +45,19 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * <p>
- * @param <ID>
  */
 @XmlRootElement(name = "person")
 @XmlType(name = "Person")
 @Entity(name = "Person")
-@Table(name = "PERSONS")
-public abstract class Person<ID extends Serializable & Comparable<ID>> extends LegalEntity<ID> {
+@Table(
+        name = "PERSONS",
+        indexes = {
+            @Index(columnList = "FAMILY_NAME", name = "PERSONS_FAMILY_NAME_INDEX"),
+            @Index(columnList = "DATE_OF_BIRTH", name = "PERSONS_DATE_OF_BIRTH_INDEX"),
+            @Index(columnList = "GENDER", name = "PERSONS_GENDER_INDEX")
+        })
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Person extends LegalEntity {
 
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -67,14 +75,18 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     @XmlElementWrapper(name = "givenNames", required = true, nillable = false)
     @XmlElement(name = "name")
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "PERSON_GIVEN_NAMES")
+    @CollectionTable(
+            name = "PERSON_GIVEN_NAMES",
+            joinColumns = @JoinColumn(name = "PERSON_FK", referencedColumnName = "ID"))
     @Column(name = "GIVEN_NAME", length = 63, nullable = false)
     private final Set<String> __givenNames = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "aliases")
     @XmlElement(name = "alias")
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "PERSON_ALIASES")
+    @CollectionTable(
+            name = "PERSON_ALIASES",
+            joinColumns = @JoinColumn(name = "PERSON_FK", referencedColumnName = "ID"))
     @Column(name = "AKA", length = 63, nullable = false)
     private final Set<String> __alsoKnownAs = new ConcurrentSkipListSet<>();
 
@@ -114,7 +126,9 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
     // lookup. A Person should have only ONE title.
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "PERSON_TITLES")
+    @CollectionTable(
+            name = "PERSON_TITLES",
+            joinColumns = @JoinColumn(name = "PERSON_FK", referencedColumnName = "ID"))
     @Column(name = "TITLE", length = 15)
     private final Set<TitleType> __titles = new ConcurrentSkipListSet<>();
 
@@ -126,7 +140,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
-    protected Person() {
+    public Person() {
         super();
     }
 
@@ -134,7 +148,6 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
      * <p>
-     * @param legalIdentifier   see {@link #getLegalIdentifier() legal identifier}.
      * @param emailAddresses    see {@link #getEmailAddresses() email addresses}.
      * @param numbers           see {@link #getTelephoneNumbers() telephone numbers}.
      * @param addresses         see {@link #getAddresses() addresses}.
@@ -148,9 +161,8 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      * @param gender            see {@link #getGender() gender}.
      * @param titles            see {@link #getTitles() titles}.
      */
-    protected Person(
+    public Person(
             // LEGAL ENTITY PARAMETERS
-            final ID legalIdentifier,
             final Iterable<EmailAddress> emailAddresses,
             final Iterable<TelephoneNumber> numbers,
             final Iterable<Address> addresses,
@@ -164,7 +176,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
             final Date deceasedOn,
             final GenderType gender,
             final Iterable<TitleType> titles) {
-        super(legalIdentifier, emailAddresses, numbers, addresses);
+        super(emailAddresses, numbers, addresses);
         addGivenNames(givenNames);
         addAliases(aka);
         setPreferredGivenName(preferedGivenName);
@@ -182,7 +194,7 @@ public abstract class Person<ID extends Serializable & Comparable<ID>> extends L
      * @param template Uses template as template to initialise {@linkplain Person
      *                 <code>this</code>}.
      */
-    protected Person(final Person<ID> template) {
+    public Person(final Person template) {
         super(template);
         addGivenNames(template.getGivenNames());
         addAliases(template.getAlsoKnownAs());

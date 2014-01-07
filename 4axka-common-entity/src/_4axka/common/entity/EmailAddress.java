@@ -132,6 +132,10 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         return __id;
     }
 
+    void setId(final Long id) {
+        __id = id;
+    }
+
     /**
      * Obvious.
      * <p>

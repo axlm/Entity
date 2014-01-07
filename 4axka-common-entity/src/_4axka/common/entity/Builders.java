@@ -47,6 +47,11 @@ public class Builders {
             super();
         }
 
+        public final AddressBuilder setId(final Long id) {
+            __.setId(id);
+            return this;
+        }
+
         public final AddressBuilder setType(final AddressType type) {
             __.setType(type);
             return this;
@@ -96,13 +101,18 @@ public class Builders {
             super();
         }
 
-        public EmailAddressBuilder setAddress(final String address) {
-            __.setAddress(address);
+        public final EmailAddressBuilder setId(final Long id) {
+            __.setId(id);
             return this;
         }
 
         public EmailAddressBuilder setType(final EmailAddressType type) {
             __.setType(type);
+            return this;
+        }
+
+        public EmailAddressBuilder setAddress(final String address) {
+            __.setAddress(address);
             return this;
         }
 
@@ -120,8 +130,13 @@ public class Builders {
             super();
         }
 
-        public TelephoneNumberBuilder setAreaCode(final String code) {
-            __.setAreaCode(code);
+        public final TelephoneNumberBuilder setId(final Long id) {
+            __.setId(id);
+            return this;
+        }
+
+        public TelephoneNumberBuilder setType(final TelephoneNumberType type) {
+            __.setType(type);
             return this;
         }
 
@@ -130,8 +145,8 @@ public class Builders {
             return this;
         }
 
-        public TelephoneNumberBuilder setExtension(final String extension) {
-            __.setExtension(extension);
+        public TelephoneNumberBuilder setAreaCode(final String code) {
+            __.setAreaCode(code);
             return this;
         }
 
@@ -140,8 +155,8 @@ public class Builders {
             return this;
         }
 
-        public TelephoneNumberBuilder setType(final TelephoneNumberType type) {
-            __.setType(type);
+        public TelephoneNumberBuilder setExtension(final String extension) {
+            __.setExtension(extension);
             return this;
         }
 
@@ -151,17 +166,12 @@ public class Builders {
         }
     }
 
-    public static abstract class PersonBuilder<ID extends Serializable & Comparable<ID>> implements
-            Builder<Person<ID>> {
+    public static abstract class PersonBuilder implements
+            Builder<Person> {
 
-        protected Person<ID> __;
+        protected Person __;
 
         protected PersonBuilder() {
-        }
-
-        public PersonBuilder<ID> setLegalIdentifier(ID id) {
-            __.setLegalIdentifier(id);
-            return this;
         }
 
         public PersonBuilder addEmailAddress(final EmailAddress address) {
@@ -225,7 +235,7 @@ public class Builders {
         }
 
         @Override
-        public Person<ID> build() {
+        public Person build() {
             return __;
         }
     }

@@ -163,6 +163,10 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         return __id;
     }
 
+    void setId(final Long id) {
+        __id = id;
+    }
+
     /**
      * Obvious.
      * <p>
