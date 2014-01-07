@@ -46,7 +46,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "emailAddress")
 @XmlType(name = "EmailAddress")
 @Entity(name = "EmailAddress")
-@Table(name = "EMAIL_ADDRESSES")
+@Table(
+        name = "EMAIL_ADDRESSES",
+        schema = "ENTITY")
 public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
@@ -130,6 +132,10 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      */
     public final Long getId() {
         return __id;
+    }
+
+    void setId(final Long id) {
+        __id = id;
     }
 
     /**

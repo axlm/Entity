@@ -46,7 +46,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "telephoneNumber")
 @XmlType(name = "TelephoneNumber")
 @Entity(name = "TelephoneNumber")
-@Table(name = "TELEPHONE_NUMBERS")
+@Table(
+        name = "TELEPHONE_NUMBERS",
+        schema = "ENTITY")
 public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber> {
 
     /**
@@ -161,6 +163,10 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      */
     public final Long getId() {
         return __id;
+    }
+
+    void setId(final Long id) {
+        __id = id;
     }
 
     /**

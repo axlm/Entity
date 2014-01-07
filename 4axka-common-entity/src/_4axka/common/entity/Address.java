@@ -48,7 +48,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Address")
 // JPA
 @Entity(name = "Address")
-@Table(name = "ADDRESSES")
+@Table(
+        name = "ADDRESSES",
+        schema = "ENTITY")
 public class Address implements Serializable, Comparable<Address> {
 
     /**
@@ -131,13 +133,13 @@ public class Address implements Serializable, Comparable<Address> {
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
      * <p>
-     * @param type     see {@link #getType() type}.
+     * @param type see {@link #getType() type}.
      * @param location see {@link #getLocation() location}.
-     * @param suburb   see {@link #getSuburb() suburb}.
-     * @param city     see {@link #getCity() city}.
-     * @param region   see {@link #getRegion() region}.
-     * @param country  see {@link #getCountry() country}.
-     * @param code     see {@link #getCode() code}.
+     * @param suburb see {@link #getSuburb() suburb}.
+     * @param city see {@link #getCity() city}.
+     * @param region see {@link #getRegion() region}.
+     * @param country see {@link #getCountry() country}.
+     * @param code see {@link #getCode() code}.
      */
     public Address(
             final AddressType type,
@@ -181,6 +183,10 @@ public class Address implements Serializable, Comparable<Address> {
      */
     public final Long getId() {
         return __id;
+    }
+
+    void setId(final Long id) {
+        __id = id;
     }
 
     /**
