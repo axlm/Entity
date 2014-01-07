@@ -27,16 +27,14 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -49,16 +47,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * <p>
- * @param <ID>
  */
 @XmlRootElement(name = "legalEntity")
 @XmlType(name = "LegalEntity")
 @XmlSeeAlso({Person.class})
-@Entity(name = "LegalEntity")
-@Table(
-        name = "LEGAL_ENTITIES",
-        schema = "ENTITY")
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class LegalEntity implements Serializable {
 
@@ -173,6 +166,10 @@ public abstract class LegalEntity implements Serializable {
      */
     public final Long getId() {
         return __id;
+    }
+
+    void setId(final Long id) {
+        __id = id;
     }
 
     /**

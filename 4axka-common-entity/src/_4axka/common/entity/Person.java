@@ -15,7 +15,6 @@ package _4axka.common.entity;
 
 import static _4axka.util.lang.ToString.toStringBuilder;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -24,11 +23,9 @@ import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -42,13 +39,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * <p>
- * @param <ID>
  */
 @XmlRootElement(name = "person")
 @XmlType(name = "Person")
-@Entity(name = "Person")
-@Table(name = "PERSONS")
 public abstract class Person extends LegalEntity {
 
     /**
@@ -126,7 +119,7 @@ public abstract class Person extends LegalEntity {
      * <p>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
-    protected Person() {
+    public Person() {
         super();
     }
 
@@ -134,7 +127,6 @@ public abstract class Person extends LegalEntity {
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
      * <p>
-     * @param legalIdentifier   see {@link #getLegalIdentifier() legal identifier}.
      * @param emailAddresses    see {@link #getEmailAddresses() email addresses}.
      * @param numbers           see {@link #getTelephoneNumbers() telephone numbers}.
      * @param addresses         see {@link #getAddresses() addresses}.
@@ -148,7 +140,7 @@ public abstract class Person extends LegalEntity {
      * @param gender            see {@link #getGender() gender}.
      * @param titles            see {@link #getTitles() titles}.
      */
-    protected Person(
+    public Person(
             // LEGAL ENTITY PARAMETERS
             final Iterable<EmailAddress> emailAddresses,
             final Iterable<TelephoneNumber> numbers,
@@ -181,7 +173,7 @@ public abstract class Person extends LegalEntity {
      * @param template Uses template as template to initialise {@linkplain Person
      *                 <code>this</code>}.
      */
-    protected Person(final Person template) {
+    public Person(final Person template) {
         super(template);
         addGivenNames(template.getGivenNames());
         addAliases(template.getAlsoKnownAs());
