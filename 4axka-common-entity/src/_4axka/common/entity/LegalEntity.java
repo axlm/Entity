@@ -29,8 +29,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
@@ -52,7 +50,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "LegalEntity")
 @XmlSeeAlso({Person.class})
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class LegalEntity implements Serializable {
 
     /**
@@ -77,7 +74,7 @@ public abstract class LegalEntity implements Serializable {
             pkColumnValue = "entity_id",
             valueColumnName = "VALUE")
     @Column(name = "ID")
-     Long __id;
+    private Long __id;
 
     @XmlTransient
     @Version

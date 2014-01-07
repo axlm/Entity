@@ -10,9 +10,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 
 @Entity(name = "SouthAfricanCitizen")
-@Table(
-        name = "SOUTH_AFTICAN_CITIZENS",
-        schema = "TEST")
+@Table(name = "SOUTH_AFTICAN_CITIZENS")
 public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfricanIdentityDocument> {
     @XmlElement(name = "identifier", required = true, nillable = false)
     @Embedded

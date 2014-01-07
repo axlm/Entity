@@ -48,9 +48,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Address")
 // JPA
 @Entity(name = "Address")
-@Table(
-        name = "ADDRESSES",
-        schema = "ENTITY")
+@Table(name = "ADDRESSES")
 public class Address implements Serializable, Comparable<Address> {
 
     /**

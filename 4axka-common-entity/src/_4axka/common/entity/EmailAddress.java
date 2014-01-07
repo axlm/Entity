@@ -46,9 +46,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "emailAddress")
 @XmlType(name = "EmailAddress")
 @Entity(name = "EmailAddress")
-@Table(
-        name = "EMAIL_ADDRESSES",
-        schema = "ENTITY")
+@Table(name = "EMAIL_ADDRESSES")
 public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**

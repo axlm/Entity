@@ -23,9 +23,15 @@ import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -42,6 +48,15 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement(name = "person")
 @XmlType(name = "Person")
+@Entity(name = "Person")
+@Table(
+        name = "PERSONS",
+        indexes = {
+            @Index(columnList = "FAMILY_NAME", name = "PERSONS_FAMILY_NAME_INDEX"),
+            @Index(columnList = "DATE_OF_BIRTH", name = "PERSONS_DATE_OF_BIRTH_INDEX"),
+            @Index(columnList = "GENDER", name = "PERSONS_GENDER_INDEX")
+        })
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person extends LegalEntity {
 
     /**
@@ -60,14 +75,18 @@ public abstract class Person extends LegalEntity {
     @XmlElementWrapper(name = "givenNames", required = true, nillable = false)
     @XmlElement(name = "name")
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "PERSON_GIVEN_NAMES")
+    @CollectionTable(
+            name = "PERSON_GIVEN_NAMES",
+            joinColumns = @JoinColumn(name = "PERSON_FK", referencedColumnName = "ID"))
     @Column(name = "GIVEN_NAME", length = 63, nullable = false)
     private final Set<String> __givenNames = new ConcurrentSkipListSet<>();
 
     @XmlElementWrapper(name = "aliases")
     @XmlElement(name = "alias")
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "PERSON_ALIASES")
+    @CollectionTable(
+            name = "PERSON_ALIASES",
+            joinColumns = @JoinColumn(name = "PERSON_FK", referencedColumnName = "ID"))
     @Column(name = "AKA", length = 63, nullable = false)
     private final Set<String> __alsoKnownAs = new ConcurrentSkipListSet<>();
 
@@ -107,7 +126,9 @@ public abstract class Person extends LegalEntity {
     // lookup. A Person should have only ONE title.
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "PERSON_TITLES")
+    @CollectionTable(
+            name = "PERSON_TITLES",
+            joinColumns = @JoinColumn(name = "PERSON_FK", referencedColumnName = "ID"))
     @Column(name = "TITLE", length = 15)
     private final Set<TitleType> __titles = new ConcurrentSkipListSet<>();
 

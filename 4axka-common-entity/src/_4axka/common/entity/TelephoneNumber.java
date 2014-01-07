@@ -46,9 +46,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "telephoneNumber")
 @XmlType(name = "TelephoneNumber")
 @Entity(name = "TelephoneNumber")
-@Table(
-        name = "TELEPHONE_NUMBERS",
-        schema = "ENTITY")
+@Table(name = "TELEPHONE_NUMBERS")
 public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber> {
 
     /**
