@@ -11,7 +11,7 @@
  * It may not be reproduced as a whole, or in part by any means unless explicit
  * permission has been granted by an authorised 4axka representative.
  */
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
 import static _4axka.util.lang.ToString.toStringBuilder;
 

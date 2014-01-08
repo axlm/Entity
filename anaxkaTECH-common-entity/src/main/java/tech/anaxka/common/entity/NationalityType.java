@@ -11,7 +11,7 @@
  * It may not be reproduced as a whole, or in part by any means unless explicit
  * permission has been granted by an authorised axlTECH representative.
  */
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
 
 import javax.xml.bind.annotation.XmlEnum;

@@ -11,7 +11,7 @@
  * It may not be reproduced as a whole, or in part by any means unless explicit
  * permission has been granted by an authorised 4axka representative.
  */
-package _4axka.common.entity.id;
+package tech.anaxka.common.entity.id;
 
 import static _4axka.util.lang.CompareTo.compareToBuilder;
 import static _4axka.util.lang.Equals.equalsBuilder;

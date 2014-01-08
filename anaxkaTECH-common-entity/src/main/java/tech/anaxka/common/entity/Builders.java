@@ -11,13 +11,13 @@
  * It may not be reproduced as a whole, or in part by any means unless explicit
  * permission has been granted by an authorised 4axka representative.
  */
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
-import _4axka.common.entity.Address.AddressType;
-import _4axka.common.entity.EmailAddress.EmailAddressType;
-import _4axka.common.entity.Person.GenderType;
-import _4axka.common.entity.Person.TitleType;
-import _4axka.common.entity.TelephoneNumber.TelephoneNumberType;
+import tech.anaxka.common.entity.Address.AddressType;
+import tech.anaxka.common.entity.EmailAddress.EmailAddressType;
+import tech.anaxka.common.entity.Person.GenderType;
+import tech.anaxka.common.entity.Person.TitleType;
+import tech.anaxka.common.entity.TelephoneNumber.TelephoneNumberType;
 import _4axka.util.functor.Builder;
 import java.io.Serializable;
 import java.util.Date;

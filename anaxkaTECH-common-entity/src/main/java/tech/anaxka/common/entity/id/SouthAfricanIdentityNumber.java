@@ -11,7 +11,7 @@
  * It may not be reproduced as a whole, or in part by any means unless explicit
  * permission has been granted by an authorised 4axka representative.
  */
-package _4axka.common.entity.id;
+package tech.anaxka.common.entity.id;
 
 import static _4axka.util.lang.CompareTo.compareToBuilder;
 import static _4axka.util.lang.Equals.equalsBuilder;
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import _4axka.common.entity.Person.GenderType;
+import tech.anaxka.common.entity.Person.GenderType;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>

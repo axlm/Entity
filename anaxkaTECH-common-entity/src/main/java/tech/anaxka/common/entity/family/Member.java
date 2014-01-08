@@ -11,7 +11,7 @@
  * It may not be reproduced as a whole, or in part by any means unless explicit
  * permission has been granted by an authorised 4axka representative.
  */
-package _4axka.common.entity.family;
+package tech.anaxka.common.entity.family;
 
 
 import java.util.Collection;
@@ -23,7 +23,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import _4axka.common.entity.Person;
+import tech.anaxka.common.entity.Person;
 
 
 public final class Member extends Person {

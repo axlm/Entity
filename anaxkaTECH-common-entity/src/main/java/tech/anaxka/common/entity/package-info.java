@@ -17,7 +17,7 @@
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSchema(namespace = "http://FourAXKA.net/common/entity/20120719")
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
 
 import javax.xml.bind.annotation.XmlAccessType;

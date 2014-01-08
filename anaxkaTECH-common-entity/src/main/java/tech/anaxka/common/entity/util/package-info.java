@@ -5,4 +5,4 @@
  * @author axlm
  *
  */
-package _4axka.common.entity.util;
+package tech.anaxka.common.entity.util;

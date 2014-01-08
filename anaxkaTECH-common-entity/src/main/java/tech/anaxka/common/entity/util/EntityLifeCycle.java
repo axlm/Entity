@@ -12,7 +12,7 @@
  * permission has been granted by an authorised 4axka representative.
  */
 
-package _4axka.common.entity.util;
+package tech.anaxka.common.entity.util;
 
 
 import java.io.Serializable;

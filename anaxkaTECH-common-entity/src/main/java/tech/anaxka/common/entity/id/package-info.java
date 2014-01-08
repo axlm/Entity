@@ -11,4 +11,15 @@
  * It may not be reproduced as a whole, or in part by any means unless explicit
  * permission has been granted by an authorised 4axka representative.
  */
-package _4axka.common.entity.family;
+
+/**
+ * @author Axl Mattheus
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSchema(namespace = "http://FourAXKA.net/common/entity/20120719")
+package tech.anaxka.common.entity.id;
+
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSchema;
