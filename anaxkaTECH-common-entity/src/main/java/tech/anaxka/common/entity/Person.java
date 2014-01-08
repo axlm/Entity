@@ -449,7 +449,7 @@ public abstract class Person extends LegalEntity {
                 .append("Gender", getGender())
                 .append("Titles", __titles)
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /**

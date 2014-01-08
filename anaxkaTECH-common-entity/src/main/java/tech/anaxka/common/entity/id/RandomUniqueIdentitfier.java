@@ -148,7 +148,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
     public int compareTo(final RandomUniqueIdentitfier that) {
         return compareToBuilder()
                 .append(getId(), that.getId())
-                .compare();
+                .build();
     }
 
     /**
@@ -158,7 +158,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
     public int hashCode() {
         return hashCodeBuilder()
                 .append(getId())
-                .hash();
+                .build();
     }
 
     /**
@@ -169,6 +169,6 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         return toStringBuilder(this)
                 .append("Radix 32 Universally Unique Identity", getId())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 }

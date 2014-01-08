@@ -340,7 +340,7 @@ public class Address implements Serializable, Comparable<Address> {
                     .append(getCode(), that_.getCode())
                     .append(getLocation(), that_.getLocation())
                     .append(getCity(), that_.getCity())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
@@ -359,7 +359,7 @@ public class Address implements Serializable, Comparable<Address> {
                 .append(getLocation(), that.getLocation())
                 .append(getCity(), that.getCity())
                 .append(getSuburb(), that.getSuburb())
-                .compare();
+                .build();
     }
 
     /**
@@ -373,7 +373,7 @@ public class Address implements Serializable, Comparable<Address> {
                 .append(getLocation())
                 .append(getCity())
                 .append(getSuburb())
-                .hash();
+                .build();
     }
 
     /**
@@ -392,7 +392,7 @@ public class Address implements Serializable, Comparable<Address> {
                 .append("Country", getCountry())
                 .append("Code", getCode())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /**

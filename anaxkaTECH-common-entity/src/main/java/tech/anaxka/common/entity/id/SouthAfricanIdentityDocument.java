@@ -122,7 +122,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
 
             result_ = equalsBuilder()
                     .append(getIdentityNumber(), that_.getIdentityNumber())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
@@ -136,7 +136,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
     public int compareTo(final SouthAfricanIdentityDocument that) {
         return compareToBuilder()
                 .append(getIdentityNumber(), that.getIdentityNumber())
-                .compare();
+                .build();
     }
 
     /**
@@ -146,7 +146,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
     public int hashCode() {
         return hashCodeBuilder()
                 .append(getIdentityNumber())
-                .hash();
+                .build();
     }
 
     /**
@@ -158,6 +158,6 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
                 .append("Identity Number", getIdentityNumber())
                 .append("Release Date", getReleaseDate())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 }

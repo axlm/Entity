@@ -38,7 +38,7 @@ public class Builders {
         return new TelephoneNumberBuilder();
     }
 
-    public static final class AddressBuilder implements Builder<Address> {
+    public static class AddressBuilder implements Builder<Address> {
 
         private final Address __ = new Address();
 
@@ -92,7 +92,7 @@ public class Builders {
         }
     }
 
-    public static final class EmailAddressBuilder implements Builder<EmailAddress> {
+    public static class EmailAddressBuilder implements Builder<EmailAddress> {
 
         private final EmailAddress __ = new EmailAddress();
 
@@ -121,7 +121,7 @@ public class Builders {
         }
     }
 
-    public static final class TelephoneNumberBuilder implements Builder<TelephoneNumber> {
+    public static class TelephoneNumberBuilder implements Builder<TelephoneNumber> {
 
         private final TelephoneNumber __ = new TelephoneNumber();
 

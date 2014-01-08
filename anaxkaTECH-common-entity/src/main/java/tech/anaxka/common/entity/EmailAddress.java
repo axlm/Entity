@@ -197,7 +197,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
             result_ = equalsBuilder()
                     .append(getType(), that_.getType())
                     .append(getAddress(), that_.getAddress())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
@@ -213,7 +213,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         return compareToBuilder()
                 .append(getType(), that.getType())
                 .append(getAddress(), that.getAddress())
-                .compare();
+                .build();
     }
 
     /**
@@ -224,7 +224,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         return hashCodeBuilder()
                 .append(getType())
                 .append(getAddress())
-                .hash();
+                .build();
     }
 
     /**
@@ -238,7 +238,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
                 .append("Type", getType())
                 .append("Address", getAddress())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /**

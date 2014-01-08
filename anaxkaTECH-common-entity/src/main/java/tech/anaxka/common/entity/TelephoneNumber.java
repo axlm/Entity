@@ -284,7 +284,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
                     .append(getCountryCode(), that_.getCountryCode())
                     .append(getAreaCode(), that_.getAreaCode())
                     .append(getNumber(), that_.getNumber())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
@@ -302,7 +302,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
                 .append(getCountryCode(), that.getCountryCode())
                 .append(getAreaCode(), that.getAreaCode())
                 .append(getNumber(), that.getNumber())
-                .compare();
+                .build();
     }
 
     /**
@@ -315,7 +315,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
                 .append(getAreaCode())
                 .append(getCountryCode())
                 .append(getNumber())
-                .hash();
+                .build();
     }
 
     /**
@@ -332,7 +332,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
                 .append("Number", getNumber())
                 .append("Extension", getExtension())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /**

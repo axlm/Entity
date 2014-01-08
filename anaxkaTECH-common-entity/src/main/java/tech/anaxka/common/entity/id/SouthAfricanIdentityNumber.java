@@ -364,7 +364,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
 
             result_ = equalsBuilder()
                     .append(getNumber(), that_.getNumber())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
@@ -378,7 +378,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
     public int compareTo(final SouthAfricanIdentityNumber that) {
         return compareToBuilder()
                 .append(getNumber(), that.getNumber())
-                .compare();
+                .build();
     }
 
     /**
@@ -388,7 +388,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
     public int hashCode() {
         return hashCodeBuilder()
                 .append(getNumber())
-                .hash();
+                .build();
     }
 
     /**
@@ -399,7 +399,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         return toStringBuilder(this)
                 .append("South African Identity Number", getNumber())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /* For internal use only. */

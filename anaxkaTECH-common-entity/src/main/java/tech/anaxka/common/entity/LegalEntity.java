@@ -524,6 +524,6 @@ public abstract class LegalEntity implements Serializable {
                 .append("Telephone Numbers", __telephoneNumbers)
                 .append("Addresses", __addresses)
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 }
