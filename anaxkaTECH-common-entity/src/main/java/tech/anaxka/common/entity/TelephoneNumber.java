@@ -13,11 +13,11 @@
  */
 package tech.anaxka.common.entity;
 
-import static _4axka.util.lang.CompareTo.compareToBuilder;
-import static _4axka.util.lang.Equals.equalsBuilder;
-import static _4axka.util.lang.Equals.isEquatable;
-import static _4axka.util.lang.HashCode.hashCodeBuilder;
-import static _4axka.util.lang.ToString.toStringBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
+import static tech.anaxka.common.utility.lang.Equals.isEquatable;
+import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 import java.io.Serializable;
 

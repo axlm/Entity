@@ -13,7 +13,7 @@
  */
 package tech.anaxka.common.entity;
 
-import static _4axka.util.lang.ToString.toStringBuilder;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 import java.util.Date;
 import java.util.Set;

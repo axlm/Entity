@@ -1,17 +1,17 @@
 package tech.anaxka.common.entity;
 
-import static _4axka.common.entity.Builders.addressBuilder;
-import static _4axka.common.entity.Builders.emailAddressBuilder;
-import static _4axka.common.entity.Builders.telephoneNumberBuilder;
+import static tech.anaxka.common.entity.Builders.addressBuilder;
+import static tech.anaxka.common.entity.Builders.emailAddressBuilder;
+import static tech.anaxka.common.entity.Builders.telephoneNumberBuilder;
 import static tech.anaxka.common.entity.SouthAfricanCitizen.southAfricanCitizenBuilder;
 
-import static _4axka.util.builder.DateTimeBuilder.dateTimeBuilder;
+import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder;
 
-import _4axka.common.entity.Address.AddressType;
-import _4axka.common.entity.EmailAddress.EmailAddressType;
-import _4axka.common.entity.Person.GenderType;
-import _4axka.common.entity.TelephoneNumber.TelephoneNumberType;
-import _4axka.common.entity.id.SouthAfricanIdentityDocument;
+import tech.anaxka.common.entity.Address.AddressType;
+import tech.anaxka.common.entity.EmailAddress.EmailAddressType;
+import tech.anaxka.common.entity.Person.GenderType;
+import tech.anaxka.common.entity.TelephoneNumber.TelephoneNumberType;
+import tech.anaxka.common.entity.id.SouthAfricanIdentityDocument;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

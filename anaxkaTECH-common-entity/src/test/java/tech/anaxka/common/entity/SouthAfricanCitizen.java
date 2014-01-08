@@ -1,8 +1,8 @@
 package tech.anaxka.common.entity;
 
-import _4axka.common.entity.id.SouthAfricanIdentityDocument;
-import _4axka.util.data.Identifiable;
-import _4axka.util.functor.Builder;
+import tech.anaxka.common.entity.id.SouthAfricanIdentityDocument;
+import tech.anaxka.common.utility.data.Identifiable;
+import tech.anaxka.common.utility.functor.Builder;
 import java.util.Date;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

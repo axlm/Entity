@@ -13,10 +13,10 @@
  */
 package tech.anaxka.common.entity;
 
-import static _4axka.util.lang.ToString.toStringBuilder;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
-import _4axka.util.functor.Modifier;
-import _4axka.util.functor.Predicate;
+import tech.anaxka.common.utility.functor.Modifier;
+import tech.anaxka.common.utility.functor.Predicate;
 
 import java.io.Serializable;
 import java.util.ArrayList;

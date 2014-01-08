@@ -18,8 +18,7 @@ import tech.anaxka.common.entity.EmailAddress.EmailAddressType;
 import tech.anaxka.common.entity.Person.GenderType;
 import tech.anaxka.common.entity.Person.TitleType;
 import tech.anaxka.common.entity.TelephoneNumber.TelephoneNumberType;
-import _4axka.util.functor.Builder;
-import java.io.Serializable;
+import tech.anaxka.common.utility.functor.Builder;
 import java.util.Date;
 
 public class Builders {
