@@ -1,1 +1,4 @@
-anaxkaTECH-common-entity/target/
+bin/
+classes/
+dist/
+target/
