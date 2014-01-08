@@ -26,6 +26,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
@@ -70,6 +71,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
             pkColumnName = "GENERATOR",
             pkColumnValue = "telephone_number_id",
             valueColumnName = "VALUE")
+    @GeneratedValue(generator = "telephone_number_id_generator")
     @Column(name = "ID")
     private Long __id;
 

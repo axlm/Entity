@@ -28,6 +28,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
@@ -73,6 +74,7 @@ public abstract class LegalEntity implements Serializable {
             pkColumnName = "GENERATOR",
             pkColumnValue = "entity_id",
             valueColumnName = "VALUE")
+    @GeneratedValue(generator = "entity_id_generator")
     @Column(name = "ID")
     private Long __id;
 
