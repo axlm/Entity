@@ -17,16 +17,14 @@ package tech.anaxka.common.entity.family;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
 import tech.anaxka.common.entity.Person;
 
 
-public final class Member extends Person {
+public class Member extends Person {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>

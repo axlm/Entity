@@ -1,36 +1,31 @@
 package tech.anaxka.common.entity;
 
-import static tech.anaxka.common.entity.Builders.addressBuilder;
-import static tech.anaxka.common.entity.Builders.emailAddressBuilder;
-import static tech.anaxka.common.entity.Builders.telephoneNumberBuilder;
-import static tech.anaxka.common.entity.SouthAfricanCitizen.southAfricanCitizenBuilder;
-
-import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder;
-
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import javax.persistence.EntityManager;
+import org.eclipse.persistence.config.PersistenceUnitProperties;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import tech.anaxka.common.entity.Address.AddressType;
 import tech.anaxka.common.entity.EmailAddress.EmailAddressType;
 import tech.anaxka.common.entity.Person.GenderType;
 import tech.anaxka.common.entity.TelephoneNumber.TelephoneNumberType;
 import tech.anaxka.common.entity.id.SouthAfricanIdentityDocument;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.security.SecureRandom;
-import java.util.ArrayList;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-//~--- JDK imports ------------------------------------------------------------
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import org.eclipse.persistence.config.PersistenceUnitProperties;
+import static java.nio.file.Files.readAllLines;
+import static java.nio.file.Paths.get;
+import static javax.persistence.Persistence.createEntityManagerFactory;
+import static tech.anaxka.common.entity.Builders.addressBuilder;
+import static tech.anaxka.common.entity.Builders.emailAddressBuilder;
+import static tech.anaxka.common.entity.Builders.telephoneNumberBuilder;
+import static tech.anaxka.common.entity.SouthAfricanCitizen.southAfricanCitizenBuilder;
+import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder;
 
 /**
  * Class description

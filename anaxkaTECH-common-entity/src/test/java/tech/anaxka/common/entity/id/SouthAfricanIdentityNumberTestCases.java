@@ -13,8 +13,6 @@
  */
 package tech.anaxka.common.entity.id;
 
-import static org.testng.Assert.assertTrue;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,13 +20,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import tech.anaxka.common.entity.Person.GenderType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import tech.anaxka.common.entity.Person.GenderType;
+
+import static org.testng.Assert.assertTrue;
 
 public class SouthAfricanIdentityNumberTestCases {
 

@@ -1,9 +1,10 @@
 package tech.anaxka.common.entity;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static javax.persistence.Persistence.createEntityManagerFactory;
+import static org.testng.Assert.assertNotNull;
 
 public class CreateMySQLScriptTest {
     

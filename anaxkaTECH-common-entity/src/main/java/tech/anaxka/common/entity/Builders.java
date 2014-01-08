@@ -13,13 +13,13 @@
  */
 package tech.anaxka.common.entity;
 
+import java.util.Date;
 import tech.anaxka.common.entity.Address.AddressType;
 import tech.anaxka.common.entity.EmailAddress.EmailAddressType;
 import tech.anaxka.common.entity.Person.GenderType;
 import tech.anaxka.common.entity.Person.TitleType;
 import tech.anaxka.common.entity.TelephoneNumber.TelephoneNumberType;
 import tech.anaxka.common.utility.functor.Builder;
-import java.util.Date;
 
 public class Builders {
 

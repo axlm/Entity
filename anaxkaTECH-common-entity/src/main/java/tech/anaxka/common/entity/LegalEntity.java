@@ -13,18 +13,11 @@
  */
 package tech.anaxka.common.entity;
 
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
-import tech.anaxka.common.utility.functor.Modifier;
-import tech.anaxka.common.utility.functor.Predicate;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
@@ -43,6 +36,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import tech.anaxka.common.utility.functor.Modifier;
+import tech.anaxka.common.utility.functor.Predicate;
+
+import static java.util.Collections.unmodifiableList;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
