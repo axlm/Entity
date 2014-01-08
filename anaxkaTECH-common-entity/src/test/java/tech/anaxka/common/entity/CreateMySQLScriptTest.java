@@ -13,8 +13,8 @@ public class CreateMySQLScriptTest {
     
     @Test
     public void createSQLScripts() {
-        final EntityManager __manager = Persistence.createEntityManagerFactory("MySQLddlPU").createEntityManager();
-        Assert.assertNotNull(__manager);
+        final EntityManager __manager = createEntityManagerFactory("MySQLddlPU").createEntityManager();
+        assertNotNull(__manager);
         __manager.close();
     }
 }

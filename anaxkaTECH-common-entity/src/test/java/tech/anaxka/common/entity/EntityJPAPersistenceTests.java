@@ -55,13 +55,13 @@ public class EntityJPAPersistenceTests {
     @BeforeClass
     void setUpTestDataVectors() throws IOException {
         // TODO: fix the paths... Move it to META-INF.
-        FAMILIES.addAll(Files.readAllLines(Paths.get(
+        FAMILIES.addAll(readAllLines(get(
                 PATH + "family.names"),
                 StandardCharsets.UTF_8));
-        FEMALES.addAll(Files.readAllLines(Paths.get(
+        FEMALES.addAll(readAllLines(get(
                 PATH + "female.names"),
                 StandardCharsets.UTF_8));
-        MALES.addAll(Files.readAllLines(Paths.get(
+        MALES.addAll(readAllLines(get(
                 PATH + "male.names"),
                 StandardCharsets.UTF_8));
     }
@@ -73,7 +73,7 @@ public class EntityJPAPersistenceTests {
     @BeforeClass(enabled = false)
     void setUpJPAEnvironment() {
         if (__manager == null) {
-            __manager = Persistence.createEntityManagerFactory("memoryPU").createEntityManager();
+            __manager = createEntityManagerFactory("memoryPU").createEntityManager();
         }
 
         __manager.setProperty(PersistenceUnitProperties.LOGGING_LOGGER, "JavaLogger");
