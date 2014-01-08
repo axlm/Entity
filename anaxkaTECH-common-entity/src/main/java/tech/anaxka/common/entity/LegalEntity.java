@@ -195,7 +195,7 @@ public abstract class LegalEntity implements Serializable {
             result_.add(new EmailAddress(ea_));
         }
 
-        return Collections.unmodifiableList(result_);
+        return unmodifiableList(result_);
     }
 
     /**
@@ -337,7 +337,7 @@ public abstract class LegalEntity implements Serializable {
             result_.add(new TelephoneNumber(t_));
         }
 
-        return Collections.unmodifiableList(result_);
+        return unmodifiableList(result_);
     }
 
     public final boolean addTelephoneNumber(final TelephoneNumber number) {
@@ -429,7 +429,7 @@ public abstract class LegalEntity implements Serializable {
             result_.add(new Address(a_));
         }
 
-        return Collections.unmodifiableList(result_);
+        return unmodifiableList(result_);
     }
 
     public final boolean addAddress(final Address address) {

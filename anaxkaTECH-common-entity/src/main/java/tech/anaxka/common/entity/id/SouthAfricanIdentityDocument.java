@@ -94,7 +94,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
     }
 
     public Byte[] getImage() {
-        return __image;
+        return Arrays.copyOf(__image, __image.length);
     }
 
     final void setImage(final Byte[] image) {
@@ -102,7 +102,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
     }
 
     public Date getReleaseDate() {
-        return __releaseDate;
+        return new Date(__releaseDate.getTime());
     }
 
     final void setReleaseDate(final Date date) {

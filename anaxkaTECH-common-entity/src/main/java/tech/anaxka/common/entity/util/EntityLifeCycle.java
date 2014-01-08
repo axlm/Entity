@@ -39,7 +39,7 @@ public class EntityLifeCycle implements Serializable {
         this();
         __state = state;
         __source = source;
-        __timestamp = timestamp;
+        __timestamp = new Date(timestamp.getTime());
     }
 
     public LifeCycleStateType getState() {
@@ -59,11 +59,11 @@ public class EntityLifeCycle implements Serializable {
     }
 
     public Date getTimestamp() {
-        return __timestamp;
+        return new Date(__timestamp.getTime());
     }
 
-    public void setTimestamp(Date timestamp) {
-        __timestamp = timestamp;
+    public void setTimestamp(final Date timestamp) {
+        __timestamp = new Date(timestamp.getTime());
     }
 
     public enum LifeCycleStateType {

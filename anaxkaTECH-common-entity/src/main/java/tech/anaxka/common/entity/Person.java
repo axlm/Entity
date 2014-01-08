@@ -349,7 +349,7 @@ public abstract class Person extends LegalEntity {
      * @return The value of <code>this</code> instance's {@linkplain #__deceasedOn date of death}.
      */
     public final Date getDeceasedOn() {
-        return __deceasedOn;
+        return new Date(__deceasedOn.getTime());
     }
 
     /**
@@ -367,7 +367,7 @@ public abstract class Person extends LegalEntity {
      * @return The value of <code>this</code> instance's {@linkplain #__dateOfBirth date of birth}.
      */
     public final Date getDateOfBirth() {
-        return __dateOfBirth;
+        return new Date(__dateOfBirth.getTime());
     }
 
     /**

@@ -88,7 +88,7 @@ public class SouthAfricanIdentityNumberTestCases {
         for (String key_ : __ids.keySet()) {
             final Boolean vectorWasBornInSouthAfrica_ = __vectors.get(key_).wasBornInSouthAfrica();
             final Boolean idWasBornInSouthAfrica_ = __ids.get(key_).wasBornInSouthAfrica();
-            assertTrue(vectorWasBornInSouthAfrica_ == idWasBornInSouthAfrica_);
+            assertTrue(vectorWasBornInSouthAfrica_.equals(idWasBornInSouthAfrica_));
         }
     }
 
@@ -97,7 +97,7 @@ public class SouthAfricanIdentityNumberTestCases {
         for (String key_ : __ids.keySet()) {
             final Boolean vectorIsValid_ = __vectors.get(key_).isValid();
             final Boolean idIsValid_ = __ids.get(key_).isValid();
-            assertTrue(vectorIsValid_ == idIsValid_);
+            assertTrue(vectorIsValid_.equals(idIsValid_));
         }
     }
 

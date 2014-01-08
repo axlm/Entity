@@ -78,7 +78,7 @@ public class Member extends Person {
         return __spouses;
     }
 
-    public void addSpouses(final Iterable<Member> spouses) {
+    public final void addSpouses(final Iterable<Member> spouses) {
         for (final Member spouse_ : spouses) {
             addSpouse(spouse_);
         }
@@ -94,7 +94,7 @@ public class Member extends Person {
         return __parents;
     }
 
-    public void addParents(final Iterable<Member> parents) {
+    public final void addParents(final Iterable<Member> parents) {
         for (final Member parent_ : parents) {
             addParent(parent_);
         }
@@ -110,7 +110,7 @@ public class Member extends Person {
         return __siblings;
     }
 
-    public void addSiblings(final Iterable<Member> siblings) {
+    public final void addSiblings(final Iterable<Member> siblings) {
         for (final Member sibling_ : siblings) {
             addSibling(sibling_);
         }
@@ -126,7 +126,7 @@ public class Member extends Person {
         return __children;
     }
 
-    public void addChildren(final Iterable<Member> children) {
+    public final void addChildren(final Iterable<Member> children) {
         for (final Member child_ : children) {
             addChild(child_);
         }
@@ -142,7 +142,7 @@ public class Member extends Person {
         return __gaurdians;
     }
 
-    public void addGuardians(final Iterable<Member> guardians) {
+    public final void addGuardians(final Iterable<Member> guardians) {
         for (final Member guardian_ : guardians) {
             addGuardian(guardian_);
         }

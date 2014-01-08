@@ -99,7 +99,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      * @return A newly created {@link RandomUniqueIdentitfier}.
      */
     public static RandomUniqueIdentitfier generate() {
-        return new RandomUniqueIdentitfier(UUID.randomUUID().toString());
+        return new RandomUniqueIdentitfier(randomUUID().toString());
     }
 
     /**
@@ -117,8 +117,12 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      * @param id Value to assign to <code>this</code> {@linkplain #__id identifier}.
      */
     final void setId(final String id) {
-        final BigInteger radix32Identifier_ = new BigInteger(id.getBytes());
-        __id = radix32Identifier_.toString(32);
+        try {
+            final BigInteger radix32Identifier_ = new BigInteger(id.getBytes("UTF8"));
+            __id = radix32Identifier_.toString(32);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(RandomUniqueIdentitfier.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -133,7 +137,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         if (isEquatable(this, that)) {
             final RandomUniqueIdentitfier that_ = RandomUniqueIdentitfier.class.cast(that);
 
-            result_ = equalsBuilder().append(getId(), that_.getId()).isEqual();
+            result_ = equalsBuilder().append(getId(), that_.getId()).build();
         }
 
         return result_;
