@@ -71,7 +71,7 @@ public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfr
         __identifier = id;
     }
 
-    public static final class SouthAfricanCitizenBuilder implements Builder<SouthAfricanCitizen> {
+    public static class SouthAfricanCitizenBuilder implements Builder<SouthAfricanCitizen> {
 
         private static final SouthAfricanCitizen __ = new SouthAfricanCitizen();
 
