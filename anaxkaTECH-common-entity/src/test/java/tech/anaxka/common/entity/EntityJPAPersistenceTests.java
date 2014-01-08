@@ -1,9 +1,9 @@
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
 import static _4axka.common.entity.Builders.addressBuilder;
 import static _4axka.common.entity.Builders.emailAddressBuilder;
 import static _4axka.common.entity.Builders.telephoneNumberBuilder;
-import static _4axka.common.entity.SouthAfricanCitizen.southAfricanCitizenBuilder;
+import static tech.anaxka.common.entity.SouthAfricanCitizen.southAfricanCitizenBuilder;
 
 import static _4axka.util.builder.DateTimeBuilder.dateTimeBuilder;
 

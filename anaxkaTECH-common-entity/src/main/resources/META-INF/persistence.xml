@@ -2,12 +2,12 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="diskPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>_4axka.common.entity.SouthAfricanCitizen</class>
     <class>tech.anaxka.common.entity.TelephoneNumber</class>
     <class>tech.anaxka.common.entity.EmailAddress</class>
     <class>tech.anaxka.common.entity.Person</class>
     <class>tech.anaxka.common.entity.LegalEntity</class>
     <class>tech.anaxka.common.entity.Address</class>
+    <class>tech.anaxka.common.entity.SouthAfricanCitizen</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/Rolodex"/>
@@ -18,12 +18,12 @@
   </persistence-unit>
   <persistence-unit name="memoryPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>_4axka.common.entity.SouthAfricanCitizen</class>
     <class>tech.anaxka.common.entity.TelephoneNumber</class>
     <class>tech.anaxka.common.entity.EmailAddress</class>
     <class>tech.anaxka.common.entity.Person</class>
     <class>tech.anaxka.common.entity.LegalEntity</class>
     <class>tech.anaxka.common.entity.Address</class>
+    <class>tech.anaxka.common.entity.SouthAfricanCitizen</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:Rolodex;create=true"/>
@@ -40,12 +40,12 @@
   </persistence-unit>
   <persistence-unit name="MySQLddlPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>_4axka.common.entity.SouthAfricanCitizen</class>
     <class>tech.anaxka.common.entity.TelephoneNumber</class>
     <class>tech.anaxka.common.entity.EmailAddress</class>
     <class>tech.anaxka.common.entity.Person</class>
     <class>tech.anaxka.common.entity.LegalEntity</class>
     <class>tech.anaxka.common.entity.Address</class>
+    <class>tech.anaxka.common.entity.SouthAfricanCitizen</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.159.10:3306/rolodex?zeroDateTimeBehavior=convertToNull"/>

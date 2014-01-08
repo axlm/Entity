@@ -1,4 +1,4 @@
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
 import _4axka.common.entity.id.SouthAfricanIdentityDocument;
 import _4axka.util.data.Identifiable;

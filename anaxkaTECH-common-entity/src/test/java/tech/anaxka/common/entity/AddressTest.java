@@ -1,4 +1,4 @@
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;

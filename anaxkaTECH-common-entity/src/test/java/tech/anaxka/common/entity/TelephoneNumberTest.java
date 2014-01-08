@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.AfterClass;

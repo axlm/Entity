@@ -1,4 +1,4 @@
-package _4axka.common.entity;
+package tech.anaxka.common.entity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
