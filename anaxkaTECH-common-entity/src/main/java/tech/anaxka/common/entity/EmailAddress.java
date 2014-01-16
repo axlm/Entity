@@ -43,7 +43,7 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * <p>
+ * <p/>
  */
 @XmlRootElement(name = "emailAddress")
 @XmlType(name = "EmailAddress")
@@ -53,11 +53,11 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Determines if a de-serialised file is compatible with this class.
-     * <p>
+     * <p/>
      * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
      * class is not compatible with the previous version. It is not necessary to include in first
      * version of the class, but included here as a reminder of its importance.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -93,10 +93,10 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Default constructor.
-     * <p>
+     * <p/>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public EmailAddress() {
@@ -106,7 +106,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
     /**
      * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
      * <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param type    see {@link #getType() type}.
      * @param address see {@link #getAddress() address}.
      */
@@ -118,7 +118,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param template Uses template as template to initialise {@linkplain EmailAddress
      *            {@code this}}.
      */
@@ -128,7 +128,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__id id}.
      */
     public final Long getId() {
@@ -141,7 +141,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
@@ -150,7 +150,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__type type}.
      */
     public final EmailAddressType getType() {
@@ -159,7 +159,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param type Value to assign to {@code this} {@linkplain #__type email address type}.
      */
     final void setType(final EmailAddressType type) {
@@ -168,7 +168,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__address address}.
      */
     public final String getAddress() {
@@ -177,7 +177,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param address Value to assign to {@code this} {@linkplain #__address address}.
      */
     final void setAddress(final String address) {
@@ -186,7 +186,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * {@inheritDoc}
-     * <p>
+     * <p/>
      * @param that
      */
     @Override
@@ -207,7 +207,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * {@inheritDoc}
-     * <p>
+     * <p/>
      * @param that
      */
     @Override

@@ -53,11 +53,11 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Determines if a de-serialised file is compatible with this class.
-     * <p>
+     * <p/>
      * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
      * class is not compatible with the previous version. It is not necessary to include in first
      * version of the class, but included here as a reminder of its importance.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -113,10 +113,10 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Default constructor.
-     * <p>
+     * <p/>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public LegalEntity() {
@@ -126,7 +126,7 @@ public abstract class LegalEntity implements Serializable {
     /**
      * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
      * <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param emailAddresses  see {@link LegalEntity#getEmailAddresses() email addresses}.
      * @param numbers         see {@link LegalEntity#getTelephoneNumbers() telephone numbers}.
      * @param addresses       see {@link LegalEntity#getAddresses() addresses}.
@@ -143,10 +143,10 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param template Uses template as template to initialise
      *                 {@linkplain LegalEntity {@code this}}.
-     * <p>
+     * <p/>
      * @see super
      */
     public LegalEntity(final LegalEntity template) {
@@ -158,7 +158,7 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__id id}.
      */
     public final Long getId() {
@@ -171,7 +171,7 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
@@ -180,10 +180,10 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return All the {@linkplain #__emailAddresses email addresses} associated with {@code this}
      *         {@linkplain LegalEntity legal entity}.
-     * <p>
+     * <p/>
      * @note This operation returns a defensive copy of each {@link EmailAddress} associated with
      * {@code this} {@linkplain LegalEntity legal entity}.
      */
@@ -200,10 +200,10 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param address {@link EmailAddress Email address} to associate with {@link LegalEntity this}
      *                legal entity.
-     * <p>
+     * <p/>
      * @return {@code true} if the {@linkplain EmailAddress email address} was successfully added.
      */
     public final boolean addEmailAddress(final EmailAddress address) {
@@ -212,11 +212,11 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param addresses A {@linkplain Iterable collection} of
      *                  {@linkplain EmailAddress email addresses} to add to {@code this}
      *                  {@link LegalEntity}.
-     * <p>
+     * <p/>
      * @return A {@linkplain Iterable sequence} of {@link EmailAddress addresses} added to
      *         {@code this}.
      */
@@ -234,10 +234,10 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param addresses {@code Array} of {@linkplain EmailAddress email addresses} to add to
      *                  {@code this}.
-     * <p>
+     * <p/>
      * @return The {@link Address addresses} added to {@code this}.
      */
     public final Iterable<EmailAddress> addEmailAddresses(final EmailAddress... addresses) {
@@ -254,10 +254,10 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param address {@link EmailAddress} to remove from {@code this} {@linkplain #__emailAddresses
      *  		email addresses}.
-     * <p>
+     * <p/>
      * @return {@code true} if the {@linkplain EmailAddress email addess} was removed.
      */
     public final boolean removeEmailAddress(final EmailAddress address) {
@@ -266,8 +266,8 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      * Removes a {@code EmailAddress} matched by the supplied {@linkplain Predicate predicate}.
-     * <p>
-     * @param predicate <p>
+     * <p/>
+     * @param predicate <p/>
      * @return
      */
     public final Iterable<EmailAddress> removeEmailAddresses(
@@ -288,7 +288,7 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      *
-     * @param predicate <p>
+     * @param predicate <p/>
      * @return
      */
     public Iterable<EmailAddress> findEmailAddresses(
@@ -307,7 +307,7 @@ public abstract class LegalEntity implements Serializable {
     /**
      *
      * @param predicate
-     * @param modifier  <p>
+     * @param modifier  <p/>
      * @return
      */
     public Iterable<EmailAddress> modifyEmailAddresses(

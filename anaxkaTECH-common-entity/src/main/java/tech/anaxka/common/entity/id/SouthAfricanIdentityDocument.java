@@ -41,11 +41,11 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
 
     /**
      * Determines if a de-serialised file is compatible with this class.
-     * <p>
+     * <p/>
      * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
      * class is not compatible with the previous version. It is not necessary to include in first
      * version of the class, but included here as a reminder of its importance.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient

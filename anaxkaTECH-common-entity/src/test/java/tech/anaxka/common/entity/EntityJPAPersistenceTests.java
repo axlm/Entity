@@ -29,7 +29,7 @@ import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder
 
 /**
  * Class description
- * <p>
+ * <p/>
  *
  * @version Enter version here..., 13/12/17
  * @author Enter your name here...
@@ -47,7 +47,7 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Constructs ...
-     * <p>
+     * <p/>
      */
     public EntityJPAPersistenceTests() {
     }
@@ -62,7 +62,7 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     @BeforeClass(enabled = false)
     void setUpJPAEnvironment() {
@@ -78,7 +78,7 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     @Test(enabled = false)
     void testAddPerson() {
@@ -89,28 +89,28 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     void testFindPerson() {
     }
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     void testModifyPerson() {
     }
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     void testRemovePerson() {
     }
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     @Test(enabled = false)
     public void showGeneratedNames() {
@@ -121,7 +121,7 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Method description
-     * <p>
+     * <p/>
      *
      * @return
      */

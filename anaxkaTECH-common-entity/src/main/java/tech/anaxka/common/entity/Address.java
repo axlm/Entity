@@ -43,7 +43,7 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * <p>
+ * <p/>
  */
 // JAXB
 @XmlRootElement(name = "address")
@@ -55,11 +55,11 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Determines if a de-serialised file is compatible with this class.
-     * <p>
+     * <p/>
      * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
      * class is not compatible with the previous version. It is not necessary to include in first
      * version of the class, but included here as a reminder of its importance.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -120,10 +120,10 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Default constructor.
-     * <p>
+     * <p/>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public Address() {
@@ -133,7 +133,7 @@ public class Address implements Serializable, Comparable<Address> {
     /**
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param type see {@link #getType() type}.
      * @param location see {@link #getLocation() location}.
      * @param suburb see {@link #getSuburb() suburb}.
@@ -162,7 +162,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param template Uses template as template to initialise {@linkplain Address
      *            <code>this</code>}.
      */
@@ -179,7 +179,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__id id}.
      */
     public final Long getId() {
@@ -192,7 +192,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
@@ -201,7 +201,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__type address type}.
      */
     public final AddressType getType() {
@@ -210,7 +210,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param type Value to assign to <code>this</code> {@linkplain #__type address type}.
      */
     final void setType(final AddressType type) {
@@ -219,7 +219,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__location location}.
      */
     public final String getLocation() {
@@ -228,7 +228,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param location Value to assign to <code>this</code> {@linkplain #__location location}.
      */
     final void setLocation(final String location) {
@@ -237,7 +237,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__suburb suburb}.
      */
     public final String getSuburb() {
@@ -246,7 +246,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param suburb Value to assign to <code>this</code> {@linkplain #__suburb suburb}.
      */
     final void setSuburb(final String suburb) {
@@ -255,7 +255,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__city city}.
      */
     public final String getCity() {
@@ -264,7 +264,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param city Value to assign to <code>this</code> {@linkplain #__city city}.
      */
     final void setCity(final String city) {
@@ -273,7 +273,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__region region}.
      */
     public final String getRegion() {
@@ -282,7 +282,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param region Value to assign to <code>this</code> {@linkplain #__region region}.
      */
     final void setRegion(final String region) {
@@ -291,7 +291,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__country country}.
      */
     public final String getCountry() {
@@ -300,7 +300,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param country Value to assign to <code>this</code> {@linkplain #__country country}.
      */
     final void setCountry(final String country) {
@@ -309,7 +309,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__code code}.
      */
     public final String getCode() {
@@ -318,7 +318,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param code Value to assign to <code>this</code> {@linkplain #__code code}.
      */
     final void setCode(final String code) {
@@ -327,7 +327,7 @@ public class Address implements Serializable, Comparable<Address> {
 
     /**
      * {@inheritDoc}
-     * <p>
+     * <p/>
      * @param that
      */
     @Override
@@ -351,7 +351,7 @@ public class Address implements Serializable, Comparable<Address> {
     
     /**
      * {@inheritDoc}
-     * <p>
+     * <p/>
      * @param that
      */
     @Override

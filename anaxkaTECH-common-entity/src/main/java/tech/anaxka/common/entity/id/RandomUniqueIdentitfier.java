@@ -46,11 +46,11 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * Determines if a de-serialised file is compatible with this class.
-     * <p>
+     * <p/>
      * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
      * class is not compatible with the previous version. It is not necessary to include in first
      * version of the class, but included here as a reminder of its importance.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     @XmlTransient
@@ -64,10 +64,10 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * Default constructor.
-     * <p>
+     * <p/>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public RandomUniqueIdentitfier() {
@@ -77,7 +77,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
     /**
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param id
      */
     public RandomUniqueIdentitfier(final String id) {
@@ -87,7 +87,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param template Uses template as template to initialise {@linkplain RandomUniqueIdentitfier
      *            <code>this</code>}.
      */
@@ -97,7 +97,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * Creates a new {@link RandomUniqueIdentitfier}.
-     * <p>
+     * <p/>
      * @return A newly created {@link RandomUniqueIdentitfier}.
      */
     public static RandomUniqueIdentitfier generate() {
@@ -106,7 +106,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__id identifier}.
      */
     public String getId() {
@@ -115,7 +115,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param id Value to assign to <code>this</code> {@linkplain #__id identifier}.
      */
     final void setId(final String id) {
@@ -129,7 +129,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * @param that
-     * <p>
+     * <p/>
      * @{inheritDoc}
      */
     @Override
@@ -147,7 +147,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
 
     /**
      * @param that
-     * <p>
+     * <p/>
      * @{inheritDoc}
      */
     @Override
