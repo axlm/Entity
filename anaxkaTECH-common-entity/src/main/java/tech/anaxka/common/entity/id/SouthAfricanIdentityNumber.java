@@ -31,7 +31,9 @@ import tech.anaxka.common.entity.Person.GenderType;
 
 import static java.lang.Integer.parseInt;
 import static java.util.logging.Logger.getLogger;
+import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
 import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
 import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
 import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
@@ -376,9 +378,13 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
      */
     @Override
     public int compareTo(final SouthAfricanIdentityNumber that) {
-        return compareToBuilder()
-                .append(getNumber(), that.getNumber())
-                .build();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getNumber(), that.getNumber())
+                    .build();
+        } else {
+            return EQUAL;
+        }
     }
 
     /**

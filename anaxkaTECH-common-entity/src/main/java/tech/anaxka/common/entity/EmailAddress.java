@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
 import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
 import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
 import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
@@ -210,10 +212,14 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      */
     @Override
     public int compareTo(final EmailAddress that) {
-        return compareToBuilder()
-                .append(getType(), that.getType())
-                .append(getAddress(), that.getAddress())
-                .build();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getType(), that.getType())
+                    .append(getAddress(), that.getAddress())
+                    .build();
+        } else {
+            return EQUAL;
+        }
     }
 
     /**

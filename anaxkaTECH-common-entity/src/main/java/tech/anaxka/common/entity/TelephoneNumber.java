@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
 import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
 import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
 import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
@@ -297,12 +299,16 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
      */
     @Override
     public int compareTo(final TelephoneNumber that) {
-        return compareToBuilder()
-                .append(getType(), that.getType())
-                .append(getCountryCode(), that.getCountryCode())
-                .append(getAreaCode(), that.getAreaCode())
-                .append(getNumber(), that.getNumber())
-                .build();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getType(), that.getType())
+                    .append(getCountryCode(), that.getCountryCode())
+                    .append(getAreaCode(), that.getAreaCode())
+                    .append(getNumber(), that.getNumber())
+                    .build();
+        } else {
+            return EQUAL;
+        }
     }
 
     /**
