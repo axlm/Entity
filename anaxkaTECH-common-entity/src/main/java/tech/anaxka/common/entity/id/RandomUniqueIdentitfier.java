@@ -13,16 +13,11 @@
  */
 package tech.anaxka.common.entity.id;
 
-import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
-import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
-import static tech.anaxka.common.utility.lang.Equals.isEquatable;
-import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.util.UUID;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -31,6 +26,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import static java.util.UUID.randomUUID;
+import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
+import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
+import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
+import static tech.anaxka.common.utility.lang.Equals.isEquatable;
+import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -97,7 +101,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      * @return A newly created {@link RandomUniqueIdentitfier}.
      */
     public static RandomUniqueIdentitfier generate() {
-        return new RandomUniqueIdentitfier(UUID.randomUUID().toString());
+        return new RandomUniqueIdentitfier(randomUUID().toString());
     }
 
     /**
@@ -115,8 +119,12 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      * @param id Value to assign to <code>this</code> {@linkplain #__id identifier}.
      */
     final void setId(final String id) {
-        final BigInteger radix32Identifier_ = new BigInteger(id.getBytes());
-        __id = radix32Identifier_.toString(32);
+        try {
+            final BigInteger radix32Identifier_ = new BigInteger(id.getBytes("UTF8"));
+            __id = radix32Identifier_.toString(32);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(RandomUniqueIdentitfier.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -131,7 +139,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         if (isEquatable(this, that)) {
             final RandomUniqueIdentitfier that_ = RandomUniqueIdentitfier.class.cast(that);
 
-            result_ = equalsBuilder().append(getId(), that_.getId()).isEqual();
+            result_ = equalsBuilder().append(getId(), that_.getId()).build();
         }
 
         return result_;
@@ -144,9 +152,13 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      */
     @Override
     public int compareTo(final RandomUniqueIdentitfier that) {
-        return compareToBuilder()
-                .append(getId(), that.getId())
-                .compare();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getId(), that.getId())
+                    .build();
+        } else {
+            return EQUAL;
+        }
     }
 
     /**
@@ -156,7 +168,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
     public int hashCode() {
         return hashCodeBuilder()
                 .append(getId())
-                .hash();
+                .build();
     }
 
     /**
@@ -167,6 +179,6 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         return toStringBuilder(this)
                 .append("Radix 32 Universally Unique Identity", getId())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 }

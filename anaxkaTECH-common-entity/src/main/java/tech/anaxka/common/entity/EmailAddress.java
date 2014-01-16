@@ -13,14 +13,7 @@
  */
 package tech.anaxka.common.entity;
 
-import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
-import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
-import static tech.anaxka.common.utility.lang.Equals.isEquatable;
-import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
 import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,6 +32,14 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
+import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
+import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
+import static tech.anaxka.common.utility.lang.Equals.isEquatable;
+import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -198,7 +199,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
             result_ = equalsBuilder()
                     .append(getType(), that_.getType())
                     .append(getAddress(), that_.getAddress())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
@@ -211,10 +212,14 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
      */
     @Override
     public int compareTo(final EmailAddress that) {
-        return compareToBuilder()
-                .append(getType(), that.getType())
-                .append(getAddress(), that.getAddress())
-                .compare();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getType(), that.getType())
+                    .append(getAddress(), that.getAddress())
+                    .build();
+        } else {
+            return EQUAL;
+        }
     }
 
     /**
@@ -225,7 +230,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         return hashCodeBuilder()
                 .append(getType())
                 .append(getAddress())
-                .hash();
+                .build();
     }
 
     /**
@@ -239,7 +244,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
                 .append("Type", getType())
                 .append("Address", getAddress())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /**
