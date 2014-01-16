@@ -13,18 +13,11 @@
  */
 package tech.anaxka.common.entity;
 
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
-import tech.anaxka.common.utility.functor.Modifier;
-import tech.anaxka.common.utility.functor.Predicate;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
@@ -43,6 +36,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import tech.anaxka.common.utility.functor.Modifier;
+import tech.anaxka.common.utility.functor.Predicate;
+
+import static java.util.Collections.unmodifiableList;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -197,7 +195,7 @@ public abstract class LegalEntity implements Serializable {
             result_.add(new EmailAddress(ea_));
         }
 
-        return Collections.unmodifiableList(result_);
+        return unmodifiableList(result_);
     }
 
     /**
@@ -339,7 +337,7 @@ public abstract class LegalEntity implements Serializable {
             result_.add(new TelephoneNumber(t_));
         }
 
-        return Collections.unmodifiableList(result_);
+        return unmodifiableList(result_);
     }
 
     public final boolean addTelephoneNumber(final TelephoneNumber number) {
@@ -431,7 +429,7 @@ public abstract class LegalEntity implements Serializable {
             result_.add(new Address(a_));
         }
 
-        return Collections.unmodifiableList(result_);
+        return unmodifiableList(result_);
     }
 
     public final boolean addAddress(final Address address) {
@@ -526,6 +524,6 @@ public abstract class LegalEntity implements Serializable {
                 .append("Telephone Numbers", __telephoneNumbers)
                 .append("Addresses", __addresses)
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 }

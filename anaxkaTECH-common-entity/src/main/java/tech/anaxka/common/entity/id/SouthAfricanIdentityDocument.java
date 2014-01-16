@@ -13,15 +13,9 @@
  */
 package tech.anaxka.common.entity.id;
 
-import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
-import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
-import static tech.anaxka.common.utility.lang.Equals.isEquatable;
-import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -33,6 +27,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
+import static tech.anaxka.common.utility.lang.Equals.isEquatable;
+import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 @XmlRootElement(name = "southAfricanIdentityDocument")
 @XmlType(name = "SouthAfricanIdentityDocument")
@@ -94,7 +94,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
     }
 
     public Byte[] getImage() {
-        return __image;
+        return Arrays.copyOf(__image, __image.length);
     }
 
     final void setImage(final Byte[] image) {
@@ -102,7 +102,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
     }
 
     public Date getReleaseDate() {
-        return __releaseDate;
+        return new Date(__releaseDate.getTime());
     }
 
     final void setReleaseDate(final Date date) {
@@ -122,7 +122,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
 
             result_ = equalsBuilder()
                     .append(getIdentityNumber(), that_.getIdentityNumber())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
@@ -136,7 +136,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
     public int compareTo(final SouthAfricanIdentityDocument that) {
         return compareToBuilder()
                 .append(getIdentityNumber(), that.getIdentityNumber())
-                .compare();
+                .build();
     }
 
     /**
@@ -146,7 +146,7 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
     public int hashCode() {
         return hashCodeBuilder()
                 .append(getIdentityNumber())
-                .hash();
+                .build();
     }
 
     /**
@@ -158,6 +158,6 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
                 .append("Identity Number", getIdentityNumber())
                 .append("Release Date", getReleaseDate())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 }
