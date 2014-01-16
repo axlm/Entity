@@ -34,10 +34,10 @@ import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder
  * @version Enter version here..., 13/12/17
  * @author Enter your name here...
  */
+@Test(enabled = false)
 public class EntityJPAPersistenceTests {
 
     private EntityManager __manager = null;
-    private Random __random;
     private final List<String> FAMILIES = new ArrayList<>();
     private final List<String> FEMALES = new ArrayList<>();
     private final List<String> MALES = new ArrayList<>();
@@ -55,15 +55,9 @@ public class EntityJPAPersistenceTests {
     @BeforeClass
     void setUpTestDataVectors() throws IOException {
         // TODO: fix the paths... Move it to META-INF.
-        FAMILIES.addAll(readAllLines(get(
-                PATH + "family.names"),
-                StandardCharsets.UTF_8));
-        FEMALES.addAll(readAllLines(get(
-                PATH + "female.names"),
-                StandardCharsets.UTF_8));
-        MALES.addAll(readAllLines(get(
-                PATH + "male.names"),
-                StandardCharsets.UTF_8));
+        FAMILIES.addAll(readAllLines(get(PATH + "family.names"), StandardCharsets.UTF_8));
+        FEMALES.addAll(readAllLines(get( PATH + "female.names"), StandardCharsets.UTF_8));
+        MALES.addAll(readAllLines(get(PATH + "male.names"),      StandardCharsets.UTF_8));
     }
 
     /**
@@ -118,7 +112,7 @@ public class EntityJPAPersistenceTests {
      * Method description
      * <p>
      */
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void showGeneratedNames() {
         for (int i_ = 0; i_ < 10; i_++) {
             System.out.println(createSouthAfricanCitizen().toString());
