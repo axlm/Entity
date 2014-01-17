@@ -1,17 +1,5 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
- *
- * The content of SouthAfricanIdentityNumber.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
- */
 package tech.anaxka.common.entity.id;
+
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -22,10 +10,8 @@ import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import tech.anaxka.common.entity.Person.GenderType;
 
@@ -39,29 +25,18 @@ import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
 import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
+
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  */
 @XmlRootElement(name = "southAfricanIdentityNumber")
 @XmlType(name = "SouthAfricanIdentityNumber")
 @Embeddable
-public class SouthAfricanIdentityNumber implements Serializable, Comparable<SouthAfricanIdentityNumber> {
+public class SouthAfricanIdentityNumber
+        implements Serializable, Comparable<SouthAfricanIdentityNumber> {
 
     private static final String NAME = SouthAfricanIdentityNumber.class.getName();
     private static final Logger LOGGER = getLogger(NAME);
-
-    /**
-     * Determines if a de-serialised file is compatible with this class.
-     * <p/>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
-     * class is not compatible with the previous version. It is not necessary to include in first
-     * version of the class, but included here as a reminder of its importance.
-     * <p/>
-     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
-     */
-    @XmlTransient
-    @Transient
-    private static final long serialVersionUID = -2445401405948658566L;
 
     @XmlElement(name = "number", required = true, nillable = false)
     @Basic
@@ -353,29 +328,23 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         return checkSum_;
     }
 
-    /**
-     * @{inheritDoc}
-     * @param that
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object that) {
         boolean result_ = false;
-
-        if (!isEquatable(this, that)) {
+        
+        if (isEquatable(this, that)) {
             final SouthAfricanIdentityNumber that_ = SouthAfricanIdentityNumber.class.cast(that);
-
+            
             result_ = equalsBuilder()
                     .append(getNumber(), that_.getNumber())
                     .build();
         }
-
+        
         return result_;
     }
-
-    /**
-     * @{inheritDoc}
-     * @param that
-     */
+    
+    /** {@inheritDoc} */
     @Override
     public int compareTo(final SouthAfricanIdentityNumber that) {
         if (isComparable(that)) {
@@ -387,9 +356,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         }
     }
 
-    /**
-     * @{inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return hashCodeBuilder()
@@ -397,9 +364,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
                 .build();
     }
 
-    /**
-     * @{inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return toStringBuilder(this)

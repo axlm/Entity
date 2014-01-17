@@ -1,17 +1,5 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
- *
- * The content of Builders.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
- */
 package tech.anaxka.common.entity;
+
 
 import java.util.Date;
 import tech.anaxka.common.entity.Address.AddressType;
@@ -20,6 +8,7 @@ import tech.anaxka.common.entity.Person.GenderType;
 import tech.anaxka.common.entity.Person.TitleType;
 import tech.anaxka.common.entity.TelephoneNumber.TelephoneNumberType;
 import tech.anaxka.common.utility.functor.Builder;
+
 
 public class Builders {
 
@@ -38,7 +27,8 @@ public class Builders {
         return new TelephoneNumberBuilder();
     }
 
-    public static class AddressBuilder implements Builder<Address> {
+    public static class AddressBuilder
+            implements Builder<Address> {
 
         private final Address __ = new Address();
 
@@ -92,7 +82,8 @@ public class Builders {
         }
     }
 
-    public static class EmailAddressBuilder implements Builder<EmailAddress> {
+    public static class EmailAddressBuilder
+            implements Builder<EmailAddress> {
 
         private final EmailAddress __ = new EmailAddress();
 
@@ -121,7 +112,8 @@ public class Builders {
         }
     }
 
-    public static class TelephoneNumberBuilder implements Builder<TelephoneNumber> {
+    public static class TelephoneNumberBuilder
+            implements Builder<TelephoneNumber> {
 
         private final TelephoneNumber __ = new TelephoneNumber();
 
@@ -165,7 +157,8 @@ public class Builders {
         }
     }
 
-    public static abstract class PersonBuilder implements
+    public static abstract class PersonBuilder
+            implements
             Builder<Person> {
 
         protected Person __;

@@ -1,17 +1,5 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
- *
- * The content of Person.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
- */
 package tech.anaxka.common.entity;
+
 
 import java.util.Date;
 import java.util.Set;
@@ -31,16 +19,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
+
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -56,20 +43,8 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
             @Index(columnList = "GENDER", name = "PERSONS_GENDER_INDEX")
         })
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Person extends LegalEntity {
-
-    /**
-     * Determines if a de-serialised file is compatible with this class.
-     * <p/>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
-     * class is not compatible with the previous version. It is not necessary to include in first
-     * version of the class, but included here as a reminder of its importance.
-     * <p/>
-     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
-     */
-    @XmlTransient
-    @Transient
-    private static final long serialVersionUID = -1623837639963962157L;
+public abstract class Person
+        extends LegalEntity {
 
     @XmlElementWrapper(name = "givenNames", required = true, nillable = false)
     @XmlElement(name = "name")
@@ -429,11 +404,7 @@ public abstract class Person extends LegalEntity {
         __titles.add(title);
     }
 
-    /**
-     * {@inheritDoc}
-     * <p/>
-     * @return
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return toStringBuilder(this)

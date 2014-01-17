@@ -1,17 +1,5 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
- *
- * The content of RandomUniqueIdentity.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
- */
 package tech.anaxka.common.entity.id;
+
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -21,10 +9,8 @@ import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import static java.util.UUID.randomUUID;
@@ -36,26 +22,15 @@ import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
 import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
+
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
  */
 @XmlRootElement(name = "randomUniqueIdentity")
 @XmlType(name = "RandomUniqueIdentity")
 @Embeddable
-public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomUniqueIdentitfier> {
-
-    /**
-     * Determines if a de-serialised file is compatible with this class.
-     * <p/>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
-     * class is not compatible with the previous version. It is not necessary to include in first
-     * version of the class, but included here as a reminder of its importance.
-     * <p/>
-     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
-     */
-    @XmlTransient
-    @Transient
-    private static final long serialVersionUID = -2315326616405271556L;
+public class RandomUniqueIdentitfier
+        implements Serializable, Comparable<RandomUniqueIdentitfier> {
 
     @XmlElement(name = "radix32UUID", required = true, nillable = false)
     @Basic
@@ -127,11 +102,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         }
     }
 
-    /**
-     * @param that
-     * <p/>
-     * @{inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object that) {
         boolean result_ = false;
@@ -145,11 +116,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         return result_;
     }
 
-    /**
-     * @param that
-     * <p/>
-     * @{inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int compareTo(final RandomUniqueIdentitfier that) {
         if (isComparable(that)) {
@@ -161,9 +128,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         }
     }
 
-    /**
-     * @{inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return hashCodeBuilder()
@@ -171,9 +136,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
                 .build();
     }
 
-    /**
-     * @{inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return toStringBuilder(this)
