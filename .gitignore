@@ -4,4 +4,3 @@ dist/
 target/
 anaxkaTECH-common-entity/src/main/resources/META-INF/create.sql
 anaxkaTECH-common-entity/src/main/resources/META-INF/drop.sql
-anaxkaTECH-common-entity/nb-configuration.xml
