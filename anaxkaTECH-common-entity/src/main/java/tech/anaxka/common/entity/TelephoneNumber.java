@@ -1,17 +1,5 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
- *
- * The content of TelephoneNumber.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
- */
 package tech.anaxka.common.entity;
+
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -23,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -41,28 +28,17 @@ import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
 import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
+
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * <p>
+ * <p/>
  */
 @XmlRootElement(name = "telephoneNumber")
 @XmlType(name = "TelephoneNumber")
 @Entity(name = "TelephoneNumber")
 @Table(name = "TELEPHONE_NUMBERS")
-public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber> {
-
-    /**
-     * Determines if a de-serialised file is compatible with this class.
-     * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
-     * class is not compatible with the previous version. It is not necessary to include in first
-     * version of the class, but included here as a reminder of its importance.
-     * <p>
-     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
-     */
-    @XmlTransient
-    @Transient
-    private static final long serialVersionUID = -4884737104059972604L;
+public class TelephoneNumber
+        implements Serializable, Comparable<TelephoneNumber> {
 
     @XmlTransient
     @Id
@@ -108,10 +84,10 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Default constructor.
-     * <p>
+     * <p/>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public TelephoneNumber() {
@@ -121,7 +97,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
     /**
      * Instance variable constructor. Initialize <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param type        see {@link #getType() type}.
      * @param countryCode see {@link #getCountryCode() coutry code}.
      * @param areaCode    see {@link #getAreaCode() area code}.
@@ -144,7 +120,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param template Uses template as template to initialise {@linkplain TelephoneNumber
      *            <code>this</code>}.
      */
@@ -159,7 +135,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__id id}.
      */
     public final Long getId() {
@@ -172,7 +148,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
@@ -181,7 +157,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__type telephone number type}.
      */
     public final TelephoneNumberType getType() {
@@ -190,7 +166,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param type Value to assign to <code>this</code> {@linkplain #__type telephone number type}.
      */
     final void setType(final TelephoneNumberType type) {
@@ -199,7 +175,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__countryCode country code}.
      */
     public final String getCountryCode() {
@@ -208,7 +184,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param code Value to assign to <code>this</code> {@linkplain #__countryCode country code}.
      */
     final void setCountryCode(final String code) {
@@ -217,7 +193,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__areaCode area code}.
      */
     public final String getAreaCode() {
@@ -226,7 +202,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param code Value to assign to <code>this</code> {@linkplain #__areaCode area code}.
      */
     final void setAreaCode(final String code) {
@@ -235,7 +211,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__number number}.
      */
     public final String getNumber() {
@@ -244,7 +220,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param number Value to assign to <code>this</code> {@linkplain #__number number}.
      */
     final void setNumber(final String number) {
@@ -253,7 +229,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__extension extension}.
      */
     public final String getExtension() {
@@ -262,18 +238,14 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param extension Value to assign to <code>this</code> {@linkplain #__extension extension}.
      */
     final void setExtension(final String extension) {
         __extension = extension;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * @param that
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object that) {
         boolean result_ = false;
@@ -292,11 +264,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         return result_;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * @param that
-     */
+    /** {@inheritDoc} */
     @Override
     public int compareTo(final TelephoneNumber that) {
         if (isComparable(that)) {
@@ -311,9 +279,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return hashCodeBuilder()
@@ -324,9 +290,7 @@ public class TelephoneNumber implements Serializable, Comparable<TelephoneNumber
                 .build();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return toStringBuilder(this)

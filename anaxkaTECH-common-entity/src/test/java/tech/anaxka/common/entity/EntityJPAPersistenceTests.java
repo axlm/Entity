@@ -1,3 +1,31 @@
+/**
+ * Copyright © ${project.inceptionYear}, Mycila
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those
+ * of the authors and should not be interpreted as representing official policies,
+ * either expressed or implied, of the FreeBSD Project.
+ */
 package tech.anaxka.common.entity;
 
 import java.io.IOException;
@@ -29,15 +57,15 @@ import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder
 
 /**
  * Class description
- * <p>
+ * <p/>
  *
  * @version Enter version here..., 13/12/17
  * @author Enter your name here...
  */
+@Test(enabled = false)
 public class EntityJPAPersistenceTests {
 
     private EntityManager __manager = null;
-    private Random __random;
     private final List<String> FAMILIES = new ArrayList<>();
     private final List<String> FEMALES = new ArrayList<>();
     private final List<String> MALES = new ArrayList<>();
@@ -47,7 +75,7 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Constructs ...
-     * <p>
+     * <p/>
      */
     public EntityJPAPersistenceTests() {
     }
@@ -55,20 +83,14 @@ public class EntityJPAPersistenceTests {
     @BeforeClass
     void setUpTestDataVectors() throws IOException {
         // TODO: fix the paths... Move it to META-INF.
-        FAMILIES.addAll(readAllLines(get(
-                PATH + "family.names"),
-                StandardCharsets.UTF_8));
-        FEMALES.addAll(readAllLines(get(
-                PATH + "female.names"),
-                StandardCharsets.UTF_8));
-        MALES.addAll(readAllLines(get(
-                PATH + "male.names"),
-                StandardCharsets.UTF_8));
+        FAMILIES.addAll(readAllLines(get(PATH + "family.names"), StandardCharsets.UTF_8));
+        FEMALES.addAll(readAllLines(get( PATH + "female.names"), StandardCharsets.UTF_8));
+        MALES.addAll(readAllLines(get(PATH + "male.names"),      StandardCharsets.UTF_8));
     }
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     @BeforeClass(enabled = false)
     void setUpJPAEnvironment() {
@@ -84,7 +106,7 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     @Test(enabled = false)
     void testAddPerson() {
@@ -95,30 +117,30 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     void testFindPerson() {
     }
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     void testModifyPerson() {
     }
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
     void testRemovePerson() {
     }
 
     /**
      * Method description
-     * <p>
+     * <p/>
      */
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void showGeneratedNames() {
         for (int i_ = 0; i_ < 10; i_++) {
             System.out.println(createSouthAfricanCitizen().toString());
@@ -127,7 +149,7 @@ public class EntityJPAPersistenceTests {
 
     /**
      * Method description
-     * <p>
+     * <p/>
      *
      * @return
      */

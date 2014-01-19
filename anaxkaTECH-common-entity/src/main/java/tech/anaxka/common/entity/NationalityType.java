@@ -1,16 +1,3 @@
-// $Id$
-
-/*
- * \u00A9 2008, axlTECH (Pty) Ltd.  All rights reserved.
- *
- * The content of NationalityType.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised axlTECH representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised axlTECH representative.
- */
 package tech.anaxka.common.entity;
 
 
@@ -18,10 +5,13 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
+
 
 @XmlType(name = "Nationalities")
 @XmlEnum
 public enum NationalityType {
+
     @XmlEnumValue("Afghanistan")
     AFGHANISTAN("Afghanistan", "Kabul", "af", "+93", "Afghanistan Afghani", "AFA"),
     @XmlEnumValue("Albania")
@@ -597,5 +587,18 @@ public enum NationalityType {
      */
     public String monitaryUnitAbreviation() {
         return __monitaryUnitAbreviation;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString() {
+        return toStringBuilder(this)
+                .append("Country", __country)
+                .append("Capitol", __capitol)
+                .append("Top Level Domain", __tld)
+                .append("International Dialing Code", __dialingCode)
+                .append("Currency", __monitaryUnitName)
+                .append("Currency Abbreviation", __monitaryUnitAbreviation)
+                .build();
     }
 }

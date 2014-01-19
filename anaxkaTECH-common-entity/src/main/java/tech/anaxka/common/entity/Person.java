@@ -1,17 +1,5 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
- *
- * The content of Person.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
- */
 package tech.anaxka.common.entity;
+
 
 import java.util.Date;
 import java.util.Set;
@@ -31,16 +19,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
+
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -56,20 +43,8 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
             @Index(columnList = "GENDER", name = "PERSONS_GENDER_INDEX")
         })
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Person extends LegalEntity {
-
-    /**
-     * Determines if a de-serialised file is compatible with this class.
-     * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
-     * class is not compatible with the previous version. It is not necessary to include in first
-     * version of the class, but included here as a reminder of its importance.
-     * <p>
-     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
-     */
-    @XmlTransient
-    @Transient
-    private static final long serialVersionUID = -1623837639963962157L;
+public abstract class Person
+        extends LegalEntity {
 
     @XmlElementWrapper(name = "givenNames", required = true, nillable = false)
     @XmlElement(name = "name")
@@ -133,10 +108,10 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Default constructor.
-     * <p>
+     * <p/>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public Person() {
@@ -146,7 +121,7 @@ public abstract class Person extends LegalEntity {
     /**
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param emailAddresses    see {@link #getEmailAddresses() email addresses}.
      * @param numbers           see {@link #getTelephoneNumbers() telephone numbers}.
      * @param addresses         see {@link #getAddresses() addresses}.
@@ -189,7 +164,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param template Uses template as template to initialise {@linkplain Person
      *                 <code>this</code>}.
      */
@@ -208,7 +183,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__givenNames given names}.
      */
     public final Iterable<String> getGivenNames() {
@@ -217,7 +192,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param names {@linkplain Iterable Collection} of {@linkplain #__givenNames given names} to
      *              add to <code>this</code> instance.
      */
@@ -231,7 +206,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param name Instance of given name to add to <code>this</code> {@linkplain #__givenNames
      *            given names} instance.
      */
@@ -241,7 +216,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's initials.
      */
     public final String getInitials() {
@@ -256,7 +231,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__alsoKnownAs aliases}.
      */
     public final Iterable<String> getAlsoKnownAs() {
@@ -265,7 +240,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param aka {@linkplain Iterable Collection} of {@linkplain # aliases} to add to
      *            <code>this</code> instance.
      */
@@ -279,7 +254,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param alias Instance of an alias to add to <code>this</code> {@linkplain #__alsoKnownAs
      *            aliases} instance.
      */
@@ -289,7 +264,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__preferredGivenName
      *         preferred given name}.
      */
@@ -299,7 +274,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param name Value to assign to <code>this</code> {@linkplain #__preferredGivenName
      *            preferred given name}.
      */
@@ -309,7 +284,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__nickName nickname}.
      */
     public final String getNickName() {
@@ -318,7 +293,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param name Value to assign to <code>this</code> {@linkplain #__nickName nick name}.
      */
     final void setNickName(final String name) {
@@ -327,7 +302,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__familyName family name}.
      */
     public final String getFamilyName() {
@@ -336,7 +311,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param name Value to assign to <code>this</code> {@linkplain #__familyName family name}.
      */
     final void setFamilyName(final String name) {
@@ -345,7 +320,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__deceasedOn date of death}.
      */
     public final Date getDeceasedOn() {
@@ -354,7 +329,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param date Value to assign to <code>this</code> {@linkplain #__deceasedOn date of death}.
      */
     final void setDeceasedOn(final Date date) {
@@ -363,7 +338,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__dateOfBirth date of birth}.
      */
     public final Date getDateOfBirth() {
@@ -372,7 +347,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param date Value to assign to <code>this</code> {@linkplain #__dateOfBirth date of birth}.
      */
     final void setDateOfBirth(final Date date) {
@@ -381,7 +356,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__gender gender}.
      */
     public final GenderType getGender() {
@@ -390,7 +365,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param gender Value to assign to <code>this</code> {@linkplain #__gender gender}.
      */
     final void setGender(final GenderType gender) {
@@ -399,7 +374,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of <code>this</code> instance's {@linkplain #__titles titiles}.
      */
     public final Iterable<TitleType> getTitles() {
@@ -408,7 +383,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param titles Value to assign to <code>this</code> {@linkplain #__titles titles}.
      */
     public final void addTitles(final Iterable<TitleType> titles) {
@@ -421,7 +396,7 @@ public abstract class Person extends LegalEntity {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param title Instance of title to add to <code>this</code> {@linkplain #__titles titles}
      *              instance.
      */
@@ -429,11 +404,7 @@ public abstract class Person extends LegalEntity {
         __titles.add(title);
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * @return
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return toStringBuilder(this)
@@ -497,7 +468,7 @@ public abstract class Person extends LegalEntity {
         /**
          * Instance variable constructor. Initialise <code>this</code> instance with the specified
          * arguments. <i>For state specifications see the see also section</i>.
-         * <p>
+         * <p/>
          * @param abbreviation
          */
         private TitleType(final String abbreviation) {
@@ -506,7 +477,7 @@ public abstract class Person extends LegalEntity {
 
         /**
          * Obvious.
-         * <p>
+         * <p/>
          * @return The value of <code>this</code> instance's {@linkplain #__abbreviation
          *         abbreviation}.
          */

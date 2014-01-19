@@ -4,10 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.anaxka</groupId>
     <artifactId>anaxkaTECH-common-entity</artifactId>
+    <name>anaxkaTECH-common-entity</name>
     <version>0.08.000.0000-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>anaxkaTECH-common-entity</name>
-    <url>http://maven.apache.org</url>
+    <organization>
+        <name>4axka (Pty) Ltd</name>
+        <url>http://4axka.net</url>
+    </organization>
+    <inceptionYear>2011</inceptionYear>
     <build>
         <plugins>
             <plugin>
@@ -27,6 +31,36 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.1</version>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <header>com/mycila/maven/plugin/license/templates/BSD-2.txt</header>
+                    <properties>
+                        <owner>4axka (Pty) Ltd</owner>
+                        <year>${project.inceptionYear}</year>
+                        <email>axl.mattheus@4axka.net</email>
+                    </properties>
+                    <excludes>
+                        <exclude>pom.xml</exclude>
+                        <exclude>nb-confiburation.xml</exclude>
+                        <exclude>src/test/**</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -64,6 +98,14 @@
             <version>6.8.7</version>
             <scope>test</scope>
         </dependency>
+        <!--        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+            <scope>test</scope>
+        </dependency>
+        -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>anaxkaTECH-common-utility</artifactId>

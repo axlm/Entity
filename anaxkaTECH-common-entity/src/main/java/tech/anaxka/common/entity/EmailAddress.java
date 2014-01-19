@@ -1,17 +1,5 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
- *
- * The content of EmailAddress.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
- */
 package tech.anaxka.common.entity;
+
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -23,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -41,28 +28,17 @@ import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
 import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
+
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
- * <p>
+ * <p/>
  */
 @XmlRootElement(name = "emailAddress")
 @XmlType(name = "EmailAddress")
 @Entity(name = "EmailAddress")
 @Table(name = "EMAIL_ADDRESSES")
-public class EmailAddress implements Serializable, Comparable<EmailAddress> {
-
-    /**
-     * Determines if a de-serialised file is compatible with this class.
-     * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of this
-     * class is not compatible with the previous version. It is not necessary to include in first
-     * version of the class, but included here as a reminder of its importance.
-     * <p>
-     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
-     */
-    @XmlTransient
-    @Transient
-    private static final long serialVersionUID = -5046751178904428274L;
+public class EmailAddress
+        implements Serializable, Comparable<EmailAddress> {
 
     @XmlTransient
     @Id
@@ -93,10 +69,10 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Default constructor.
-     * <p>
+     * <p/>
      * This constructor is supplied to conform to the JavaBeans 1.01 Specification. It
      * <strong>MUST NOT</strong> be invoked directly.
-     * <p>
+     * <p/>
      * @see <a href="http://bit.ly/BddaX">JavaBeans 1.01 Specification</a>.
      */
     public EmailAddress() {
@@ -106,7 +82,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
     /**
      * Instance variable constructor. Initialise {@code this} instance with the specified arguments.
      * <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param type    see {@link #getType() type}.
      * @param address see {@link #getAddress() address}.
      */
@@ -118,7 +94,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Copy constructor. <i>For state specifications see the see also section</i>.
-     * <p>
+     * <p/>
      * @param template Uses template as template to initialise {@linkplain EmailAddress
      *            {@code this}}.
      */
@@ -128,7 +104,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__id id}.
      */
     public final Long getId() {
@@ -141,7 +117,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__version version}.
      */
     public final Integer getVersion() {
@@ -150,7 +126,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__type type}.
      */
     public final EmailAddressType getType() {
@@ -159,7 +135,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param type Value to assign to {@code this} {@linkplain #__type email address type}.
      */
     final void setType(final EmailAddressType type) {
@@ -168,7 +144,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @return The value of {@code this} instance's {@linkplain #__address address}.
      */
     public final String getAddress() {
@@ -177,18 +153,14 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
 
     /**
      * Obvious.
-     * <p>
+     * <p/>
      * @param address Value to assign to {@code this} {@linkplain #__address address}.
      */
     final void setAddress(final String address) {
         __address = address;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * @param that
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object that) {
         boolean result_ = false;
@@ -205,11 +177,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         return result_;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * @param that
-     */
+    /** {@inheritDoc} */
     @Override
     public int compareTo(final EmailAddress that) {
         if (isComparable(that)) {
@@ -222,9 +190,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return hashCodeBuilder()
@@ -233,9 +199,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
                 .build();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return toStringBuilder(this)
