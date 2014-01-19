@@ -17,16 +17,14 @@ package tech.anaxka.common.entity.family;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
 import tech.anaxka.common.entity.Person;
 
 
-public final class Member extends Person {
+public class Member extends Person {
     /**
      * Determines if a de-serialised file is compatible with this class.
      * <p>
@@ -80,7 +78,7 @@ public final class Member extends Person {
         return __spouses;
     }
 
-    public void addSpouses(final Iterable<Member> spouses) {
+    public final void addSpouses(final Iterable<Member> spouses) {
         for (final Member spouse_ : spouses) {
             addSpouse(spouse_);
         }
@@ -96,7 +94,7 @@ public final class Member extends Person {
         return __parents;
     }
 
-    public void addParents(final Iterable<Member> parents) {
+    public final void addParents(final Iterable<Member> parents) {
         for (final Member parent_ : parents) {
             addParent(parent_);
         }
@@ -112,7 +110,7 @@ public final class Member extends Person {
         return __siblings;
     }
 
-    public void addSiblings(final Iterable<Member> siblings) {
+    public final void addSiblings(final Iterable<Member> siblings) {
         for (final Member sibling_ : siblings) {
             addSibling(sibling_);
         }
@@ -128,7 +126,7 @@ public final class Member extends Person {
         return __children;
     }
 
-    public void addChildren(final Iterable<Member> children) {
+    public final void addChildren(final Iterable<Member> children) {
         for (final Member child_ : children) {
             addChild(child_);
         }
@@ -144,7 +142,7 @@ public final class Member extends Person {
         return __gaurdians;
     }
 
-    public void addGuardians(final Iterable<Member> guardians) {
+    public final void addGuardians(final Iterable<Member> guardians) {
         for (final Member guardian_ : guardians) {
             addGuardian(guardian_);
         }

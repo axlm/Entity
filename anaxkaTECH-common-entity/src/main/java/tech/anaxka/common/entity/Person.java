@@ -13,12 +13,9 @@
  */
 package tech.anaxka.common.entity;
 
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
-
 import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -42,6 +39,8 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -350,7 +349,7 @@ public abstract class Person extends LegalEntity {
      * @return The value of <code>this</code> instance's {@linkplain #__deceasedOn date of death}.
      */
     public final Date getDeceasedOn() {
-        return __deceasedOn;
+        return new Date(__deceasedOn.getTime());
     }
 
     /**
@@ -368,7 +367,7 @@ public abstract class Person extends LegalEntity {
      * @return The value of <code>this</code> instance's {@linkplain #__dateOfBirth date of birth}.
      */
     public final Date getDateOfBirth() {
-        return __dateOfBirth;
+        return new Date(__dateOfBirth.getTime());
     }
 
     /**
@@ -450,7 +449,7 @@ public abstract class Person extends LegalEntity {
                 .append("Gender", getGender())
                 .append("Titles", __titles)
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /**

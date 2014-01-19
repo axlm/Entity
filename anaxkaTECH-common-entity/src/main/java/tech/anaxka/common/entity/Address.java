@@ -13,14 +13,7 @@
  */
 package tech.anaxka.common.entity;
 
-import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
-import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
-import static tech.anaxka.common.utility.lang.Equals.isEquatable;
-import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
 import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,6 +32,14 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import static tech.anaxka.common.utility.lang.CompareTo.GREATER_THAN;
+import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
+import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
+import static tech.anaxka.common.utility.lang.Equals.isEquatable;
+import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -341,12 +342,13 @@ public class Address implements Serializable, Comparable<Address> {
                     .append(getCode(), that_.getCode())
                     .append(getLocation(), that_.getLocation())
                     .append(getCity(), that_.getCity())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
     }
 
+    
     /**
      * {@inheritDoc}
      * <p>
@@ -354,13 +356,17 @@ public class Address implements Serializable, Comparable<Address> {
      */
     @Override
     public int compareTo(final Address that) {
-        return compareToBuilder()
-                .append(getType(), that.getType())
-                .append(getCode(), that.getCode())
-                .append(getLocation(), that.getLocation())
-                .append(getCity(), that.getCity())
-                .append(getSuburb(), that.getSuburb())
-                .compare();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getType(), that.getType())
+                    .append(getCode(), that.getCode())
+                    .append(getLocation(), that.getLocation())
+                    .append(getCity(), that.getCity())
+                    .append(getSuburb(), that.getSuburb())
+                    .build();
+        } else {
+            return GREATER_THAN;
+        }
     }
 
     /**
@@ -374,7 +380,7 @@ public class Address implements Serializable, Comparable<Address> {
                 .append(getLocation())
                 .append(getCity())
                 .append(getSuburb())
-                .hash();
+                .build();
     }
 
     /**
@@ -393,7 +399,7 @@ public class Address implements Serializable, Comparable<Address> {
                 .append("Country", getCountry())
                 .append("Code", getCode())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /**
