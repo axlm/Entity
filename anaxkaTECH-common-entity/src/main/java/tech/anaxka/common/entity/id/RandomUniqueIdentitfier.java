@@ -59,6 +59,7 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 @Embeddable
 public class RandomUniqueIdentitfier
         implements Serializable, Comparable<RandomUniqueIdentitfier> {
+    private static final long serialVersionUID = -2333371160772410645L;
 
     @XmlElement(name = "radix32UUID", required = true, nillable = false)
     @Basic

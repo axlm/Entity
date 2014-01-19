@@ -40,6 +40,8 @@ import tech.anaxka.common.entity.Person;
 
 
 public class Member extends Person {
+    private static final long serialVersionUID = 6973561246303070049L;
+
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")

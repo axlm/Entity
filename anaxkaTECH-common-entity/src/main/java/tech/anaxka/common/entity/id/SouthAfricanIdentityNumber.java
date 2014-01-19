@@ -62,7 +62,7 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 @Embeddable
 public class SouthAfricanIdentityNumber
         implements Serializable, Comparable<SouthAfricanIdentityNumber> {
-
+    private static final long serialVersionUID = -4871409407938245502L;
     private static final String NAME = SouthAfricanIdentityNumber.class.getName();
     private static final Logger LOGGER = getLogger(NAME);
 

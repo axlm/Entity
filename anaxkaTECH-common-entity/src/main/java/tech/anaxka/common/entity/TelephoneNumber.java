@@ -67,6 +67,7 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 @Table(name = "TELEPHONE_NUMBERS")
 public class TelephoneNumber
         implements Serializable, Comparable<TelephoneNumber> {
+    private static final long serialVersionUID = 6632090269651186642L;
 
     @XmlTransient
     @Id

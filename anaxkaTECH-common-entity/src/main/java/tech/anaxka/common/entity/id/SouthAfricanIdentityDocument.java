@@ -56,6 +56,7 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 @Embeddable
 public class SouthAfricanIdentityDocument
         implements Serializable, Comparable<SouthAfricanIdentityDocument> {
+    private static final long serialVersionUID = -8452818534320194824L;
 
     @XmlElement(name = "identityNumber", required = true, nillable = false)
     @Basic

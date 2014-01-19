@@ -73,6 +73,7 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person
         extends LegalEntity {
+    private static final long serialVersionUID = -4070126709393413792L;
 
     @XmlElementWrapper(name = "givenNames", required = true, nillable = false)
     @XmlElement(name = "name")

@@ -41,6 +41,7 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class EntityLifeCycle implements Serializable {
+    private static final long serialVersionUID = -1483493342079848330L;
     private LifeCycleStateType __state;
     private String __source;
     private Date __timestamp;

@@ -67,6 +67,7 @@ import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 @MappedSuperclass
 public abstract class LegalEntity
         implements Serializable {
+    private static final long serialVersionUID = 5988798622244728194L;
 
     @XmlTransient
     @Id
