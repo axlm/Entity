@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import static tech.anaxka.common.utility.lang.CompareTo.GREATER_THAN;
 import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
 import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
 import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
@@ -353,13 +355,17 @@ public class Address implements Serializable, Comparable<Address> {
      */
     @Override
     public int compareTo(final Address that) {
-        return compareToBuilder()
-                .append(getType(), that.getType())
-                .append(getCode(), that.getCode())
-                .append(getLocation(), that.getLocation())
-                .append(getCity(), that.getCity())
-                .append(getSuburb(), that.getSuburb())
-                .build();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getType(), that.getType())
+                    .append(getCode(), that.getCode())
+                    .append(getLocation(), that.getLocation())
+                    .append(getCity(), that.getCity())
+                    .append(getSuburb(), that.getSuburb())
+                    .build();
+        } else {
+            return GREATER_THAN;
+        }
     }
 
     /**

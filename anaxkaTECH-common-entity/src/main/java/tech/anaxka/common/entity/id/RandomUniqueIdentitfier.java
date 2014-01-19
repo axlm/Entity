@@ -28,7 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import static java.util.UUID.randomUUID;
+import static tech.anaxka.common.utility.lang.CompareTo.GREATER_THAN;
 import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
 import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
 import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
@@ -150,9 +152,13 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      */
     @Override
     public int compareTo(final RandomUniqueIdentitfier that) {
-        return compareToBuilder()
-                .append(getId(), that.getId())
-                .build();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getId(), that.getId())
+                    .build();
+        } else {
+            return GREATER_THAN;
+        }
     }
 
     /**

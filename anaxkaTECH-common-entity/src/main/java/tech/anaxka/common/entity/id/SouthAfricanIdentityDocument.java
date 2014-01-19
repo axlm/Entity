@@ -28,7 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import static tech.anaxka.common.utility.lang.CompareTo.GREATER_THAN;
 import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
 import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
 import static tech.anaxka.common.utility.lang.Equals.isEquatable;
 import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
@@ -134,9 +136,13 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
      */
     @Override
     public int compareTo(final SouthAfricanIdentityDocument that) {
-        return compareToBuilder()
-                .append(getIdentityNumber(), that.getIdentityNumber())
-                .build();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getIdentityNumber(), that.getIdentityNumber())
+                    .build();
+        } else {
+            return GREATER_THAN;
+        }
     }
 
     /**
