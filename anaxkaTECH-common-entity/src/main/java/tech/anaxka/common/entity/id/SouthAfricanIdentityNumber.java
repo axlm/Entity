@@ -13,19 +13,12 @@
  */
 package tech.anaxka.common.entity.id;
 
-import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
-import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
-import static tech.anaxka.common.utility.lang.Equals.isEquatable;
-import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -34,8 +27,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
 import tech.anaxka.common.entity.Person.GenderType;
+
+import static java.lang.Integer.parseInt;
+import static java.util.logging.Logger.getLogger;
+import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
+import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
+import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
+import static tech.anaxka.common.utility.lang.Equals.isEquatable;
+import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -46,7 +48,7 @@ import tech.anaxka.common.entity.Person.GenderType;
 public class SouthAfricanIdentityNumber implements Serializable, Comparable<SouthAfricanIdentityNumber> {
 
     private static final String NAME = SouthAfricanIdentityNumber.class.getName();
-    private static final Logger LOGGER = Logger.getLogger(NAME);
+    private static final Logger LOGGER = getLogger(NAME);
 
     /**
      * Determines if a de-serialised file is compatible with this class.
@@ -292,7 +294,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
 
         // 9. The number obtained in 8.) must equal the id number check digit.
         final int offset_ = numberWithCheckDigit_.length();
-        result_ = (checkSum_ == Integer.parseInt(
+        result_ = (checkSum_ == parseInt(
                 numberWithCheckDigit_.substring(offset_ - 1, offset_)));
 
         return result_;
@@ -317,7 +319,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         int oddDigitSum_ = 0;
         for (int i_ = 0; i_ < numberWithoutCheckDigit_.length(); i_ += 2) {
             final String digitAsString_ = numberWithoutCheckDigit_.substring(i_, i_ + 1);
-            oddDigitSum_ += Integer.parseInt(digitAsString_);
+            oddDigitSum_ += parseInt(digitAsString_);
         }
 
         // 3. Build a number by placing even digits sequentially.
@@ -329,13 +331,13 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         final String evenCatAsString_ = evenCatBuilder_.toString();
 
         // 4. Multiply number in 3.) by two.
-        int doubleEvenCat_ = Integer.parseInt(evenCatAsString_) * 2;
+        int doubleEvenCat_ = parseInt(evenCatAsString_) * 2;
 
         // 5. Add numbers of number obtained in 4.) together.
         final String doubleEvenCatAsString_ = Integer.toString(doubleEvenCat_);
         int doubleEvenCatSum_ = 0;
         for (final Character digitAsCharacter_ : doubleEvenCatAsString_.toCharArray()) {
-            doubleEvenCatSum_ += Integer.parseInt(digitAsCharacter_.toString());
+            doubleEvenCatSum_ += parseInt(digitAsCharacter_.toString());
         }
 
         // 6. Add numbers from 5.) and 2.) together.
@@ -343,7 +345,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         final String checkSumBaseAsString_ = Integer.toString(checkSumBase_);
 
         // 7. Get the right most digit in the number from the number obtained in 6.).
-        final int checkSumBaseRight_ = Integer.parseInt(
+        final int checkSumBaseRight_ = parseInt(
                 checkSumBaseAsString_.substring(checkSumBaseAsString_.length() - 1));
 
         // 8. Subtract the number obtained in 7.) from 10.
@@ -364,7 +366,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
 
             result_ = equalsBuilder()
                     .append(getNumber(), that_.getNumber())
-                    .isEqual();
+                    .build();
         }
 
         return result_;
@@ -376,9 +378,13 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
      */
     @Override
     public int compareTo(final SouthAfricanIdentityNumber that) {
-        return compareToBuilder()
-                .append(getNumber(), that.getNumber())
-                .compare();
+        if (isComparable(that)) {
+            return compareToBuilder()
+                    .append(getNumber(), that.getNumber())
+                    .build();
+        } else {
+            return EQUAL;
+        }
     }
 
     /**
@@ -388,7 +394,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
     public int hashCode() {
         return hashCodeBuilder()
                 .append(getNumber())
-                .hash();
+                .build();
     }
 
     /**
@@ -399,7 +405,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         return toStringBuilder(this)
                 .append("South African Identity Number", getNumber())
                 .append("super", super.toString())
-                .string();
+                .build();
     }
 
     /* For internal use only. */

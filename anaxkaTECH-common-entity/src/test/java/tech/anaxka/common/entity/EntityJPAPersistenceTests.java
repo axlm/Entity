@@ -1,36 +1,31 @@
 package tech.anaxka.common.entity;
 
-import static tech.anaxka.common.entity.Builders.addressBuilder;
-import static tech.anaxka.common.entity.Builders.emailAddressBuilder;
-import static tech.anaxka.common.entity.Builders.telephoneNumberBuilder;
-import static tech.anaxka.common.entity.SouthAfricanCitizen.southAfricanCitizenBuilder;
-
-import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder;
-
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import javax.persistence.EntityManager;
+import org.eclipse.persistence.config.PersistenceUnitProperties;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import tech.anaxka.common.entity.Address.AddressType;
 import tech.anaxka.common.entity.EmailAddress.EmailAddressType;
 import tech.anaxka.common.entity.Person.GenderType;
 import tech.anaxka.common.entity.TelephoneNumber.TelephoneNumberType;
 import tech.anaxka.common.entity.id.SouthAfricanIdentityDocument;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.security.SecureRandom;
-import java.util.ArrayList;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-//~--- JDK imports ------------------------------------------------------------
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import org.eclipse.persistence.config.PersistenceUnitProperties;
+import static java.nio.file.Files.readAllLines;
+import static java.nio.file.Paths.get;
+import static javax.persistence.Persistence.createEntityManagerFactory;
+import static tech.anaxka.common.entity.Builders.addressBuilder;
+import static tech.anaxka.common.entity.Builders.emailAddressBuilder;
+import static tech.anaxka.common.entity.Builders.telephoneNumberBuilder;
+import static tech.anaxka.common.entity.SouthAfricanCitizen.southAfricanCitizenBuilder;
+import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder;
 
 /**
  * Class description
@@ -39,10 +34,10 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
  * @version Enter version here..., 13/12/17
  * @author Enter your name here...
  */
+@Test(enabled = false)
 public class EntityJPAPersistenceTests {
 
     private EntityManager __manager = null;
-    private Random __random;
     private final List<String> FAMILIES = new ArrayList<>();
     private final List<String> FEMALES = new ArrayList<>();
     private final List<String> MALES = new ArrayList<>();
@@ -60,15 +55,9 @@ public class EntityJPAPersistenceTests {
     @BeforeClass
     void setUpTestDataVectors() throws IOException {
         // TODO: fix the paths... Move it to META-INF.
-        FAMILIES.addAll(Files.readAllLines(Paths.get(
-                PATH + "family.names"),
-                StandardCharsets.UTF_8));
-        FEMALES.addAll(Files.readAllLines(Paths.get(
-                PATH + "female.names"),
-                StandardCharsets.UTF_8));
-        MALES.addAll(Files.readAllLines(Paths.get(
-                PATH + "male.names"),
-                StandardCharsets.UTF_8));
+        FAMILIES.addAll(readAllLines(get(PATH + "family.names"), StandardCharsets.UTF_8));
+        FEMALES.addAll(readAllLines(get( PATH + "female.names"), StandardCharsets.UTF_8));
+        MALES.addAll(readAllLines(get(PATH + "male.names"),      StandardCharsets.UTF_8));
     }
 
     /**
@@ -78,7 +67,7 @@ public class EntityJPAPersistenceTests {
     @BeforeClass(enabled = false)
     void setUpJPAEnvironment() {
         if (__manager == null) {
-            __manager = Persistence.createEntityManagerFactory("memoryPU").createEntityManager();
+            __manager = createEntityManagerFactory("memoryPU").createEntityManager();
         }
 
         __manager.setProperty(PersistenceUnitProperties.LOGGING_LOGGER, "JavaLogger");
@@ -123,7 +112,7 @@ public class EntityJPAPersistenceTests {
      * Method description
      * <p>
      */
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void showGeneratedNames() {
         for (int i_ = 0; i_ < 10; i_++) {
             System.out.println(createSouthAfricanCitizen().toString());
