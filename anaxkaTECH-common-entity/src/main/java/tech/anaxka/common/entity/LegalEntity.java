@@ -317,7 +317,7 @@ public abstract class LegalEntity
      */
     public Iterable<EmailAddress> modifyEmailAddresses(
             final Predicate<EmailAddress, IllegalStateException> predicate,
-            final Modifier<EmailAddress, EmailAddress, IllegalStateException> modifier) {
+            final Modifier<EmailAddress, IllegalStateException> modifier) {
         final List<EmailAddress> result_ = new ArrayList<>();
 
         for (EmailAddress ea_ : __emailAddresses) {
@@ -409,7 +409,7 @@ public abstract class LegalEntity
 
     public Iterable<TelephoneNumber> modifyTelephoneNumbers(
             final Predicate<TelephoneNumber, IllegalStateException> predicate,
-            final Modifier<TelephoneNumber, TelephoneNumber, IllegalStateException> modifier) {
+            final Modifier<TelephoneNumber, IllegalStateException> modifier) {
         final List<TelephoneNumber> result_ = new ArrayList<>();
 
         for (TelephoneNumber t_ : __telephoneNumbers) {
@@ -500,7 +500,7 @@ public abstract class LegalEntity
 
     public Iterable<Address> modifyAddresses(
             final Predicate<Address, IllegalStateException> predicate,
-            final Modifier<Address, Address, IllegalStateException> modifier) {
+            final Modifier<Address, IllegalStateException> modifier) {
         final List<Address> result_ = new ArrayList<>();
 
         for (Address a_ : __addresses) {
