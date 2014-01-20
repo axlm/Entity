@@ -40,6 +40,8 @@ import tech.anaxka.common.utility.functor.Builder;
 @Entity(name = "SouthAfricanCitizen")
 @Table(name = "SOUTH_AFTICAN_CITIZENS")
 public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfricanIdentityDocument> {
+    private static final long serialVersionUID = 1784599712174170231L;
+
     @XmlElement(name = "identifier", required = true, nillable = false)
     @Embedded
     private SouthAfricanIdentityDocument __identifier;

@@ -50,14 +50,24 @@
                     </properties>
                     <excludes>
                         <exclude>pom.xml</exclude>
-                        <exclude>nb-confiburation.xml</exclude>
+                        <exclude>nb-configuration.xml</exclude>
+                        <exclude>nbactions.xml</exclude>
                         <exclude>src/test/**</exclude>
+                        <excluce>**/*.sql</excluce>
                     </excludes>
+                    <headerDefinitions>
+                        <headerDefinition>license-header-format.xml</headerDefinition>
+                    </headerDefinitions>
+                    <mapping>
+                        <javadoc_style>JAVADOC_STYLE</javadoc_style>
+                    </mapping>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
+                            <!--<goal>check</goal>-->
                             <goal>format</goal>
+                            <goal>remove</goal>
                         </goals>
                     </execution>
                 </executions>
