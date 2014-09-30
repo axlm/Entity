@@ -31,13 +31,13 @@ import tech.anaxka.common.entity.Person.GenderType;
 
 import static java.lang.Integer.parseInt;
 import static java.util.logging.Logger.getLogger;
-import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
-import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
-import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
-import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
-import static tech.anaxka.common.utility.lang.Equals.isEquatable;
-import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
+import static tech.anaxka.util.lang.CompareTo.EQUAL;
+import static tech.anaxka.util.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.util.lang.CompareTo.isComparable;
+import static tech.anaxka.util.lang.Equals.equalsBuilder;
+import static tech.anaxka.util.lang.Equals.isEquatable;
+import static tech.anaxka.util.lang.HashCode.hashCodeBuilder;
+import static tech.anaxka.util.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>

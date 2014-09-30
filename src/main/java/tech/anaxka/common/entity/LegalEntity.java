@@ -36,11 +36,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import tech.anaxka.common.utility.functor.Modifier;
-import tech.anaxka.common.utility.functor.Predicate;
+import tech.anaxka.util.functor.Modifier;
+import tech.anaxka.util.functor.Predicate;
 
 import static java.util.Collections.unmodifiableList;
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
+import static tech.anaxka.util.lang.ToString.toStringBuilder;
 
 /**
  * @author <a href="mailto:axl.mattheus@4axka.net">4axka (Pty) Ltd</a>
@@ -312,7 +312,7 @@ public abstract class LegalEntity implements Serializable {
      */
     public Iterable<EmailAddress> modifyEmailAddresses(
             final Predicate<EmailAddress, IllegalStateException> predicate,
-            final Modifier<EmailAddress, EmailAddress, IllegalStateException> modifier) {
+            final Modifier<EmailAddress, IllegalStateException> modifier) {
         final List<EmailAddress> result_ = new ArrayList<>();
 
         for (EmailAddress ea_ : __emailAddresses) {
@@ -404,7 +404,7 @@ public abstract class LegalEntity implements Serializable {
 
     public Iterable<TelephoneNumber> modifyTelephoneNumbers(
             final Predicate<TelephoneNumber, IllegalStateException> predicate,
-            final Modifier<TelephoneNumber, TelephoneNumber, IllegalStateException> modifier) {
+            final Modifier<TelephoneNumber, IllegalStateException> modifier) {
         final List<TelephoneNumber> result_ = new ArrayList<>();
 
         for (TelephoneNumber t_ : __telephoneNumbers) {
@@ -495,7 +495,7 @@ public abstract class LegalEntity implements Serializable {
 
     public Iterable<Address> modifyAddresses(
             final Predicate<Address, IllegalStateException> predicate,
-            final Modifier<Address, Address, IllegalStateException> modifier) {
+            final Modifier<Address, IllegalStateException> modifier) {
         final List<Address> result_ = new ArrayList<>();
 
         for (Address a_ : __addresses) {

@@ -6,8 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import tech.anaxka.common.entity.id.SouthAfricanIdentityDocument;
-import tech.anaxka.common.utility.data.Identifiable;
-import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.common.utility.exception.NonFatalException;
+import tech.anaxka.util.data.Identifiable;
+import tech.anaxka.util.functor.Builder;
 
 @Entity(name = "SouthAfricanCitizen")
 @Table(name = "SOUTH_AFTICAN_CITIZENS")
@@ -71,7 +72,7 @@ public class SouthAfricanCitizen extends Person implements Identifiable<SouthAfr
         __identifier = id;
     }
 
-    public static class SouthAfricanCitizenBuilder implements Builder<SouthAfricanCitizen> {
+    public static class SouthAfricanCitizenBuilder implements Builder<SouthAfricanCitizen, NonFatalException> {
 
         private static final SouthAfricanCitizen __ = new SouthAfricanCitizen();
 

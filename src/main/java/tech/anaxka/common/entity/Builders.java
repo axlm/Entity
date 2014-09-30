@@ -19,7 +19,8 @@ import tech.anaxka.common.entity.EmailAddress.EmailAddressType;
 import tech.anaxka.common.entity.Person.GenderType;
 import tech.anaxka.common.entity.Person.TitleType;
 import tech.anaxka.common.entity.TelephoneNumber.TelephoneNumberType;
-import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.common.utility.exception.NonFatalException;
+import tech.anaxka.util.functor.Builder;
 
 public class Builders {
 
@@ -38,7 +39,7 @@ public class Builders {
         return new TelephoneNumberBuilder();
     }
 
-    public static class AddressBuilder implements Builder<Address> {
+    public static class AddressBuilder implements Builder<Address, NonFatalException> {
 
         private final Address __ = new Address();
 
@@ -92,7 +93,7 @@ public class Builders {
         }
     }
 
-    public static class EmailAddressBuilder implements Builder<EmailAddress> {
+    public static class EmailAddressBuilder implements Builder<EmailAddress, NonFatalException> {
 
         private final EmailAddress __ = new EmailAddress();
 
@@ -121,7 +122,7 @@ public class Builders {
         }
     }
 
-    public static class TelephoneNumberBuilder implements Builder<TelephoneNumber> {
+    public static class TelephoneNumberBuilder implements Builder<TelephoneNumber, NonFatalException> {
 
         private final TelephoneNumber __ = new TelephoneNumber();
 
@@ -166,7 +167,7 @@ public class Builders {
     }
 
     public static abstract class PersonBuilder implements
-            Builder<Person> {
+            Builder<Person, NonFatalException> {
 
         protected Person __;
 
