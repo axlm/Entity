@@ -25,7 +25,7 @@ import static tech.anaxka.common.entity.Builders.addressBuilder;
 import static tech.anaxka.common.entity.Builders.emailAddressBuilder;
 import static tech.anaxka.common.entity.Builders.telephoneNumberBuilder;
 import static tech.anaxka.common.entity.SouthAfricanCitizen.southAfricanCitizenBuilder;
-import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder;
+import static tech.anaxka.util.builder.DateTimeBuilder.dateTimeBuilder;
 
 /**
  * Class description
