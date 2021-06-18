@@ -16,8 +16,13 @@ package tech.anaxka.common.entity.id;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.nio.charset.StandardCharsets;
+
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
