@@ -4,3 +4,5 @@ dist/
 target/
 anaxkaTECH-common-entity/src/main/resources/META-INF/*.sql
 anaxkaTECH-common-entity/nb-configuration.xml
+anaxkaTECH-entity.iml
+
