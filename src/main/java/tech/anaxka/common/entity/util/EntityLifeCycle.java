@@ -72,7 +72,7 @@ public class EntityLifeCycle implements Serializable {
         ACTIVATED  (2, 4, 1, 3),
         DEACTIVATED(3, 4, 2),
         DESTROYED  (4);
-        
+
         private final int __state;
         private final Set<Integer> __nextStates = new HashSet<>();
 

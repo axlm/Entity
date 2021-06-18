@@ -14,7 +14,6 @@
 package tech.anaxka.common.entity.id;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 
@@ -27,15 +26,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
 import static java.util.UUID.randomUUID;
-import static tech.anaxka.util.lang.CompareTo.EQUAL;
-import static tech.anaxka.util.lang.CompareTo.compareToBuilder;
-import static tech.anaxka.util.lang.CompareTo.isComparable;
+import static tech.anaxka.util.lang.CompareTo.*;
 import static tech.anaxka.util.lang.Equals.equalsBuilder;
 import static tech.anaxka.util.lang.Equals.isEquatable;
 import static tech.anaxka.util.lang.HashCode.hashCodeBuilder;
@@ -62,7 +55,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
     @Transient
     private static final long serialVersionUID = -2315326616405271556L;
 
-    @XmlElement(name = "radix32UUID", required = true, nillable = false)
+    @XmlElement(name = "radix32UUID", required = true)
     @Basic
     @Column(name = "RADIX_32_UUID", length = 63, nullable = false, unique = true)
     private String __id;
@@ -83,7 +76,7 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      * Instance variable constructor. Initialise <code>this</code> instance with the specified
      * arguments. <i>For state specifications see the see also section</i>.
      * <p>
-     * @param id
+     * @param id Some identifier.
      */
     public RandomUniqueIdentitfier(final String id) {
         this();
@@ -124,25 +117,16 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
      * @param id Value to assign to <code>this</code> {@linkplain #__id identifier}.
      */
     final void setId(final String id) {
-        try {
-            final BigInteger radix32Identifier_ = new BigInteger(id.getBytes("UTF8"));
-            __id = radix32Identifier_.toString(32);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(RandomUniqueIdentitfier.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        final BigInteger radix32Identifier_ = new BigInteger(id.getBytes(StandardCharsets.UTF_8));
+        __id = radix32Identifier_.toString(32);
     }
 
-    /**
-     * @param that
-     * <p>
-     * @{inheritDoc}
-     */
     @Override
     public boolean equals(final Object that) {
         boolean result_ = false;
 
         if (isEquatable(this, that)) {
-            final RandomUniqueIdentitfier that_ = RandomUniqueIdentitfier.class.cast(that);
+            final RandomUniqueIdentitfier that_ = (RandomUniqueIdentitfier) that;
 
             result_ = equalsBuilder().append(getId(), that_.getId()).build();
         }
@@ -150,11 +134,6 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         return result_;
     }
 
-    /**
-     * @param that
-     * <p>
-     * @{inheritDoc}
-     */
     @Override
     public int compareTo(final RandomUniqueIdentitfier that) {
         if (isComparable(that)) {
@@ -166,9 +145,6 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
         }
     }
 
-    /**
-     * @{inheritDoc}
-     */
     @Override
     public int hashCode() {
         return hashCodeBuilder()
@@ -176,9 +152,6 @@ public class RandomUniqueIdentitfier implements Serializable, Comparable<RandomU
                 .build();
     }
 
-    /**
-     * @{inheritDoc}
-     */
     @Override
     public String toString() {
         return toStringBuilder(this)

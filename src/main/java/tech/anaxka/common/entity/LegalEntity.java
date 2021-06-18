@@ -184,7 +184,7 @@ public abstract class LegalEntity implements Serializable {
      * @return All the {@linkplain #__emailAddresses email addresses} associated with {@code this}
      *         {@linkplain LegalEntity legal entity}.
      * <p>
-     * @note This operation returns a defensive copy of each {@link EmailAddress} associated with
+     * <b>NOTE:</b> This operation returns a defensive copy of each {@link EmailAddress} associated with
      * {@code this} {@linkplain LegalEntity legal entity}.
      */
     public final Iterable<EmailAddress> getEmailAddresses() {
@@ -258,7 +258,7 @@ public abstract class LegalEntity implements Serializable {
      * @param address {@link EmailAddress} to remove from {@code this} {@linkplain #__emailAddresses
      *  		email addresses}.
      * <p>
-     * @return {@code true} if the {@linkplain EmailAddress email addess} was removed.
+     * @return {@code true} if the {@linkplain EmailAddress email address} was removed.
      */
     public final boolean removeEmailAddress(final EmailAddress address) {
         return __emailAddresses.remove(address);
@@ -268,7 +268,7 @@ public abstract class LegalEntity implements Serializable {
      * Removes a {@code EmailAddress} matched by the supplied {@linkplain Predicate predicate}.
      * <p>
      * @param predicate <p>
-     * @return
+     * @return The removed {@linkplain EmailAddress addresses}.
      */
     public final Iterable<EmailAddress> removeEmailAddresses(
             final Predicate<EmailAddress, IllegalStateException> predicate) {
@@ -288,8 +288,9 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      *
-     * @param predicate <p>
-     * @return
+     * @param predicate Matcher for search.
+     * <p>
+     * @return {@linkplain EmailAddress Email addresses} found by matching {@link Predicate}.
      */
     public Iterable<EmailAddress> findEmailAddresses(
             final Predicate<EmailAddress, IllegalStateException> predicate) {
@@ -306,9 +307,10 @@ public abstract class LegalEntity implements Serializable {
 
     /**
      *
-     * @param predicate
-     * @param modifier  <p>
-     * @return
+     * @param predicate Matcher for search.
+     * @param modifier Modifier.
+     * <p>
+     * @return The modified {@linkplain EmailAddress email addresses}.
      */
     public Iterable<EmailAddress> modifyEmailAddresses(
             final Predicate<EmailAddress, IllegalStateException> predicate,

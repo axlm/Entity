@@ -88,9 +88,9 @@ public class Address implements Serializable, Comparable<Address> {
     @Column(name = "ADDRESS_TYPE", length = 15, nullable = false)
     private AddressType __type;
 
-    @XmlElement(name = "location", required = true, nillable = false)
+    @XmlElement(name = "location", required = true)
     @Basic
-    @Column(name = "LOCATION", length = 255, nullable = false)
+    @Column(name = "LOCATION", nullable = false)
     private String __location;
 
     @XmlElement(name = "suburb")
@@ -98,7 +98,7 @@ public class Address implements Serializable, Comparable<Address> {
     @Column(name = "SUBURB", length = 63)
     private String __suburb;
 
-    @XmlElement(name = "city", required = true, nillable = false)
+    @XmlElement(name = "city", required = true)
     @Basic
     @Column(name = "CITY", length = 63, nullable = false)
     private String __city;
@@ -113,7 +113,7 @@ public class Address implements Serializable, Comparable<Address> {
     @Column(name = "COUNTRY", length = 63)
     private String __country;
 
-    @XmlElement(name = "code", required = true, nillable = false)
+    @XmlElement(name = "code", required = true)
     @Basic
     @Column(name = "CODE", length = 15, nullable = false)
     private String __code;
@@ -335,7 +335,7 @@ public class Address implements Serializable, Comparable<Address> {
         boolean result_ = false;
 
         if (isEquatable(this, that)) {
-            final Address that_ = Address.class.cast(that);
+            final Address that_ = (Address) that;
 
             result_ = equalsBuilder()
                     .append(getType(), that_.getType())
@@ -415,6 +415,6 @@ public class Address implements Serializable, Comparable<Address> {
         @XmlEnumValue("Postal")
         POSTAL,
         @XmlEnumValue("Unspecified")
-        UNSPECIFIED;
+        UNSPECIFIED
     }
 }

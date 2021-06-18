@@ -25,7 +25,7 @@ public enum NationalityType {
     @XmlEnumValue("Afghanistan")
     AFGHANISTAN("Afghanistan", "Kabul", "af", "+93", "Afghanistan Afghani", "AFA"),
     @XmlEnumValue("Albania")
-    ALBANIA("Albania", "Tiran", "al", "+355", "Albanian Lek", "ALL"),
+    ALBANIA("Albania", "Tirana", "al", "+355", "Albanian Lek", "ALL"),
     @XmlEnumValue("Algeria")
     ALGERIA("Algeria", "Algiers", "dz", "+213", "Algerian Dinar", "DZD"),
     @XmlEnumValue("American Samoa")
@@ -531,8 +531,8 @@ public enum NationalityType {
     private final String __capitol;
     private final String __tld;
     private final String __dialingCode;
-    private final String __monitaryUnitName;
-    private final String __monitaryUnitAbreviation;
+    private final String __monetaryUnitName;
+    private final String __monetaryUnitAbbreviation;
 
     /**
      * @param country
@@ -540,7 +540,7 @@ public enum NationalityType {
      * @param tld
      * @param code
      * @param monetaryUnit
-     * @param monitaryUnitAbbreviation
+     * @param monetaryUnitAbbreviation
      */
     private NationalityType(
             final String country,
@@ -548,13 +548,13 @@ public enum NationalityType {
             final String tld,
             final String code,
             final String monetaryUnit,
-            final String monitaryUnitAbbreviation) {
+            final String monetaryUnitAbbreviation) {
         __country = country;
         __capitol = capitol;
         __tld = tld;
         __dialingCode = code;
-        __monitaryUnitName = monetaryUnit;
-        __monitaryUnitAbreviation = monitaryUnitAbbreviation;
+        __monetaryUnitName = monetaryUnit;
+        __monetaryUnitAbbreviation = monetaryUnitAbbreviation;
     }
 
     /**
@@ -588,14 +588,14 @@ public enum NationalityType {
     /**
      * @return
      */
-    public String monitaryUnitName() {
-        return __monitaryUnitName;
+    public String monetaryUnitName() {
+        return __monetaryUnitName;
     }
 
     /**
      * @return
      */
-    public String monitaryUnitAbreviation() {
-        return __monitaryUnitAbreviation;
+    public String monetaryUnitAbbreviation() {
+        return __monetaryUnitAbbreviation;
     }
 }

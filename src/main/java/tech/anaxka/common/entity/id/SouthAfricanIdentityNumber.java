@@ -63,7 +63,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
     @Transient
     private static final long serialVersionUID = -2445401405948658566L;
 
-    @XmlElement(name = "number", required = true, nillable = false)
+    @XmlElement(name = "number", required = true)
     @Basic
     @Column(name = "SOUTH_AFRICAN_ID_NUMBER", length = 31, nullable = false, unique = true)
     private String __number;
@@ -113,11 +113,10 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
     /**
      * Obvious.
      * <p>
-     * @param number Value to assign to <code>this</code> {@linkplain #__number identiy number}.
+     * @param number Value to assign to <code>this</code> {@linkplain #__number identity number}.
      */
     final void setNumber(final String number) {
-        final String number_ = format(number);
-        __number = number_;
+        __number = format(number);
     }
 
     /**
@@ -148,6 +147,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
      * @throws IllegalArgumentException if the {@link SouthAfricanIdentityNumber#__number number}
      *                                  cannot be formatted.
      */
+    @SuppressWarnings("StringBufferReplaceableByString")
     private String format(final String number) throws IllegalArgumentException {
         if (number == null) {
             throw new IllegalArgumentException("Argument may not be null!");
@@ -160,15 +160,13 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
 
         final StringBuilder builder_ = new StringBuilder();
 
-        builder_.append(number_.substring(0, 6)).append(" ")
-                .append(number_.substring(6, 10)).append(" ")
-                .append(number_.substring(10, 11)).append(" ")
-                .append(number_.substring(11, 12)).append(" ")
-                .append(number_.substring(12, 13)).append(" ");
+        builder_.append(number_, 0, 6).append(" ")
+                .append(number_, 6, 10).append(" ")
+                .append(number_.charAt(10)).append(" ")
+                .append(number_.charAt(11)).append(" ")
+                .append(number_.charAt(12)).append(" ");
 
-        final String result_ = builder_.toString();
-
-        return result_;
+        return builder_.toString();
     }
 
     /**
@@ -187,7 +185,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
                     Offsets.BIRTH_DATE_START.offset(),
                     Offsets.BIRTH_DATE_STOP.offset()));
         } catch (final ParseException e_) {
-            LOGGER.logp(Level.SEVERE, NAME, SIGNATURE, "Unable to pase date.", e_);
+            LOGGER.logp(Level.SEVERE, NAME, SIGNATURE, "Unable to parse date.", e_);
         }
 
         return result_;
@@ -219,7 +217,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
      * @return The value of <code>this</code> instance's {@linkplain #__number country of birth}.
      */
     public Boolean wasBornInSouthAfrica() {
-        Boolean result_ = false;
+        boolean result_ = false;
 
         final String bornInSACode_ = __number.substring(
                 Offsets.CITIZENSHIP_START.offset(),
@@ -280,12 +278,12 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
      * @see #isValid()
      */
     private Boolean isValid(final String number) {
-        Boolean result_;
+        boolean result_;
 
         // Check the validity of the date first.
         result_ = getDateOfBirth() != null;
         if (!result_) {
-            return result_;
+            return false;
         }
 
         // 1. Remove redundant white space AND remove check digit - we will calculate it here!
@@ -349,20 +347,18 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
                 checkSumBaseAsString_.substring(checkSumBaseAsString_.length() - 1));
 
         // 8. Subtract the number obtained in 7.) from 10.
-        final int checkSum_ = 10 - checkSumBaseRight_;
-        return checkSum_;
+        return 10 - checkSumBaseRight_;
     }
 
     /**
      * @{inheritDoc}
-     * @param that
      */
     @Override
     public boolean equals(final Object that) {
         boolean result_ = false;
 
         if (!isEquatable(this, that)) {
-            final SouthAfricanIdentityNumber that_ = SouthAfricanIdentityNumber.class.cast(that);
+            final SouthAfricanIdentityNumber that_ = (SouthAfricanIdentityNumber) that;
 
             result_ = equalsBuilder()
                     .append(getNumber(), that_.getNumber())
@@ -372,10 +368,6 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         return result_;
     }
 
-    /**
-     * @{inheritDoc}
-     * @param that
-     */
     @Override
     public int compareTo(final SouthAfricanIdentityNumber that) {
         if (isComparable(that)) {
@@ -387,9 +379,6 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
         }
     }
 
-    /**
-     * @{inheritDoc}
-     */
     @Override
     public int hashCode() {
         return hashCodeBuilder()
@@ -397,9 +386,6 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
                 .build();
     }
 
-    /**
-     * @{inheritDoc}
-     */
     @Override
     public String toString() {
         return toStringBuilder(this)
@@ -409,7 +395,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
     }
 
     /* For internal use only. */
-    private static enum Offsets {
+    private enum Offsets {
 
         BIRTH_DATE_START(0),
         BIRTH_DATE_STOP(6),
@@ -426,7 +412,7 @@ public class SouthAfricanIdentityNumber implements Serializable, Comparable<Sout
 
         private final int __offset;
 
-        private Offsets(final int offset) {
+        Offsets(final int offset) {
             __offset = offset;
         }
 

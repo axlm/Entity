@@ -86,7 +86,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
     @Column(name = "EMAIL_ADDRESS_TYPE", length = 15, nullable = false)
     private EmailAddressType __type;
 
-    @XmlElement(name = "address", required = true, nillable = false)
+    @XmlElement(name = "address", required = true)
     @Basic
     @Column(name = "ADDRESS", length = 127, nullable = false)
     private String __address;
@@ -194,7 +194,7 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         boolean result_ = false;
 
         if (isEquatable(this, that)) {
-            final EmailAddress that_ = EmailAddress.class.cast(that);
+            final EmailAddress that_ = (EmailAddress) that;
 
             result_ = equalsBuilder()
                     .append(getType(), that_.getType())
@@ -259,6 +259,6 @@ public class EmailAddress implements Serializable, Comparable<EmailAddress> {
         @XmlEnumValue("Office")
         OFFICE,
         @XmlEnumValue("Unspecified")
-        UNSPECIFIED;
+        UNSPECIFIED
     }
 }

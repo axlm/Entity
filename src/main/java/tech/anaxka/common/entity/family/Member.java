@@ -31,7 +31,7 @@ public class Member extends Person {
      * Maintainers <strong>MUST</strong> change this value if and only if the new version of
      * this class is not compatible with the previous version. It is not necessary to include
      * in first version of the class, but included here as a reminder of its importance.
-     * 
+     *
      * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
      */
     private static final long serialVersionUID = -7580026024045997036L;
@@ -59,7 +59,7 @@ public class Member extends Person {
     @OneToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER, mappedBy = "__member")
-    private final ConcurrentSkipListSet<Member> __gaurdians = new ConcurrentSkipListSet<>();
+    private final ConcurrentSkipListSet<Member> __guardians = new ConcurrentSkipListSet<>();
 
     @JoinColumn(name = "MEMBER_FK", referencedColumnName = "ID")
     private Member __member;
@@ -139,7 +139,7 @@ public class Member extends Person {
     }
 
     public Iterable<Member> getGuardians() {
-        return __gaurdians;
+        return __guardians;
     }
 
     public final void addGuardians(final Iterable<Member> guardians) {
@@ -150,7 +150,7 @@ public class Member extends Person {
 
     public void addGuardian(final Member guardian) {
         final Member guardian_ = new Member(guardian);
-        __gaurdians.add(guardian_);
+        __guardians.add(guardian_);
         guardian.setMember(this);
     }
 
@@ -170,7 +170,7 @@ public class Member extends Person {
         return result_;
     }
 
-    public Iterable<Member> getBrotehrs() {
+    public Iterable<Member> getBrothers() {
         final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
         for (Member sibling_ : getSiblings()) {
@@ -276,7 +276,7 @@ public class Member extends Person {
         return result_;
     }
 
-    public Iterable<Member> getNices() {
+    public Iterable<Member> getNieces() {
         final CopyOnWriteArrayList<Member> result_ = new CopyOnWriteArrayList<>();
 
         for (final Member sibling_ : getSiblings()) {

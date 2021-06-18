@@ -109,10 +109,6 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
         __releaseDate = date;
     }
 
-    /**
-     * @{inheritDoc}
-     * @param that
-     */
     @Override
     public boolean equals(final Object that) {
         boolean result_ = false;
@@ -128,10 +124,6 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
         return result_;
     }
 
-    /**
-     * @{inheritDoc}
-     * @param that
-     */
     @Override
     public int compareTo(final SouthAfricanIdentityDocument that) {
         return compareToBuilder()
@@ -139,9 +131,6 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
                 .build();
     }
 
-    /**
-     * @{inheritDoc}
-     */
     @Override
     public int hashCode() {
         return hashCodeBuilder()
@@ -149,9 +138,6 @@ public class SouthAfricanIdentityDocument implements Serializable, Comparable<So
                 .build();
     }
 
-    /**
-     * @{inheritDoc}
-     */
     @Override
     public String toString() {
         return toStringBuilder(this)
